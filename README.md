@@ -7,3 +7,6 @@ Small implentation of controlling your AlfaZeta Flipdots OTA:
 
 ![](key.png)
 
+## Notes
+- AlfaZeta XY5 Boards are 24x14
+- RS485 serial port interface
