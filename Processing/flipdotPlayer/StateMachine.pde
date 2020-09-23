@@ -42,7 +42,7 @@ void stateMachine(int state) {
         if(panelLayout == 0) {
           translate(8, 200);
         } else if(panelLayout == 1) {
-          translate(300, 8);
+          translate(300, 22);
         }
         
         image(source, 0, 0);

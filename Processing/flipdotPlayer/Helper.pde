@@ -212,7 +212,7 @@ void initCP5() {
     ;
   } else if(panelLayout == 1) {
     cp5.addSlider("movieVolume")
-    .setPosition(300,110)
+    .setPosition(300,8)
     .setRange(0f,1f)
     .setLabel("Volume")
     ;
