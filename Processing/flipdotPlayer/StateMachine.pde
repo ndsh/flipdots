@@ -39,10 +39,16 @@ void stateMachine(int state) {
         
         push();
         source.resize(196, 0);
-        image(source, 8, 200);
+        if(panelLayout == 0) {
+          translate(8, 200);
+        } else if(panelLayout == 1) {
+          translate(300, 8);
+        }
+        
+        image(source, 0, 0);
         if(dither) {
           d.feed(source);
-          image(d.floyd_steinberg(), 200, 200);
+          image(d.floyd_steinberg(), 200, 0);
         }
         pop();
         
@@ -53,8 +59,13 @@ void stateMachine(int state) {
         feedBuffer(shrink);
         flipdots.feed(shrink);
         
+        
         push();
-        image(pg, 8, 95, width-22, 71);
+        if(panelLayout == 0) {
+          image(pg, 8, 95, width-22, 71);
+        } else if(panelLayout == 1) {
+          image(pg, 150, 8, 140, height-61);
+        }
         pop();
         
         flipdots.update();
@@ -62,7 +73,12 @@ void stateMachine(int state) {
         send();
         
         push();
-        translate(8, 170);
+        if(panelLayout == 0) {
+          translate(8, 170);
+        } else if(panelLayout == 1) {
+          translate(8, height-20);
+        }
+        
         noStroke();
         rect(0, 0, map(myMovie.time(), 0, myMovie.duration(), 0, width-22), 6);
         pop();

@@ -204,11 +204,19 @@ void initCP5() {
   .setLabel("Online")
   ;
   
-  cp5.addSlider("movieVolume")
-  .setPosition(8,180)
-  .setRange(0f,1f)
-  .setLabel("Volume")
-  ;
+  if(panelLayout == 0) {
+    cp5.addSlider("movieVolume")
+    .setPosition(8,180)
+    .setRange(0f,1f)
+    .setLabel("Volume")
+    ;
+  } else if(panelLayout == 1) {
+    cp5.addSlider("movieVolume")
+    .setPosition(300,110)
+    .setRange(0f,1f)
+    .setLabel("Volume")
+    ;
+  }    
   
   cp5.setColorForeground(gray);
   cp5.setColorBackground(black);
