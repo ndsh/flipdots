@@ -5,6 +5,7 @@ import controlP5.*;
 ArtNetClient artnet;
 ControlP5 cp5;
 Importer importer;
+PFont europaGrotesk;
 Dither d;
 String ip = "2.0.0.3"; // flipdoteeny
 //String ip = "2.0.0.2";
@@ -76,4 +77,9 @@ int panelLayout = 1; // horizontal
 // SchnickSchnack LEDs
 String[] routers = {"2.161.30.223", "2.12.4.156", "2.12.4.69"};
 int[][] routing = {{0, 1, 5, 6}, {2, 3, 7, 8}, {4, 9}};
-int maxBrightness = 255;
+int maxBrightness = 120;
+String[] scrollSource;
+int currentScrollText = 0;
+int scrollPosition = 0;
+String usedFont = "Nobile-italic-16.vlw";
+//String usedFont = "LKEuropaGroteskCity-MediumItalic-16.vlw";

@@ -7,7 +7,7 @@
 // pause button
 
 void setup() {
-  size(1600, 550, P2D);
+  size(1600, 550);
   //frameRate(20);
   surface.setLocation(0, 0);
   colorMode(HSB, 360, 100, 100);
@@ -21,7 +21,6 @@ void setup() {
 }
 
 void draw() {
-  background(gray);
-  stateMachine(state);
+  //stateMachine(state);
   stateMachine_LED(state_L);
 }

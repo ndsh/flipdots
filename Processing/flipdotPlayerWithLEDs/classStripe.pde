@@ -20,7 +20,7 @@ class Stripe {
     router = _router;
     for(int x = 0; x<64; x++) {
       for(int y = 0; y<8; y++) {
-        leds[x][y] = (int)random(255);
+        leds[x][y] = (int)random(100);
       } 
     }
     
@@ -70,7 +70,7 @@ class Stripe {
         c = p.get(x, y);
         //int l = y*16+x;
         //c = p.pixels[l];
-        b = (int)map(brightness(c), 0, 255, 0, maxBrightness);
+        b = (int)map(brightness(c), 0, 100, 0, maxBrightness);
         leds[x][y] = b;
         data[y*16+x] = (byte)b;
         
@@ -82,7 +82,7 @@ class Stripe {
         c = p.get(x, y);
         //int l = y*16+x;
         //c = p.pixels[l];
-        b = (int)map(brightness(c), 0, 255, 0, maxBrightness);
+        b = (int)map(brightness(c), 0, 100, 0, maxBrightness);
         leds[x][y] = b;
         data[(y*16+x+(64*2))-16] = (byte)b;
         
@@ -94,7 +94,7 @@ class Stripe {
         c = p.get(x, y);
         //int l = y*16+x;
         //c = p.pixels[l];
-        b = (int)map(brightness(c), 0, 255, 0, maxBrightness);
+        b = (int)map(brightness(c), 0, 100, 0, maxBrightness);
         leds[x][y] = b;
         data[(y*16+x+(64*3))+32] = (byte)b;
         
@@ -106,7 +106,8 @@ class Stripe {
         c = p.get(x, y);
         //int l = y*16+x;
         //c = p.pixels[l];
-        b = (int)map(brightness(c), 0, 255, 0, maxBrightness);
+        b = (int)map(brightness(c), 0, 100, 0, maxBrightness);
+        
         leds[x][y] = b;
         data[(y*16+x+(64*3))+144] = (byte)b;
         

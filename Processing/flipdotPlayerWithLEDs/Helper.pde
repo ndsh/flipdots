@@ -204,6 +204,31 @@ void initObjects(PApplet pa) {
   }
   if(ledFiles.size() > 0) feedVideoLEDs(pa, ledFiles.get(currentMovieLEDs));
   
+  scrollSource = loadStrings("scroll.txt");
+  String s = bunchTextTogether(scrollSource);
+  scrollSource = new String[1];
+  scrollSource[0] = s;
+  europaGrotesk = loadFont(usedFont);
+  float w = textWidth(scrollSource[currentScrollText]);
+  scrollPosition = (int)320;
+  
+  
+}
+
+void nextScrollText() {
+  currentScrollText++;
+  currentScrollText %= scrollSource.length;
+  float w = textWidth(scrollSource[currentScrollText]);
+  scrollPosition = (int)320;
+}
+
+String bunchTextTogether(String[] split) {
+  String toSend = "";
+  for(int i = 0; i<split.length; i++) {
+    toSend += split[i] + " / ";
+  }
+  return toSend;
+  
 }
 
 void nextMovieFlipdots(PApplet pa) {
@@ -275,10 +300,11 @@ void movieVolume(float theVol) {
   if(state == INTRO) return;
   setVolume(theVol);
 }
-
+/*
 void movieEvent(Movie m) {
   m.read();
 }
+*/
 
 String getBasename(String s) {
   String[] split = split(s, "/");

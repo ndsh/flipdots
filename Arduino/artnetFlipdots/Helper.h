@@ -13,6 +13,7 @@
 #define RESET_PIN 12
 #define NUM_STRIPS 1
 #define HWSERIAL Serial1
+#define HWSERIAL2 Serial2
 
 // Variables
 #define NUMPIXELS 8
@@ -85,6 +86,7 @@ void pin_reset() {
 void setupEnv() {
   Serial.begin(115200);
   HWSERIAL.begin(57600);
+  HWSERIAL2.begin(57600);
   //while (!Serial) ; // wait for serial port to connect. Needed for native USB port only
 
   Serial.println("/ / / / / / / / / / / / / / / / / / / / /");
@@ -211,17 +213,38 @@ void runFlipdotsData() {
 //    byte[] collect =  new byte[512];
     millisLastTransmission = millis();
     //Serial.println(Serial1.available());
-    Serial1.write(header_norefresh, 2); 
-    Serial1.write(artnet.getUniverse() & 0xFF);
-    for(int x = 0; x<28; x++) {
-      decoding = "";
-      //Serial.print(artnet.getDmxFrame()[x] & 0xFF);
-      //Serial.print(" ");
-      Serial1.write(artnet.getDmxFrame()[x]); // farben umkehren
-      //Serial.print(" ");
-      //Serial.println(decoding.toInt());
+    if(artnet.getUniverse() <= 8) {
+      Serial1.write(header_norefresh, 2); 
+      Serial1.write(artnet.getUniverse() & 0xFF);
+      for(int x = 0; x<28; x++) {
+        Serial.println("HW1");
+        decoding = "";
+        //Serial.print(artnet.getDmxFrame()[x] & 0xFF);
+        //Serial.print(" ");
+        Serial1.write(artnet.getDmxFrame()[x]); // farben umkehren
+        //Serial.print(" ");
+        //Serial.println(decoding.toInt());
+      }
+      Serial1.write(closure, 1); 
+    } else {
+      Serial.println("HW2");
+      
+      Serial2.write(header_norefresh, 2); 
+      Serial2.write(artnet.getUniverse() & 0xFF);
+      for(int x = 0; x<28; x++) {
+        decoding = "";
+        //Serial.print(artnet.getDmxFrame()[x] & 0xFF);
+        //Serial.print(" ");
+        Serial2.write(artnet.getDmxFrame()[x]); // farben umkehren
+        //Serial.print(" ");
+        //Serial.println(decoding.toInt());
+      }
+      Serial2.write(closure, 1); 
     }
-    Serial1.write(closure, 1); 
+  
+    
+    
+    
     //Serial.println("---");
     //artnet.getDmxFrame()[0+3*i]
    }
@@ -230,4 +253,7 @@ void runFlipdotsData() {
 void refreshFlipdots() {
   Serial1.write(header_refresh, 2);
   Serial1.write(closure, 1);
+
+  Serial2.write(header_refresh, 2);
+  Serial2.write(closure, 1);
 }

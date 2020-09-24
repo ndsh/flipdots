@@ -28,10 +28,10 @@ void stateMachine(int state) {
     break;
     
     case VIDEO:
-      //if(!isPlaying) return;
-      //if(flipdotMovie.available()) {
-        
-        //flipdotMovie.read();
+      if(!isPlaying) return;
+      if(flipdotMovie.available()) {
+        background(gray);
+        flipdotMovie.read();
         
         source = flipdotMovie.get();
         newFrame = flipdotMovie;
@@ -83,7 +83,7 @@ void stateMachine(int state) {
         rect(0, 0, map(flipdotMovie.time(), 0, flipdotMovie.duration(), 0, width-22), 6);
         pop();
         
-      //}
+      }
     break;
     
     case IMAGES:

@@ -20,6 +20,11 @@ void stateMachine() {
       delay (500);
       Serial1.write(all_bright_2C, 32); 
       delay (100);
+
+      Serial2.write(all_dark_2C, 32); 
+      delay (500);
+      Serial2.write(all_bright_2C, 32); 
+      delay (100);
       
       state = UPDATE;
       Serial.println("→ Switch to Update");
@@ -77,7 +82,7 @@ void stateMachine() {
       if (r == ART_DMX) {
         // print out our data
         networkDataAvailable = true;
-        
+        /*
         Serial.print("universe number = ");
         Serial.print(artnet.getUniverse());
         Serial.print("\tdata length = ");
@@ -91,6 +96,7 @@ void stateMachine() {
         }
         Serial.println();
         Serial.println();
+        */
         
         millisKeepAlive = millis();
       } else //Serial.println("no data available");

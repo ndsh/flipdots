@@ -14,7 +14,7 @@ void setup() {
   ellipseMode(CENTER);
   smooth();
   
-  staticImage = loadImage("source.png");
+  staticImage = loadImage("source3.png");
   pa = this;
   runInits(pa);
   //feedVideo(this, "1183361194.mp4");

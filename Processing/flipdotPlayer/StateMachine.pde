@@ -24,7 +24,7 @@ void stateMachine(int state) {
   
    switch(state) {
     case INTRO:
-      setState(VIDEO);
+      setState(IMAGES);
     break;
     
     case VIDEO:
@@ -87,17 +87,16 @@ void stateMachine(int state) {
     break;
     
     case IMAGES:
-      feedBuffer(newFrame);
-      panel.feed(newFrame);
+      feedBuffer(staticImage);
+      flipdots.feed(staticImage);
       
       push();
       image(pg, 5, height-160, 28*11, 14*11);
       pop();
         
-      panel.update();
-      panel.display();
-      artnet.unicastDmx(ip, 0, 13, grabFrame(true));
-      artnet.unicastDmx(ip, 0, 14, grabFrame(false));
+      flipdots.update();
+      flipdots.display();
+      send();
     break;
    }
 }
