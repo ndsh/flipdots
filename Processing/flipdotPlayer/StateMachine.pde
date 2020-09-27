@@ -10,10 +10,7 @@ static final int TRANSITION = 7; // plays random transition from the transition 
 int state = INTRO;
 
 static final String[] stateNames = {
-  "Intro", "Video", "Images",
-  "Hochwandern", "Soundreaktiv", "Perlin",
-  "Flocking", "PingPong", "H. Wellen",
-  "V. Wellen", "Aufwaerts", "Statische Bilder"
+  "Intro", "Video", "Images"
 };
 
 String getStateName(int state) {
@@ -24,11 +21,11 @@ void stateMachine(int state) {
   
    switch(state) {
     case INTRO:
-      setState(IMAGES);
+      setState(VIDEO);
     break;
     
     case VIDEO:
-      //if(!isPlaying) return;
+      if(!isPlaying) return;
       if(myMovie.available()) {
         background(gray);
         myMovie.read();
@@ -38,18 +35,18 @@ void stateMachine(int state) {
         shrink = shrinkToFormat(newFrame);
         
         push();
-        source.resize(196, 0);
-        if(panelLayout == 0) {
-          translate(8, 200);
-        } else if(panelLayout == 1) {
-          translate(300, 22);
-        }
-        
-        image(source, 0, 0);
-        if(dither) {
-          d.feed(source);
-          image(d.floyd_steinberg(), 200, 0);
-        }
+          source.resize(196, 0);
+          if(panelLayout == 0) {
+            translate(8, 200);
+          } else if(panelLayout == 1) {
+            translate(330, 22);
+          }
+          
+          image(source, 0, 0);
+          if(dither) {
+            d.feed(source);
+            image(d.floyd_steinberg(), 200, 0);
+          }
         pop();
         
         if(dither) {
@@ -61,26 +58,26 @@ void stateMachine(int state) {
         
         
         push();
-        if(panelLayout == 0) {
-          image(pg, 8, 95, width-22, 71);
-        } else if(panelLayout == 1) {
-          image(pg, 150, 8, 140, height-61);
-        }
+          if(panelLayout == 0) {
+            image(pg, 8, 95, width-22, 71);
+          } else if(panelLayout == 1) {
+            image(pg, 180, 8, 140, height-61);
+          }
         pop();
         
         flipdots.update();
         flipdots.display();
-        send();
+        if(online) flipdots.send();
         
         push();
-        if(panelLayout == 0) {
-          translate(8, 170);
-        } else if(panelLayout == 1) {
-          translate(8, height-20);
-        }
-        
-        noStroke();
-        rect(0, 0, map(myMovie.time(), 0, myMovie.duration(), 0, width-22), 6);
+          if(panelLayout == 0) {
+            translate(8, 170);
+          } else if(panelLayout == 1) {
+            translate(8, height-20);
+          }
+          
+          noStroke();
+          rect(0, 0, map(myMovie.time(), 0, myMovie.duration(), 0, width-22), 6);
         pop();
         
       }
@@ -96,7 +93,7 @@ void stateMachine(int state) {
         
       flipdots.update();
       flipdots.display();
-      send();
+      if(online) flipdots.send();
     break;
    }
 }

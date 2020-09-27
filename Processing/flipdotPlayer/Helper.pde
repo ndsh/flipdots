@@ -1,6 +1,4 @@
 void keyPressed() {
-  //dot.flip();
-  //  panel.flip(); // invertiert gerade einfach das display
   if (key == CODED) {
     if (keyCode == LEFT) {
       prevMovie(this);
@@ -10,6 +8,8 @@ void keyPressed() {
   } else if (key == 'o') {
     online = !online;
     println("online= " + online);
+    float r[] = {online?1f:0f};
+    onlineCheckbox.setArrayValue(r);
   } else if (key == 'd') {
     dither = !dither;
     println("dither= " + dither);
@@ -18,6 +18,9 @@ void keyPressed() {
     println("isPlaying= "+ isPlaying);
     if(isPlaying) myMovie.play();
     else myMovie.pause();
+    float r[] = {isPlaying?1f:0f};
+    isPlayingCheckbox.setArrayValue(r);
+    
   }
 }
 
@@ -70,14 +73,8 @@ void feedBuffer(PImage p) {
   pg.endDraw();
 }
 
-void send() {
-  if(online) {
-    flipdots.sendData();
-  }
-}
 
-
-boolean compareFrames(PImage one, PImage two) {
+boolean compareImages(PImage one, PImage two) {
   one.loadPixels();
   two.loadPixels();
   for (int i = 0; i < one.pixels.length; i++) {
@@ -121,7 +118,8 @@ byte[] grabFrame(PImage p, int panel) {
   for(int x = 0; x<28; x++) {
     toSend = "";
     for(int y = y_start; y<y_end; y++) {
-      pixel = p.get(x, y);
+      //pixel = p.get(x, y);
+      pixel = p.pixels[y*28+x];
       if(brightness(pixel) > 50.0) toSend = 1 + toSend;
       else toSend = 0 + toSend;
     }
@@ -132,6 +130,7 @@ byte[] grabFrame(PImage p, int panel) {
 }
 
 void feedVideo(PApplet pa, String s) {
+  println("Flipdots movie= " + getBasename(s));
   if(myMovie != null) myMovie.stop();
   myMovie = new Movie(pa, s);
   myMovie.loop();
@@ -197,11 +196,22 @@ void initArtnet() {
 }
 // cp5
 void initCP5() {
-  cp5.addToggle("onlineButton")
-  .setPosition(width-50,height-20)
-  .setSize(50,20)
-  .setValue(online)
-  .setLabel("Online")
+  onlineCheckbox = cp5.addCheckBox("onlineCheckbox")
+  .setPosition(width-100,height-20)
+  .setSize(32, 8)
+  .addItem("online", 1)
+  ;
+  
+  isPlayingCheckbox = cp5.addCheckBox("isPlayingCheckbox")
+  .setPosition(width-100,height-30)
+  .setSize(32, 8)
+  .addItem("Playing", 1)
+  ;
+  
+  ditherCheckbox = cp5.addCheckBox("ditherCheckbox")
+  .setPosition(width-100,height-40)
+  .setSize(32, 8)
+  .addItem("Dither", 1)
   ;
   
   if(panelLayout == 0) {
@@ -212,7 +222,7 @@ void initCP5() {
     ;
   } else if(panelLayout == 1) {
     cp5.addSlider("movieVolume")
-    .setPosition(300,8)
+    .setPosition(330,8)
     .setRange(0f,1f)
     .setLabel("Volume")
     ;
@@ -222,17 +232,33 @@ void initCP5() {
   cp5.setColorBackground(black);
   cp5.setColorActive(white);
 }
-void onlineButton(boolean theFlag) {
-  if(state == INTRO) return; 
-  if(theFlag==true) {
-    online = true;
-  } else {
-    online = false;
-  }
+void onlineCheckbox(float[] a) {
+  if(state == INTRO) return;
+  if (a[0] == 1f) online = true;
+  else online = false;
   println("online: " + online);
 }
+
+void isPlayingCheckbox(float[] a) {
+  if(state == INTRO) return;
+  if (a[0] == 1f) isPlaying = true;
+  else isPlaying = false;
+  println("isPlaying: " + isPlaying);
+}
+void ditherCheckbox(float[] a) {
+  if(state == INTRO) return;
+  if (a[0] == 1f) dither = true;
+  else dither = false;
+  println("dither: " + dither);
+}
+
 
 void movieVolume(float theVol) {
   if(state == INTRO) return;
   setVolume(theVol);
+}
+
+String getBasename(String s) {
+  String[] split = split(s, "/");
+  return split[split.length-1];
 }

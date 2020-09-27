@@ -6,13 +6,13 @@ ArtNetClient artnet;
 ControlP5 cp5;
 Importer importer;
 Dither d;
-String ip = "2.0.0.3"; // flipdoteeny
-//String ip = "2.0.0.2";
+//String ip = "2.0.0.3"; // flipdoteeny
+String ip = "2.0.0.2"; // local
 boolean switcher = false;
-byte[] data = new byte[28];
 float flipdotSize = 4;
 
 String toSend = "";
+byte bytesSent = 0;
 color pixel = color(0);
 
 PImage newFrame;
@@ -42,6 +42,11 @@ StringList movieFiles = new StringList();
 int currentMovie = 0;
 
 PApplet pa;
+
+// CP5
+CheckBox onlineCheckbox;
+CheckBox isPlayingCheckbox;
+CheckBox ditherCheckbox;
 
 int panelLayout = 1; // horizontal
 /*
