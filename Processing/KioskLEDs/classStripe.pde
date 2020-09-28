@@ -1,6 +1,4 @@
 class Stripe {
-  
-  
   int stripeID = 0;
   PVector pos;
   int[][] leds = new int[64][8];
@@ -57,7 +55,6 @@ class Stripe {
         ellipse(3*x, 3*y, ledSize, ledSize);
       } 
     }
-    
     pop();
   }
   
@@ -73,7 +70,6 @@ class Stripe {
         b = (int)map(brightness(c), 0, 100, 0, maxBrightness);
         leds[x][y] = b;
         data[y*16+x] = (byte)b;
-        
       } 
     }
     
@@ -85,7 +81,6 @@ class Stripe {
         b = (int)map(brightness(c), 0, 100, 0, maxBrightness);
         leds[x][y] = b;
         data[(y*16+x+(64*2))-16] = (byte)b;
-        
       } 
     }
     
@@ -97,7 +92,6 @@ class Stripe {
         b = (int)map(brightness(c), 0, 100, 0, maxBrightness);
         leds[x][y] = b;
         data[(y*16+x+(64*3))+32] = (byte)b;
-        
       } 
     }
     
@@ -107,10 +101,8 @@ class Stripe {
         //int l = y*16+x;
         //c = p.pixels[l];
         b = (int)map(brightness(c), 0, 100, 0, maxBrightness);
-        
         leds[x][y] = b;
         data[(y*16+x+(64*3))+144] = (byte)b;
-        
       } 
     }
     

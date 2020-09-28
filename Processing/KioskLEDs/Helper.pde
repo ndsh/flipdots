@@ -3,12 +3,8 @@ void keyPressed() {
   //  panel.flip(); // invertiert gerade einfach das display
   if (key == CODED) {
     if (keyCode == LEFT) {
-      prevMovieFlipdots(this);
-    } else if (keyCode == RIGHT) {
-      nextMovieFlipdots(this);
-    } else if (keyCode == DOWN) {
       prevMovieLEDs(this);
-    } else if (keyCode == UP) {
+    } else if (keyCode == RIGHT) {
       nextMovieLEDs(this);
     } 
   } else if (key == 'o') {
@@ -62,11 +58,9 @@ PImage shrinkToFormat(PImage p) {
   pg_t.beginDraw();
   int calcHeight = 0;
   int calcWidth = 0;
-  if(panelLayout == 0) calcHeight = (pg.width*p.height)/p.width;
-  else if(panelLayout == 1) calcWidth = (pg.height*p.width)/p.height;
+  
   //pg_t.image(p, 0, 0, pg.width, calcHeight);
-  if(panelLayout == 0) pg_t.image(p, 0, map(mouseY, 0, height, 0, -calcHeight), pg.width, 147);
-  else if(panelLayout == 1)  pg_t.image(p, map(mouseX, 0, width, 0, -calcWidth), 0, calcWidth, pg.height);
+  
   //pg_t.image(p, 0, -50, pg.width, 147);
   pg_t.endDraw();
   return pg_t;
@@ -168,27 +162,21 @@ void initVariables() {
   black = color(0, 0, 0);
   white = color(0, 0, 100);
   gray = color(90);
+  followers = getFollowers();
+  followerIcon = loadImage("f.png");
+  diameter = pg.width - 10;
 }
 void initObjects(PApplet pa) {
   cp5 = new ControlP5(pa);
   //frameRate(15);
-  if(panelLayout == 0) pg = createGraphics(196, 14); // 2744 pixel
-  else if(panelLayout  == 1) pg = createGraphics(28, 98); // 2744 pixels
+  
+  pg = createGraphics(320, 16);
+  ledTemp = createGraphics(320, 16);
   
   leds = new SchnickSchnack(maxBrightness);
   d = new Dither();
   d.setCanvas(pg.width, pg.height);
   
-  importer = new Importer("footage");
-  for(int i = 0; i<importer.folders.size(); i++) {
-    if(importer.folders.get(i).equals("sequences")) {
-      importer.loadFiles(importer.folders.get(i));
-      for (int j = 0; j <importer.getFiles().size(); j++) {   
-        flipdotFiles.append(importer.getFiles().get(j));
-      }
-    }
-  }
-  if(flipdotFiles.size() > 0) feedVideoFlipdots(pa, flipdotFiles.get(currentMovieFlipdots));
   
   importer = new Importer("footage");
   for(int i = 0; i<importer.folders.size(); i++) {
@@ -208,7 +196,18 @@ void initObjects(PApplet pa) {
   europaGrotesk = loadFont(usedFont);
   float w = textWidth(scrollSource[currentScrollText]);
   scrollPosition = (int)320;
+  ledTemp.beginDraw();
+  ledTemp.textFont(europaGrotesk, 16);
+  ledTemp.textSize(16);
+  ledTemp.endDraw();
   
+  grid = new Cell[cols][rows];
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < rows; j++) {
+      // Initialize each object
+      grid[i][j] = new Cell(i*10,j*2,10,2,i+j);
+    }
+  }
   
 }
 
@@ -226,18 +225,6 @@ String bunchTextTogether(String[] split) {
   }
   return toSend;
   
-}
-
-void nextMovieFlipdots(PApplet pa) {
-  currentMovieFlipdots++;
-  currentMovieFlipdots %= flipdotFiles.size();
-  feedVideoFlipdots(pa, flipdotFiles.get(currentMovieFlipdots));
-}
-
-void prevMovieFlipdots(PApplet pa) {
-  currentMovieFlipdots--;
-  if(currentMovieFlipdots < 0) currentMovieFlipdots = flipdotFiles.size()-1;
-  feedVideoFlipdots(pa, flipdotFiles.get(currentMovieFlipdots));
 }
 
 void nextMovieLEDs(PApplet pa) {
@@ -276,45 +263,80 @@ void initCP5() {
   .addItem("Dither", 1)
   ;
   
-  if(panelLayout == 0) {
+  
     cp5.addSlider("movieVolume")
     .setPosition(8,180)
     .setRange(0f,1f)
     .setLabel("Volume")
     ;
-  } else if(panelLayout == 1) {
-    cp5.addSlider("movieVolume")
-    .setPosition(300,8)
-    .setRange(0f,1f)
-    .setLabel("Volume")
-    ;
-  }    
+      
   
   cp5.setColorForeground(gray);
   cp5.setColorBackground(black);
   cp5.setColorActive(white);
 }
-void onlineButton(boolean theFlag) {
-  if(state == INTRO) return; 
-  if(theFlag==true) {
-    online = true;
-  } else {
-    online = false;
-  }
+void onlineCheckbox(float[] a) {
+  if(state == INTRO) return;
+  if (a[0] == 1f) online = true;
+  else online = false;
   println("online: " + online);
+}
+
+void isPlayingCheckbox(float[] a) {
+  if(state == INTRO) return;
+  if (a[0] == 1f) isPlaying = true;
+  else isPlaying = false;
+  println("isPlaying: " + isPlaying);
+}
+void ditherCheckbox(float[] a) {
+  if(state == INTRO) return;
+  if (a[0] == 1f) dither = true;
+  else dither = false;
+  println("dither: " + dither);
 }
 
 void movieVolume(float theVol) {
   if(state == INTRO) return;
   setVolume(theVol);
 }
-/*
-void movieEvent(Movie m) {
-  m.read();
-}
-*/
+
 
 String getBasename(String s) {
   String[] split = split(s, "/");
   return split[split.length-1];
+}
+
+int getFollowers() {
+  println("polling followers");
+  json = loadJSONObject("https://www.instagram.com/livingthecity.eu/?__a=1");
+  int i = json.getJSONObject("graphql").getJSONObject("user").getJSONObject("edge_followed_by").getInt("count");
+  return i;
+}
+
+class Cell {
+  // A cell object knows about its location in the grid 
+  // as well as its size with the variables x,y,w,h
+  float x,y;   // x,y location
+  float w,h;   // width and height
+  float angle; // angle for oscillating brightness
+
+  // Cell Constructor
+  Cell(float tempX, float tempY, float tempW, float tempH, float tempAngle) {
+    x = tempX;
+    y = tempY;
+    w = tempW;
+    h = tempH;
+    angle = tempAngle;
+  } 
+  
+  // Oscillation means increase angle
+  void oscillate() {
+    angle += 0.02; 
+  }
+
+  void display() {
+    // Color calculated using sine wave
+    ledTemp.fill(127+127*sin(angle));
+    ledTemp.rect(x,y,w,h); 
+  }
 }

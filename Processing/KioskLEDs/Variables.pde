@@ -46,11 +46,17 @@ int currentMovieLEDs = 0;
 
 PApplet pa;
 
-int panelLayout = 1; // horizontal
+int textPos = 0;
 
 CheckBox onlineCheckbox;
 CheckBox isPlayingCheckbox;
 CheckBox ditherCheckbox;
+
+JSONObject json;
+long followerTimestamp = 0;
+long followerInterval = 120000;
+int followers = 0;
+PImage followerIcon;
 /*
   0
     ▀ ▀ ▀ ▀ ▀ ▀ ▀
@@ -82,6 +88,22 @@ int[][] routing = {{0, 1, 5, 6}, {2, 3, 7, 8}, {4, 9}};
 int maxBrightness = 120;
 String[] scrollSource;
 int currentScrollText = 0;
-int scrollPosition = 0;
+float scrollPosition = 0;
 String usedFont = "Nobile-italic-16.vlw";
 //String usedFont = "LKEuropaGroteskCity-MediumItalic-16.vlw";
+
+
+// DEMOS
+float diameter; 
+float angle = 0;
+
+long demoTimestamp = 0;
+long demoInterval = 10000;
+
+long randomCheckTimestamp = 0;
+long randomCheckInterval = 300000;
+
+Cell[][] grid;
+// Number of columns and rows in the grid
+int cols = 32;
+int rows = 16;
