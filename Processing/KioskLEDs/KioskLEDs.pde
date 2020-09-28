@@ -21,6 +21,5 @@ void setup() {
 }
 
 void draw() {
-  //stateMachine(state);
-  stateMachine_LED(state_L);
+  stateMachine_LED(state);
 }

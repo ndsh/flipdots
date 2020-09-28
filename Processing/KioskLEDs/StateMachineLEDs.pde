@@ -5,24 +5,24 @@ leds.display();
 leds.send();
 */
 
-static final int INTRO_L = 0;
-static final int VIDEO_L = 1; // videos von festplatte laden
-static final int IMAGES_L = 2; // bilder von festplatte laden
-static final int CALENDAR_L = 3; // events aus kalender lesen
-static final int SCROLLTEXT_L = 4; // texts aus file lesen
+static final int INTRO = 0;
+static final int VIDEO = 1; // videos von festplatte laden
+static final int IMAGES = 2; // bilder von festplatte laden
+static final int CALENDAR = 3; // events aus kalender lesen
+static final int SCROLLTEXT = 4; // texts aus file lesen
 
-int state_L = INTRO_L;
+int state = INTRO;
 
 PGraphics ledTemp;
 
 void stateMachine_LED(int state) {
   
    switch(state) {
-    case INTRO_L:
-      setState_L(SCROLLTEXT_L);
+    case INTRO:
+      setState(SCROLLTEXT);
     break;
     
-    case VIDEO_L:
+    case VIDEO:
       if(!isPlaying) return;
       if(ledMovie.available()) {
         ledMovie.read();
@@ -60,16 +60,17 @@ void stateMachine_LED(int state) {
       }
     break;
     
-    case IMAGES_L:      
+    case IMAGES:      
       //leds.feed(testImage);
       //leds.update();
       //leds.display();
       //leds.send();
     break;
     
-    case SCROLLTEXT_L:
+    case SCROLLTEXT:
       if(!isPlaying) return;
-      push();      
+      push();
+        background(gray);
         if(ledMovie != null) ledMovie.stop();
         String currentString = scrollSource[currentScrollText];
         float sw = textWidth(currentString);
@@ -93,7 +94,7 @@ void stateMachine_LED(int state) {
         translate(300, height-150);
         leds.display();
         pop();
-        leds.send();
+        if(online) leds.send();
         
         
         if(scrollPosition <= -(sw)-320) {
@@ -105,6 +106,6 @@ void stateMachine_LED(int state) {
    }
 }
 
-void setState_L(int s) {
-  state_L = s;
+void setState(int s) {
+  state = s;
 }

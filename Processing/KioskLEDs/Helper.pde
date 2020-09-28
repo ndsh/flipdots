@@ -14,14 +14,18 @@ void keyPressed() {
   } else if (key == 'o') {
     online = !online;
     println("online= " + online);
+    float r[] = {online?1f:0f};
+    onlineCheckbox.setArrayValue(r);
   } else if (key == 'd') {
     dither = !dither;
     println("dither= " + dither);
   } else if(key == ' ') {
     isPlaying = !isPlaying;
     println("isPlaying= "+ isPlaying);
-    if(isPlaying) flipdotMovie.play();
-    else flipdotMovie.pause();
+    if(isPlaying) ledMovie.play();
+    else ledMovie.pause();
+    float r[] = {isPlaying?1f:0f};
+    isPlayingCheckbox.setArrayValue(r);
   }
 }
 
@@ -72,12 +76,6 @@ void feedBuffer(PImage p) {
   pg.beginDraw();
   pg.image(p, 0, 0);
   pg.endDraw();
-}
-
-void send() {
-  if(online) {
-    flipdots.sendData();
-  }
 }
 
 
@@ -177,7 +175,6 @@ void initObjects(PApplet pa) {
   if(panelLayout == 0) pg = createGraphics(196, 14); // 2744 pixel
   else if(panelLayout  == 1) pg = createGraphics(28, 98); // 2744 pixels
   
-  flipdots = new FlipdotDisplay(panels, panelLayout, 10, 10);
   leds = new SchnickSchnack(maxBrightness);
   d = new Dither();
   d.setCanvas(pg.width, pg.height);
@@ -261,11 +258,22 @@ void initArtnet() {
 }
 // cp5
 void initCP5() {
-  cp5.addToggle("onlineButton")
-  .setPosition(width-50,height-20)
-  .setSize(50,20)
-  .setValue(online)
-  .setLabel("Online")
+  onlineCheckbox = cp5.addCheckBox("onlineCheckbox")
+  .setPosition(width-100,height-20)
+  .setSize(32, 8)
+  .addItem("online", 1)
+  ;
+  
+  isPlayingCheckbox = cp5.addCheckBox("isPlayingCheckbox")
+  .setPosition(width-100,height-30)
+  .setSize(32, 8)
+  .addItem("Playing", 1)
+  ;
+  
+  ditherCheckbox = cp5.addCheckBox("ditherCheckbox")
+  .setPosition(width-100,height-40)
+  .setSize(32, 8)
+  .addItem("Dither", 1)
   ;
   
   if(panelLayout == 0) {

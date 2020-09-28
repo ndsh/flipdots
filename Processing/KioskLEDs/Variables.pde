@@ -27,9 +27,7 @@ boolean online = true;
 boolean dither = false;
 boolean isPlaying = true;
 
-FlipdotDisplay flipdots;
 SchnickSchnack leds;
-Panel panel;
 //Dot dot;
 
 int panels = 7;
@@ -49,6 +47,10 @@ int currentMovieLEDs = 0;
 PApplet pa;
 
 int panelLayout = 1; // horizontal
+
+CheckBox onlineCheckbox;
+CheckBox isPlayingCheckbox;
+CheckBox ditherCheckbox;
 /*
   0
     ▀ ▀ ▀ ▀ ▀ ▀ ▀
