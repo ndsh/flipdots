@@ -8,7 +8,7 @@
 
 void setup() {
   size(1000, 550);
-  frameRate(20);
+  //frameRate(20);
   surface.setLocation(0, 0);
   colorMode(HSB, 360, 100, 100);
   ellipseMode(CENTER);

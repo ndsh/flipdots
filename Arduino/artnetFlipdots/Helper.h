@@ -5,6 +5,7 @@
 //#include <EthernetUdp.h>
 #include <NativeEthernet.h>
 #include <NativeEthernetUdp.h>
+#define UDP_TX_PACKET_MAX_SIZE 512 //increase UDP size
 #include <Artnet.h>
 #include <SPI.h>
 
@@ -37,7 +38,7 @@ int prevState = 0;
 
 // Millis Area
 long millisLastTransmission = 0;
-long delayTransmission = 1;
+long delayTransmission = 0;
 boolean dotsSwitcherState = false;
 
 int idlePixel = 0;
@@ -100,7 +101,7 @@ void setupEnv() {
   pixels.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
   pixels.show();            
   artnet.begin(mac, ip);
-  artnet.setBroadcast(broadcast);
+  //artnet.setBroadcast(broadcast);
 
   attachInterrupt(RESET_PIN, pin_reset, FALLING);
   
@@ -213,11 +214,12 @@ void runFlipdotsData() {
 //    byte[] collect =  new byte[512];
     millisLastTransmission = millis();
     //Serial.println(Serial1.available());
+    r = artnet.read();
     if(artnet.getUniverse() <= 8) {
       Serial1.write(header_norefresh, 2); 
       Serial1.write(artnet.getUniverse() & 0xFF);
       for(int x = 0; x<28; x++) {
-        Serial.println("HW1");
+        //Serial.println("HW1");
         decoding = "";
         //Serial.print(artnet.getDmxFrame()[x] & 0xFF);
         //Serial.print(" ");
@@ -227,7 +229,7 @@ void runFlipdotsData() {
       }
       Serial1.write(closure, 1); 
     } else {
-      Serial.println("HW2");
+      //Serial.println("HW2");
       
       Serial2.write(header_norefresh, 2); 
       Serial2.write(artnet.getUniverse() & 0xFF);

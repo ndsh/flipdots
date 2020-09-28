@@ -23,7 +23,7 @@ PImage source;
 PGraphics pg;
 Movie flipdotMovie;
 Movie ledMovie;
-boolean online = false;
+boolean online = true;
 boolean dither = false;
 boolean isPlaying = true;
 

@@ -176,8 +176,10 @@ class Panel {
     //println(panelID + " --- " + (panelID+1));
     int[][] panelHalves = {{1,2}, {3,4}, {5,6}, {7,8}, {9,10}, {11,12}, {13,14} };
     //int first 
-    if(changeUp) artnet.unicastDmx(ip, 0, panelHalves[panelID-1][0], dataUp);
-    if(changeDown) artnet.unicastDmx(ip, 0, panelHalves[panelID-1][1], dataDown);
+    if(changeUp); 
+    artnet.unicastDmx(ip, 0, panelHalves[panelID-1][0], dataUp);
+    if(changeDown); 
+    artnet.unicastDmx(ip, 0, panelHalves[panelID-1][1], dataDown);
   }
   
   void flip() { // eigentlich "invert"

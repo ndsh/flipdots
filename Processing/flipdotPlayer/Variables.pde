@@ -6,8 +6,8 @@ ArtNetClient artnet;
 ControlP5 cp5;
 Importer importer;
 Dither d;
-//String ip = "2.0.0.3"; // flipdoteeny
-String ip = "2.0.0.2"; // local
+String ip = "2.0.0.3"; // flipdoteeny
+//String ip = "2.0.0.2"; // local
 boolean switcher = false;
 float flipdotSize = 4;
 
@@ -51,25 +51,25 @@ CheckBox ditherCheckbox;
 int panelLayout = 1; // horizontal
 /*
   0
-    ▀ ▀ ▀ ▀ ▀ ▀ ▀
-    
-  1
-    ▀
-    ▀
-    ▀
-    ▀
-    ▀
-    ▀
-    ▀
-   
-  2 (1 == 2; 90° gedreht)
-    █ █ █ █ █ █ █
-  3
-    █
-    █
-    █
-    █
-    █
-    █
-    █
-*/
+ ▀ ▀ ▀ ▀ ▀ ▀ ▀
+ 
+ 1
+ ▀
+ ▀
+ ▀
+ ▀
+ ▀
+ ▀
+ ▀
+ 
+ 2 (1 == 2; 90° gedreht)
+ █ █ █ █ █ █ █
+ 3
+ █
+ █
+ █
+ █
+ █
+ █
+ █
+ */
