@@ -14,6 +14,9 @@ static final int TIME = 5;
 static final int CALENDAR = 6; // events aus kalender lesen
 static final int SINE = 7;
 static final int CELLS = 8;
+static final int BALLS = 9;
+static final int CELLULARAUTOMATA = 10;
+static final int FLOCKING = 11;
 
 int state = INTRO;
 
@@ -78,7 +81,9 @@ void stateMachine_LED(int state) {
       } else if(millis() - randomCheckTimestamp > randomCheckInterval) {
         randomCheckTimestamp = millis();
         demoTimestamp = millis();
-        int random = (int)random(2);
+        int random = (int)random(5);
+        //random = 0; // force a random state :)
+        leaResults = pickNewHashtags();
         if(random == 0) {
           setState(SINE);
         } else if(random == 1) {
@@ -92,10 +97,30 @@ void stateMachine_LED(int state) {
             }
           }
           setState(CELLS);
+        } else if(random == 2) {
+          numBalls = (int)random(12, 50);
+          spring = random(0.05, 1.1);
+          gravity = random(-0.03, 0.03);
+          friction = random(0.9, -0.9);
+          balls = new Ball[numBalls];
+          for (int i = 0; i < numBalls; i++) {
+            balls[i] = new Ball(random(ledTemp.width), random(ledTemp.height*2), random(3, 7), i, balls);
+          }
+          setState(BALLS);
+        } else if(random == 3) {
+          setState(CELLULARAUTOMATA);
+        } else if(random == 4) {
+          flock = new Flock();
+          // Add an initial set of boids into the system
+          for (int i = 0; i < 150; i++) {
+            flock.addBoid(new Boid(ledTemp.width/2, ledTemp.height/2));
+          }
+          setState(FLOCKING);
         }
       } else {
         setState(SCROLLTEXT_BORING);
       }
+      stateLabel.setText("Next state in: " + (randomCheckInterval-(millis() - randomCheckTimestamp))/1000 +" seconds");
       
     break;
     
@@ -180,15 +205,9 @@ void stateMachine_LED(int state) {
       float d2 = 10 + (sin(angle + PI/2) * diameter/2) + diameter/2;
       float d3 = 10 + (sin(angle + PI) * diameter/2) + diameter/2;
       
-      
-      
       angle += 0.02;
       push();
         background(gray);
-        if(millis() - followerTimestamp > followerInterval) {
-          followerTimestamp = millis();
-          followers = getFollowers();
-        }
         ledTemp.smooth();
         ledTemp.beginDraw();
         ledTemp.noStroke();
@@ -199,6 +218,9 @@ void stateMachine_LED(int state) {
         ledTemp.endDraw();
         textPos++;
         textPos %= ledTemp.width;
+        
+        //
+        textOverlay();
         
         image(ledTemp, 20, 80, 320*2.99, 16*2.99);
         push();
@@ -217,19 +239,18 @@ void stateMachine_LED(int state) {
         
         
       pop();
+      stateLabel.setText("Next state in: " + (demoInterval-(millis() - demoTimestamp))/1000 +" seconds");
       if(millis() - demoTimestamp < demoInterval) return;
       demoTimestamp = millis();
+      randomCheckTimestamp = millis();
       setState(CHECK);
       
     break;
     
     case CELLS:
-    push();
+      push();
         background(gray);
-        if(millis() - followerTimestamp > followerInterval) {
-          followerTimestamp = millis();
-          followers = getFollowers();
-        }
+        // hashtags von lea
         ledTemp.smooth();
         ledTemp.beginDraw();
         ledTemp.noStroke();
@@ -245,6 +266,9 @@ void stateMachine_LED(int state) {
         textPos++;
         textPos %= ledTemp.width;
         
+        
+        textOverlay();
+        
         image(ledTemp, 20, 80, 320*2.99, 16*2.99);
         push();
           noFill();
@@ -262,12 +286,152 @@ void stateMachine_LED(int state) {
         
         
       pop();
+      stateLabel.setText("Next state in: " + (demoInterval-(millis() - demoTimestamp))/1000 +" seconds");
       if(millis() - demoTimestamp < demoInterval) return;
       demoTimestamp = millis();
+      randomCheckTimestamp = millis();
       setState(CHECK);
       
       
     break;
+    
+    case BALLS:
+      push();
+        background(gray);
+        
+        
+        ledTemp.smooth();
+        ledTemp.beginDraw();
+        ledTemp.noStroke();
+        ledTemp.clear();
+        
+        for (Ball ball : balls) {
+          ball.collide();
+          ball.move();
+          ball.display();  
+        }
+        
+        ledTemp.endDraw();
+        textPos++;
+        textPos %= ledTemp.width;
+        
+        
+        textOverlay();
+        
+        image(ledTemp, 20, 80, 320*2.99, 16*2.99);
+        push();
+          noFill();
+          stroke(black);
+          rect(20, 80, 320*2.99, 16*2.99);
+        pop();
+        leds.feed(ledTemp);
+        
+        leds.update();
+        push();
+          translate(20, 20);
+          leds.display();
+        pop();
+        if(online) leds.send();
+        
+        
+      pop();
+      stateLabel.setText("Next state in: " + (demoInterval-(millis() - demoTimestamp))/1000 +" seconds");
+      if(millis() - demoTimestamp < demoInterval) return;
+      demoTimestamp = millis();
+      randomCheckTimestamp = millis();
+      setState(CHECK);
+      
+      
+    break;
+    
+    case CELLULARAUTOMATA:
+      push();
+        background(gray);
+        
+        ledTemp.push();
+        ledTemp.beginDraw();
+        //ledTemp.clear();
+        
+        ca.render();    // Draw the CA
+        ca.generate();  // Generate the next level
+        
+        if (ca.finished()) {   // If we're done, clear the screen, pick a new ruleset and restart
+          ledTemp.background(black);
+          ca.randomize();
+          ca.restart();
+        }
+        
+        ledTemp.endDraw();
+        ledTemp.pop();
+        textPos++;
+        textPos %= ledTemp.width;
+        
+        textOverlay();
+        
+        image(ledTemp, 20, 80, 320*2.99, 16*2.99);
+        push();
+          noFill();
+          stroke(black);
+          rect(20, 80, 320*2.99, 16*2.99);
+        pop();
+        leds.feed(ledTemp);
+        
+        leds.update();
+        push();
+          translate(20, 20);
+          leds.display();
+        pop();
+        if(online) leds.send();
+        
+        
+      pop();
+      stateLabel.setText("Next state in: " + (demoInterval-(millis() - demoTimestamp))/1000 +" seconds");
+      if(millis() - demoTimestamp < demoInterval) return;
+      demoTimestamp = millis();
+      randomCheckTimestamp = millis();
+      setState(CHECK);
+    break;
+    
+    case FLOCKING:
+      push();
+        background(gray);
+        
+        ledTemp.push();
+        ledTemp.beginDraw();
+        ledTemp.background(black);
+        flock.run();
+        
+        ledTemp.endDraw();
+        ledTemp.pop();
+        textPos++;
+        textPos %= ledTemp.width;
+        
+        textOverlay();
+        
+        image(ledTemp, 20, 80, 320*2.99, 16*2.99);
+        push();
+          noFill();
+          stroke(black);
+          rect(20, 80, 320*2.99, 16*2.99);
+        pop();
+        leds.feed(ledTemp);
+        
+        leds.update();
+        push();
+          translate(20, 20);
+          leds.display();
+        pop();
+        if(online) leds.send();
+        
+        
+      pop();
+      stateLabel.setText("Next state in: " + (demoInterval-(millis() - demoTimestamp))/1000 +" seconds");
+      if(millis() - demoTimestamp < demoInterval) return;
+      demoTimestamp = millis();
+      randomCheckTimestamp = millis();
+      setState(CHECK);
+    break;
+    
    }
 }
 

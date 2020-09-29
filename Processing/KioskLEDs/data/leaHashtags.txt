@@ -1,0 +1,31 @@
+Activation;Aktivierung
+Appropriation;Aneignung
+Change;Wandel
+Cooperative Planning;gemeinschaftliche Planungen
+Community;Gemeinschaft
+Cohabitation;Zusammenleben
+Climate;Klima
+Decolonising;Dekolonisierung
+Data;Daten
+Diversity;Vielfalt
+Exchange;Austausch;Dialog
+Everyday;Alltag
+Different Economies;Alternative Oekonomien
+Heritage;Kulturelles Erbe
+Housing;Wohnen
+Infrastructure;Infrastruktur
+Migration;Migration
+Mixed-use;Mischnutzung
+Mobility;Mobilitaet
+Networks;Netzwerke
+Participation;Beteiligung
+Protest;Protest
+Public space;Oeffentlicher Raum
+Reframing;Neue Modelle
+Resistance;Widerstand
+Re-use;Weiter-Nutzen
+Rights;Rechte
+Self-Organisation;Selbstorganisation
+Solidarity;Solidaritaet
+Training;Schulung
+Urban agriculture;Urbane Landwirtschaft 

@@ -127,16 +127,6 @@ byte[] grabFrame(PImage p, int panel) {
   return data;
 }
 
-void feedVideoFlipdots(PApplet pa, String s) {
-  println("Flipdots movie= " + getBasename(s));
-  if(flipdotMovie != null) flipdotMovie.stop();
-  flipdotMovie = new Movie(pa, s);
-  flipdotMovie.loop();
-  flipdotMovie.volume(movieVolume);
-  //myMovie.jump(160.0);}
-  //System.gc();
-}
-
 void feedVideoLEDs(PApplet pa, String s) {
   println("LEDs movie= " + getBasename(s));
   if(ledMovie != null) ledMovie.stop();
@@ -148,7 +138,7 @@ void feedVideoLEDs(PApplet pa, String s) {
 }
 
 void setVolume(float f) {
-  flipdotMovie.volume(f);
+  ledMovie.volume(f);
 }
 
 void runInits(PApplet pa) {
@@ -190,12 +180,21 @@ void initObjects(PApplet pa) {
   if(ledFiles.size() > 0) feedVideoLEDs(pa, ledFiles.get(currentMovieLEDs));
   
   scrollSource = loadStrings("scroll.txt");
+  leaHashtags = loadStrings("leaHashtags.txt");
   String s = bunchTextTogether(scrollSource);
   scrollSource = new String[1];
   scrollSource[0] = s;
   europaGrotesk = loadFont(usedFont);
   float w = textWidth(scrollSource[currentScrollText]);
   scrollPosition = (int)320;
+  monoFont = loadFont("04b-25-12.vlw");
+  //textFont(monoFont, 12);
+  textOverlay = createGraphics(320, 16);
+  textOverlay.beginDraw();
+  textOverlay.textFont(monoFont, 12);
+  textOverlay.textAlign(CENTER, CENTER);
+  textOverlay.endDraw();
+  
   ledTemp.beginDraw();
   ledTemp.textFont(europaGrotesk, 16);
   ledTemp.textSize(16);
@@ -208,6 +207,7 @@ void initObjects(PApplet pa) {
       grid[i][j] = new Cell(i*10,j*2,10,2,i+j);
     }
   }
+  ca = new CA(ruleset);                 // Initialize CA
   
 }
 
@@ -245,6 +245,11 @@ void initArtnet() {
 }
 // cp5
 void initCP5() {
+  stateLabel = cp5.addTextlabel("label2")
+  .setText("Next state in: ")
+  .setPosition(16, 140)
+  ;
+    
   onlineCheckbox = cp5.addCheckBox("onlineCheckbox")
   .setPosition(width-100,height-20)
   .setSize(32, 8)
@@ -264,11 +269,11 @@ void initCP5() {
   ;
   
   
-    cp5.addSlider("movieVolume")
-    .setPosition(8,180)
-    .setRange(0f,1f)
-    .setLabel("Volume")
-    ;
+  cp5.addSlider("movieVolume")
+  .setPosition(8,180)
+  .setRange(0f,1f)
+  .setLabel("Volume")
+  ;
       
   
   cp5.setColorForeground(gray);
@@ -313,30 +318,35 @@ int getFollowers() {
   return i;
 }
 
-class Cell {
-  // A cell object knows about its location in the grid 
-  // as well as its size with the variables x,y,w,h
-  float x,y;   // x,y location
-  float w,h;   // width and height
-  float angle; // angle for oscillating brightness
-
-  // Cell Constructor
-  Cell(float tempX, float tempY, float tempW, float tempH, float tempAngle) {
-    x = tempX;
-    y = tempY;
-    w = tempW;
-    h = tempH;
-    angle = tempAngle;
-  } 
+String[] pickNewHashtags() {
+  //String[] result = {"a", "b"};
   
-  // Oscillation means increase angle
-  void oscillate() {
-    angle += 0.02; 
-  }
+  int randomRow = (int)random(leaHashtags.length);
+  String[] split = split(leaHashtags[randomRow], ";");
+  return split;
+}
 
-  void display() {
-    // Color calculated using sine wave
-    ledTemp.fill(127+127*sin(angle));
-    ledTemp.rect(x,y,w,h); 
-  }
+void textOverlay() {
+  textOverlay.beginDraw();      
+        
+  textOverlay.push();
+  textOverlay.clear();
+  textOverlay.fill(black);
+  textOverlay.text(leaResults[0].toUpperCase(), ledTemp.width/4, ledTemp.height/2-1);
+  textOverlay.text(leaResults[0].toUpperCase(), ledTemp.width/4, ledTemp.height/2+1);
+  textOverlay.text(leaResults[0].toUpperCase(), ledTemp.width/4+1, ledTemp.height/2);
+  textOverlay.text(leaResults[0].toUpperCase(), ledTemp.width/4-1, ledTemp.height/2);
+  textOverlay.text(leaResults[1].toUpperCase(), ledTemp.width/2+ledTemp.width/4, ledTemp.height/2-1);
+  textOverlay.text(leaResults[1].toUpperCase(), ledTemp.width/2+ledTemp.width/4, ledTemp.height/2+1);
+  textOverlay.text(leaResults[1].toUpperCase(), ledTemp.width/2+ledTemp.width/4+1, ledTemp.height/2);
+  textOverlay.text(leaResults[1].toUpperCase(), ledTemp.width/2+ledTemp.width/4-1, ledTemp.height/2);
+  textOverlay.fill(white);
+  textOverlay.text(leaResults[0].toUpperCase(), ledTemp.width/4, ledTemp.height/2);
+  textOverlay.text(leaResults[1].toUpperCase(), ledTemp.width/2+ledTemp.width/4, ledTemp.height/2);
+  textOverlay.pop();
+  textOverlay.endDraw();
+  //
+  ledTemp.beginDraw();
+  ledTemp.image(textOverlay, 0, 0);
+  ledTemp.endDraw();
 }
