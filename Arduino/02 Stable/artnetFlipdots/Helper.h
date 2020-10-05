@@ -219,6 +219,106 @@ void runFlipdotsDataSingleUniverse() {
       pos = x - 28 * (x / 28); // modulo funktion umgeschrieben! performance.
       dataPackage[pos+3] = artnet.getDmxFrame()[x];
       //if(x % 28 == 0 && x != 0) {
+      if(x == 27) {
+        u = 1;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial1.write(dataPackage, 32);
+      } else if(x == 55) {
+        u = 2;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial1.write(dataPackage, 32);
+      } else if(x == 83) {
+        u = 3;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial1.write(dataPackage, 32);
+      } else if(x == 111) {
+        u = 4;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial1.write(dataPackage, 32);
+      } else if(x == 139) {
+        u = 5;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial1.write(dataPackage, 32);
+      } else if(x == 167) {
+        u = 6;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial1.write(dataPackage, 32);
+      } else if(x == 195) {
+        u = 7;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial1.write(dataPackage, 32);
+      } else if(x == 223) {
+        u = 8;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial1.write(dataPackage, 32);
+      } else if(x == 251) {
+        u = 9;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial2.write(dataPackage, 32);
+      } else if(x == 279) { 
+        u = 10;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial2.write(dataPackage, 32);
+      } else if(x == 307) {
+        u = 11;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial2.write(dataPackage, 32);
+      } else if(x == 335) {
+        u = 12;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial2.write(dataPackage, 32);
+      } else if(x == 364) {
+        u = 13;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial2.write(dataPackage, 32);
+      } else if(x == 391) {
+        u = 14;
+        dataPackage[0] = 0x80;
+        dataPackage[1] = 0x84;
+        dataPackage[2] = u & 0xFF;
+        dataPackage[31] = 0x8F;
+        Serial2.write(dataPackage, 32);
+      }
+      /*
       if(pos == 0 && x != 0) {
         u++;
         dataPackage[0] = 0x80;
@@ -227,8 +327,7 @@ void runFlipdotsDataSingleUniverse() {
         dataPackage[31] = 0x8F;
         if(u <= 8) Serial1.write(dataPackage, 32);
         else Serial2.write(dataPackage, 32);
-      }
-      /*} else if(x == 391) { // letztes bit
+      } else if(x == 391) { // letztes bit
         u++;
         dataPackage[0] = 0x80;
         dataPackage[1] = 0x84;
@@ -236,7 +335,8 @@ void runFlipdotsDataSingleUniverse() {
         dataPackage[31] = 0x8F;
         if(u <= 8) Serial1.write(dataPackage, 32);
         else Serial2.write(dataPackage, 32);
-      }*/
+      }
+      */
     }
     
 }

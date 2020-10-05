@@ -27,7 +27,7 @@ void stateMachine(int state) {
   
    switch(state) {
     case INTRO:
-      setState(WORDS);
+      setState(VIDEO);
     break;
     
     case VIDEO:
@@ -95,7 +95,7 @@ void stateMachine(int state) {
       if(myMovie.available()) {
         background(gray);
         myMovie.read();
-        String displayText = "T\nG\nE\n";
+        String displayText = "#\nL\nT\nC\n";
         source = myMovie.get();
         newFrame = myMovie;
         shrink = shrinkToFormat(newFrame);
