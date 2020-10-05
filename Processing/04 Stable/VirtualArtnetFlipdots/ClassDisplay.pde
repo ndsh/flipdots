@@ -65,27 +65,8 @@ class FlipdotDisplay {
   */
   
   void send() {
-    byte[][] retrieve = new byte[7][2];
-    if(!sendMode) { // single packages
-      for(int i = 0; i<amountPanels; i++) {
-        panels[i].send();
-      }
-    } else { // big package of 392 bytes
-      flipdotData = new byte[392];
-      int c = 0;
-      for(int i = 0; i<amountPanels; i++) {
-        retrieve = panels[i].getData();
-        for(int k = 0; k<retrieve[0].length; k++) {
-          flipdotData[c] = retrieve[0][k];
-          c++;
-        }
-        for(int k = 0; k<retrieve[1].length; k++) {
-          flipdotData[c] = retrieve[1][k];
-          c++;
-        }
-      }
-      if(online) artnet.unicastDmx(ip, 0, 0, flipdotData);
-      // send off
+    for(int i = 0; i<amountPanels; i++) {
+      panels[i].send();
     }
   }
   

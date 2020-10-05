@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html style="" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!--[if IE]><style>div { zoom: 1; /* trigger hasLayout */ }</style><![endif]-->
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><script type="text/javascript" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/40b3e098a7.js"></script><script type="text/javascript" async="" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/owbpizd5"></script><script type="text/javascript" async="" id="inspsync" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/inspectlet.js"></script><script src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/nr-1184.js"></script><script type="text/javascript" async="" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/mixpanel-2-latest.js"></script><script async="" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/analytics.js"></script><script async="" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/tags.js"></script><script type="text/javascript" async="" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/heap-1579461670.js"></script><script src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/NbTlZ2adl2QVV8NacYS1brjWh60.js"></script><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={licenseKey:"40b3e098a7",applicationID:"29832197"};window.NREUM||(NREUM={}),__nr_require=function(e,t,n){function r(n){if(!t[n]){var i=t[n]={exports:{}};e[n][0].call(i.exports,function(t){var i=e[n][1][t];return r(i||t)},i,i.exports)}return t[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(e,t,n){function r(){}function i(e,t,n){return function(){return o(e,[u.now()].concat(c(arguments)),t?null:this,n),t?void 0:this}}var o=e("handle"),a=e(6),c=e(7),f=e("ee").get("tracer"),u=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],p="api-",l=p+"ixn-";a(d,function(e,t){s[t]=i(p+t,!0,"api")}),s.addPageAction=i(p+"addPageAction",!0),s.setCurrentRouteName=i(p+"routeName",!0),t.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,t){var n={},r=this,i="function"==typeof t;return o(l+"tracer",[u.now(),e,n],r),function(){if(f.emit((i?"":"no-")+"fn-start",[u.now(),r,i],n),i)try{return t.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],n),e}finally{f.emit("fn-end",[u.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,t){m[t]=i(l+t)}),newrelic.noticeError=function(e,t){"string"==typeof e&&(e=new Error(e)),o("err",[e,u.now(),!1,t])}},{}],2:[function(e,t,n){function r(){return c.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,c=e(8);t.exports=r,t.exports.offset=a,t.exports.getLastTimestamp=i},{}],3:[function(e,t,n){function r(e,t){var n=e.getEntries();n.forEach(function(e){"first-paint"===e.name?d("timing",["fp",Math.floor(e.startTime)]):"first-contentful-paint"===e.name&&d("timing",["fcp",Math.floor(e.startTime)])})}function i(e,t){var n=e.getEntries();n.length>0&&d("lcp",[n[n.length-1]])}function o(e){e.getEntries().forEach(function(e){e.hadRecentInput||d("cls",[e])})}function a(e){if(e instanceof m&&!g){var t=Math.round(e.timeStamp),n={type:e.type};t<=p.now()?n.fid=p.now()-t:t>p.offset&&t<=Date.now()?(t-=p.offset,n.fid=p.now()-t):t=p.now(),g=!0,d("timing",["fi",t,n])}}function c(e){d("pageHide",[p.now(),e])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var f,u,s,d=e("handle"),p=e("loader"),l=e(5),m=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){f=new PerformanceObserver(r);try{f.observe({entryTypes:["paint"]})}catch(v){}u=new PerformanceObserver(i);try{u.observe({entryTypes:["largest-contentful-paint"]})}catch(v){}s=new PerformanceObserver(o);try{s.observe({type:"layout-shift",buffered:!0})}catch(v){}}if("addEventListener"in document){var g=!1,y=["click","keydown","mousedown","pointerdown","touchstart"];y.forEach(function(e){document.addEventListener(e,a,!1)})}l(c)}},{}],4:[function(e,t,n){function r(e,t){if(!i)return!1;if(e!==i)return!1;if(!t)return!0;if(!o)return!1;for(var n=o.split("."),r=t.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var c=navigator.userAgent,f=c.match(a);f&&c.indexOf("Chrome")===-1&&c.indexOf("Chromium")===-1&&(i="Safari",o=f[1])}t.exports={agent:i,version:o,match:r}},{}],5:[function(e,t,n){function r(e){function t(){e(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,t,!1)}t.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],6:[function(e,t,n){function r(e,t){var n=[],r="",o=0;for(r in e)i.call(e,r)&&(n[o]=t(r,e[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;t.exports=r},{}],7:[function(e,t,n){function r(e,t,n){t||(t=0),"undefined"==typeof n&&(n=e?e.length:0);for(var r=-1,i=n-t||0,o=Array(i<0?0:i);++r<i;)o[r]=e[t+r];return o}t.exports=r},{}],8:[function(e,t,n){t.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,t,n){function r(){}function i(e){function t(e){return e&&e instanceof r?e:e?f(e,c,o):o()}function n(n,r,i,o){if(!p.aborted||o){e&&e(n,r,i);for(var a=t(i),c=v(n),f=c.length,u=0;u<f;u++)c[u].apply(a,r);var d=s[w[n]];return d&&d.push([b,n,r,a]),a}}function l(e,t){h[e]=v(e).concat(t)}function m(e,t){var n=h[e];if(n)for(var r=0;r<n.length;r++)n[r]===t&&n.splice(r,1)}function v(e){return h[e]||[]}function g(e){return d[e]=d[e]||i(n)}function y(e,t){u(e,function(e,n){t=t||"feature",w[n]=t,t in s||(s[t]=[])})}var h={},w={},b={on:l,addEventListener:l,removeEventListener:m,emit:n,get:g,listeners:v,context:t,buffer:y,abort:a,aborted:!1};return b}function o(){return new r}function a(){(s.api||s.feature)&&(p.aborted=!0,s=p.backlog={})}var c="nr@context",f=e("gos"),u=e(6),s={},d={},p=t.exports=i();p.backlog=s},{}],gos:[function(e,t,n){function r(e,t,n){if(i.call(e,t))return e[t];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,t,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return e[t]=r,r}var i=Object.prototype.hasOwnProperty;t.exports=r},{}],handle:[function(e,t,n){function r(e,t,n,r){i.buffer([e],r),i.emit(e,t,n)}var i=e("ee").get("handle");t.exports=r,r.ee=i},{}],id:[function(e,t,n){function r(e){var t=typeof e;return!e||"object"!==t&&"function"!==t?-1:e===window?0:a(e,o,function(){return i++})}var i=1,o="nr@id",a=e("gos");t.exports=r},{}],loader:[function(e,t,n){function r(){if(!E++){var e=b.info=NREUM.info,t=p.getElementsByTagName("script")[0];if(setTimeout(u.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&t))return u.abort();f(h,function(t,n){e[t]||(e[t]=n)});var n=a();c("mark",["onload",n+b.offset],null,"api"),c("timing",["load",n]);var r=p.createElement("script");r.src="https://"+e.agent,t.parentNode.insertBefore(r,t)}}function i(){"complete"===p.readyState&&o()}function o(){c("mark",["domContent",a()+b.offset],null,"api")}var a=e(2),c=e("handle"),f=e(6),u=e("ee"),s=e(4),d=window,p=d.document,l="addEventListener",m="attachEvent",v=d.XMLHttpRequest,g=v&&v.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:v,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var y=""+location,h={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1184.min.js"},w=v&&g&&g[l]&&!/CriOS/.test(navigator.userAgent),b=t.exports={offset:a.getLastTimestamp(),now:a,origin:y,features:{},xhrWrappable:w,userAgent:s};e(1),e(3),p[l]?(p[l]("DOMContentLoaded",o,!1),d[l]("load",r,!1)):(p[m]("onreadystatechange",i),d[m]("onload",r)),c("mark",["firstbyte",a.getLastTimestamp()],null,"api");var E=0},{}],"wrap-function":[function(e,t,n){function r(e){return!(e&&e instanceof Function&&e.apply&&!e[a])}var i=e("ee"),o=e(7),a="nr@original",c=Object.prototype.hasOwnProperty,f=!1;t.exports=function(e,t){function n(e,t,n,i){function nrWrapper(){var r,a,c,f;try{a=this,r=o(arguments),c="function"==typeof n?n(r,a):n||{}}catch(u){p([u,"",[r,a,i],c])}s(t+"start",[r,a,i],c);try{return f=e.apply(a,r)}catch(d){throw s(t+"err",[r,a,d],c),d}finally{s(t+"end",[r,a,f],c)}}return r(e)?e:(t||(t=""),nrWrapper[a]=e,d(e,nrWrapper),nrWrapper)}function u(e,t,i,o){i||(i="");var a,c,f,u="-"===i.charAt(0);for(f=0;f<t.length;f++)c=t[f],a=e[c],r(a)||(e[c]=n(a,u?c+i:i,o,c))}function s(n,r,i){if(!f||t){var o=f;f=!0;try{e.emit(n,r,i,t)}catch(a){p([a,n,r,i])}f=o}}function d(e,t){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(e);return n.forEach(function(n){Object.defineProperty(t,n,{get:function(){return e[n]},set:function(t){return e[n]=t,t}})}),t}catch(r){p([r])}for(var i in e)c.call(e,i)&&(t[i]=e[i]);return t}function p(t){try{e.emit("internal-error",t)}catch(n){}}return e||(e=i),n.inPlace=u,n.flag=a,n}},{}]},{},["loader"]);</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"licenseKey":"40b3e098a7","errorBeacon":"bam.nr-data.net","agent":"","beacon":"bam.nr-data.net","queueTime":9,"applicationID":"29832197","transactionName":"NVYAbUpQVhIDW0JeWwwcJExWUkwIDVYZREQLUAdUV1VdDREWQF5RFUBYT1FUTz4PXWlTVRZSEVFdVEw=","applicationTime":248}</script>
+
+<link rel="icon" type="image/x-icon" href="https://www.snapeda.com/static/img/icons/SnapEDA.23e7b568532a.ico">
+
+<link href="https://plus.google.com/105383266825551010805" rel="publisher">
+<style>
+.join-hook-container{
+    background-image: url(/static/img/join-hook-bg.8c750b158c3a.png);
+}
+.social-facebook a {
+  background-image: url(/static/img/icons/face.762b30ae766e.png);
+}
+.social-linkedin a{
+    background-image: url(/static/img/icons/linkedin.f3e729cfc3bc.png);
+}
+.social-twitter a{
+    background-image: url(/static/img/icons/twitter.199fdd7b93a0.png);
+}
+</style>
+<link rel="stylesheet" href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/jquery-ui.css">
+<script src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/jquery.js"></script>
+<script src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/jquery-ui.js"></script>
+
+<script src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/3693.js" charset="UTF-8"></script>
+<title>
+        RB1-125BAG1A datasheet by WIZnet | SnapEDA
+    </title>
+<link href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/css.css" rel="stylesheet" type="text/css">
+<link href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/core.css" rel="stylesheet" type="text/css" media="all">
+
+<meta name="description" content="SnapEDA Plugin for Eagle and Altium Designer, search and download symbols, footprints and 3D models right in the tool">
+<link href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/css2.css" rel="stylesheet">
+<style>
+
+.base{
+	padding-bottom: 0 !important;
+}
+body{
+	overflow: hidden;
+}
+.sct-header{
+    background-color: #fff;
+    padding: 15px;
+    overflow: hidden;
+    height:58px;
+}
+.sct-header.ver2{
+    background-color: #314d6f !important;
+    background-size: 140px auto;
+    padding: 0px !important;
+    height: 88px !important;
+}
+
+.center2{ 
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+}
+.sct-header.ver2 .center2{
+    background: #fff;
+    overflow: hidden; 
+    border-radius: 5px;
+    height: 64px !important;
+}
+.me-logo{
+    float: left;
+    width: 130px;
+    padding-top: 5px;
+}
+.me-available{
+	float: left;
+    margin: 18px 10px 0px 50px;
+    font-weight: 400;
+    color: #777;
+}
+
+.me-button{
+	float:right;
+	margin-top:12px;
+	padding: 7px 15px;
+}
+.ad_buy{
+
+	margin-right: 10px;
+}
+.me-iframe{
+	width:100%;
+	min-height:100%;
+}
+
+.me-pricing{
+    float: left;
+    margin: 10px 20px 0px 30px;
+    text-align: left;
+}
+
+.part-img{
+    float:left;
+    margin: 0px 0px 0px 30px;
+    width: 53px;
+}
+
+.me-pricing p{
+    margin-bottom: 0;
+    color:#0D4F85;
+}
+
+.me-pricing p span{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.placeholder-i{
+    font-size: 40px;
+    padding-top: 10px;
+    color: #ccc;
+}
+
+
+.me-pricing p{
+  color: #004A85;
+}
+.sct-header.ver2{
+  background-color: #004A85 !important;
+}
+
+.s-btn.blue, .s-btn-icon.blue i{
+  border: 1px solid #304E70;
+  background-color: #304E70;
+  box-shadow: none !important;
+}
+
+.s-btn.blue:hover {
+  color: #304E70;
+  background: #fff;
+}
+
+.ds-bk-section {
+  display: flex !important;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 88px !important;
+  position: relative;
+}
+
+.ml-25 {
+  margin-left: 25px;
+}
+
+.get-symbol {
+  background-image: url(/static_files/images/alert-orange.png);
+  width: 336px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.link-color {
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+.s-btn {
+  border-radius: 50px;
+  padding: 10px;
+}
+
+.ab-new-design .bg-elipse {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  width: 320px;
+}
+
+.ab-new-design .order-pricing {
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 48px;
+  display: inline;
+}
+
+.ab-new-design .orders-available {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 33px;
+  text-align: center;
+  color: #1A1A1A;
+}
+
+.ab-new-design .price-start {
+  background: #FF761A;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 4px 10px 4px 10px;
+  width: auto;
+  text-transform: UPPERCASE;
+  display: inline-flex;
+}
+
+.ab-new-design .btn-banner {
+  z-index: 100 !important;
+  border: 1.5px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 24px; 
+  color: #fff; 
+}
+
+.ab-new-design .btn-banner:hover {
+  background: #ffffff;
+  color: #FF761A;
+}
+
+.ab-new-design .banner-buttons {
+  position: absolute;
+  z-index: 1000;
+  right: 24px;
+  top: 4px;
+}
+
+.sct-header.ver2 .ab-new-design .center2 {
+  background: #1E4B7F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ab-new-design .part-img {
+  width: 60px;
+  height: 60px;
+}
+
+.ab-new-design {
+  cursor: pointer;
+  position: absolute;
+  left: calc((100vw /2) - 400px);
+  top: 5px;
+} 
+
+.datasheet-banner {
+  position: absolute;
+  cursor: pointer;
+  left: calc(50vw - 330px);
+}
+
+.datasheet-banner .center2 {
+    background: #fff;
+    overflow: hidden;
+    padding: 0px 10px 0px 10px !important;
+    border-radius: 5px; 
+}
+
+.datasheet-banner .img-section {
+    padding: 20px; 
+}
+
+.datasheet-banner .me-logo { 
+    width: 88px;
+    padding: 0px; 
+    image-rendering: -moz-crisp-edges;         /* Firefox */
+    image-rendering:   -o-crisp-edges;         /* Opera */
+    image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.datasheet-banner .info-section {
+    display: flex;
+    padding: 6px 10px 6px 20px;
+}
+
+.datasheet-banner .info-text-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 280px; 
+}
+
+.datasheet-banner .t1 {
+    font-weight: 800;
+    font-size: 14px; 
+    font-family: 'Roboto', sans-serif;
+    color: rgb(60,60,80);
+}
+
+.datasheet-banner .t2 {
+    font-weight: 800;
+    font-size: 13px;
+    font-stretch: ultra-condensed;
+    font-style: italic;
+    color: #ff761a;
+    margin-top: 2px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.datasheet-banner .btn-buy-part {
+    margin: 0px 0px 0px 40px !important;
+    padding: 10px 16px 10px 16px !important;
+    box-shadow: 10px 0px 20px rgba(244, 127, 32, 0.3), -10px 4px 20px rgba(255, 118, 26, 0.2);
+}
+ 
+.get-symbol-footprint {
+  margin: 0px 32px 0px 0px !important;
+}
+
+.vertical-divider {
+    position: relative;
+    height: 60px;
+    width: 2px;
+}
+
+.divider-line {
+    position: absolute;
+    width: 1px;
+    height: 100px;
+    top: -16px;
+    left: 0px;
+    background: #1E4B7F;
+}
+
+#nav-logo-link {
+  margin: 0px !important;
+}
+
+.ti-info {
+    margin-left: 45px;
+    min-width: 200px !important;
+}
+
+.ti-info .info-text-section {
+    color: #304E70 !important;
+    width: 180px;
+}
+
+.ti-info .text-1 {
+    color: #304E70 !important;
+    font-size: 11px;
+}
+
+.ti-info .text-2 {
+    color: #304E70 !important;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pr-20 {
+  padding-right: 20px;
+}
+
+</style>
+<script type="text/javascript">
+
+        window.heap=window.heap||[],heap.load=function(e,t){window.heap.appid=e,window.heap.config=t=t||{};var r=t.forceSSL||"https:"===document.location.protocol,a=document.createElement("script");a.type="text/javascript",a.async=!0,a.src=(r?"https:":"http:")+"//cdn.heapanalytics.com/js/heap-"+e+".js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n);for(var o=function(e){return function(){heap.push([e].concat(Array.prototype.slice.call(arguments,0)))}},p=["addEventProperties","addUserProperties","clearEventProperties","identify","removeEventProperty","setEventProperties","track","unsetEventProperty"],c=0;c<p.length;c++)heap[p[c]]=o(p[c])};
+        heap.load("1579461670");
+    </script>
+
+<script src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/load.js" async=""></script>
+<style>
+        
+    </style>
+<style type="text/css">.fomo-notification.fomo-notification-animation-fade-in{-webkit-animation:fomoFadeIn 1s;-o-animation:fomoFadeIn 1s;animation:fomoFadeIn 1s;-webkit-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both}.fomo-notification.fomo-notification-animation-fade-out{-webkit-animation:fomoFadeOut 1s;-o-animation:fomoFadeOut 1s;animation:fomoFadeOut 1s;-webkit-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both}.fomo-notification.fomo-notification-animation-horizontal,.fomo-notification.fomo-notification-animation-vertical{-webkit-animation-fill-mode:forwards;-o-animation-fill-mode:forwards;animation-fill-mode:forwards}@-webkit-keyframes fomoFadeIn{0%{opacity:0}to{opacity:1}}@-o-keyframes fomoFadeIn{0%{opacity:0}to{opacity:1}}@keyframes fomoFadeIn{0%{opacity:0}to{opacity:1}}@-webkit-keyframes fomoFadeOut{0%{opacity:1}to{opacity:0}}@-o-keyframes fomoFadeOut{0%{opacity:1}to{opacity:0}}@keyframes fomoFadeOut{0%{opacity:1}to{opacity:0}}@-webkit-keyframes fomoSlideOutHorizontalLeft{to{opacity:0;-webkit-transform:translateX(-200%);transform:translateX(-200%)}}@-o-keyframes fomoSlideOutHorizontalLeft{to{opacity:0;-o-transform:translateX(-200%);transform:translateX(-200%)}}@keyframes fomoSlideOutHorizontalLeft{to{opacity:0;-webkit-transform:translateX(-200%);-o-transform:translateX(-200%);transform:translateX(-200%)}}@-webkit-keyframes fomoSlideInHorizontalRight{to{opacity:1;-webkit-transform:translateX(0);transform:translateX(0)}}@-o-keyframes fomoSlideInHorizontalRight{to{opacity:1;-o-transform:translateX(0);transform:translateX(0)}}@keyframes fomoSlideInHorizontalRight{to{opacity:1;-webkit-transform:translateX(0);-o-transform:translateX(0);transform:translateX(0)}}@-webkit-keyframes fomoSlideOutHorizontalRight{to{opacity:0;-webkit-transform:translateX(200%);transform:translateX(200%)}}@-o-keyframes fomoSlideOutHorizontalRight{to{opacity:0;-o-transform:translateX(200%);transform:translateX(200%)}}@keyframes fomoSlideOutHorizontalRight{to{opacity:0;-webkit-transform:translateX(200%);-o-transform:translateX(200%);transform:translateX(200%)}}@-webkit-keyframes fomoSlideOutVerticalBottom{to{opacity:1;-webkit-transform:translateY(200%);transform:translateY(200%)}}@-o-keyframes fomoSlideOutVerticalBottom{to{opacity:1;-o-transform:translateY(200%);transform:translateY(200%)}}@keyframes fomoSlideOutVerticalBottom{to{opacity:1;-webkit-transform:translateY(200%);-o-transform:translateY(200%);transform:translateY(200%)}}@-webkit-keyframes fomoSlideOutVerticalBottomCenter{to{opacity:1;-webkit-transform:translateX(-50%) translateY(200%);transform:translateX(-50%) translateY(200%)}}@-o-keyframes fomoSlideOutVerticalBottomCenter{to{opacity:1;-o-transform:translateX(-50%) translateY(200%);transform:translateX(-50%) translateY(200%)}}@keyframes fomoSlideOutVerticalBottomCenter{to{opacity:1;-webkit-transform:translateX(-50%) translateY(200%);-o-transform:translateX(-50%) translateY(200%);transform:translateX(-50%) translateY(200%)}}@-webkit-keyframes fomoSlideInVerticalTop{to{opacity:1;-webkit-transform:translateY(0);transform:translateY(0)}}@-o-keyframes fomoSlideInVerticalTop{to{opacity:1;-o-transform:translateY(0);transform:translateY(0)}}@keyframes fomoSlideInVerticalTop{to{opacity:1;-webkit-transform:translateY(0);-o-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes fomoSlideOutVerticalTop{to{opacity:1;-webkit-transform:translateY(-200%);transform:translateY(-200%)}}@-o-keyframes fomoSlideOutVerticalTop{to{opacity:1;-o-transform:translateY(-200%);transform:translateY(-200%)}}@keyframes fomoSlideOutVerticalTop{to{opacity:1;-webkit-transform:translateY(-200%);-o-transform:translateY(-200%);transform:translateY(-200%)}}@-webkit-keyframes fomoSlideInVerticalTopCenter{to{opacity:1;-webkit-transform:translateX(-50%) translateY(0);transform:translateX(-50%) translateY(0)}}@-o-keyframes fomoSlideInVerticalTopCenter{to{opacity:1;-o-transform:translateX(-50%) translateY(0);transform:translateX(-50%) translateY(0)}}@keyframes fomoSlideInVerticalTopCenter{to{opacity:1;-webkit-transform:translateX(-50%) translateY(0);-o-transform:translateX(-50%) translateY(0);transform:translateX(-50%) translateY(0)}}@-webkit-keyframes fomoSlideOutVerticalTopCenter{to{opacity:1;-webkit-transform:translateX(-50%) translateY(-200%);transform:translateX(-50%) translateY(-200%)}}@-o-keyframes fomoSlideOutVerticalTopCenter{to{opacity:1;-o-transform:translateX(-50%) translateY(-200%);transform:translateX(-50%) translateY(-200%)}}@keyframes fomoSlideOutVerticalTopCenter{to{opacity:1;-webkit-transform:translateX(-50%) translateY(-200%);-o-transform:translateX(-50%) translateY(-200%);transform:translateX(-50%) translateY(-200%)}}.fomo-notification.fomo-notification-position-bottom-left,.fomo-notification.fomo-notification-position-top-left{-webkit-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s}.fomo-notification.fomo-notification-position-bottom-left.fomo-notification-animation-horizontal.fomo-notification-show,.fomo-notification.fomo-notification-position-top-left.fomo-notification-animation-horizontal.fomo-notification-show{-webkit-transform:translateX(-200%);-ms-transform:translateX(-200%);-o-transform:translateX(-200%);transform:translateX(-200%);opacity:0;-webkit-animation-name:fomoSlideInHorizontalRight;-o-animation-name:fomoSlideInHorizontalRight;animation-name:fomoSlideInHorizontalRight}.fomo-notification.fomo-notification-position-bottom-left.fomo-notification-animation-horizontal.fomo-notification-hide,.fomo-notification.fomo-notification-position-top-left.fomo-notification-animation-horizontal.fomo-notification-hide{-webkit-animation-name:fomoSlideOutHorizontalLeft;-o-animation-name:fomoSlideOutHorizontalLeft;animation-name:fomoSlideOutHorizontalLeft}.fomo-notification.fomo-notification-position-bottom-left.fomo-notification-animation-vertical.fomo-notification-show{-webkit-transform:translateY(200%);-ms-transform:translateY(200%);-o-transform:translateY(200%);transform:translateY(200%);opacity:0;-webkit-animation-name:fomoSlideInVerticalTop;-o-animation-name:fomoSlideInVerticalTop;animation-name:fomoSlideInVerticalTop}.fomo-notification.fomo-notification-position-bottom-left.fomo-notification-animation-vertical.fomo-notification-hide{-webkit-animation-name:fomoSlideOutVerticalBottom;-o-animation-name:fomoSlideOutVerticalBottom;animation-name:fomoSlideOutVerticalBottom}.fomo-notification.fomo-notification-position-top-left{bottom:auto;top:20px}.fomo-notification.fomo-notification-position-top-left.fomo-notification-animation-vertical.fomo-notification-show{-webkit-transform:translateY(-200%);-ms-transform:translateY(-200%);-o-transform:translateY(-200%);transform:translateY(-200%);opacity:0;-webkit-animation-name:fomoSlideInVerticalTop;-o-animation-name:fomoSlideInVerticalTop;animation-name:fomoSlideInVerticalTop}.fomo-notification.fomo-notification-position-top-left.fomo-notification-animation-vertical.fomo-notification-hide{-webkit-animation-name:fomoSlideOutVerticalTop;-o-animation-name:fomoSlideOutVerticalTop;animation-name:fomoSlideOutVerticalTop}.fomo-notification.fomo-notification-position-bottom-right,.fomo-notification.fomo-notification-position-top-right{-webkit-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s}.fomo-notification.fomo-notification-position-bottom-right.fomo-notification-animation-horizontal.fomo-notification-show,.fomo-notification.fomo-notification-position-top-right.fomo-notification-animation-horizontal.fomo-notification-show{-webkit-transform:translateX(200%);-ms-transform:translateX(200%);-o-transform:translateX(200%);transform:translateX(200%);opacity:0;-webkit-animation-name:fomoSlideInHorizontalRight;-o-animation-name:fomoSlideInHorizontalRight;animation-name:fomoSlideInHorizontalRight}.fomo-notification.fomo-notification-position-bottom-right.fomo-notification-animation-horizontal.fomo-notification-hide,.fomo-notification.fomo-notification-position-top-right.fomo-notification-animation-horizontal.fomo-notification-hide{-webkit-animation-name:fomoSlideOutHorizontalRight;-o-animation-name:fomoSlideOutHorizontalRight;animation-name:fomoSlideOutHorizontalRight}.fomo-notification.fomo-notification-position-top-right{right:20px;top:20px;left:auto;bottom:auto}.fomo-notification.fomo-notification-position-top-right.fomo-notification-animation-vertical.fomo-notification-show{-webkit-transform:translateY(-200%);-ms-transform:translateY(-200%);-o-transform:translateY(-200%);transform:translateY(-200%);opacity:0;-webkit-animation-name:fomoSlideInVerticalTop;-o-animation-name:fomoSlideInVerticalTop;animation-name:fomoSlideInVerticalTop}.fomo-notification.fomo-notification-position-top-right.fomo-notification-animation-vertical.fomo-notification-hide{-webkit-animation-name:fomoSlideOutVerticalTop;-o-animation-name:fomoSlideOutVerticalTop;animation-name:fomoSlideOutVerticalTop}.fomo-notification.fomo-notification-position-bottom-right{right:20px;left:auto}.fomo-notification.fomo-notification-position-bottom-right.fomo-notification-animation-vertical.fomo-notification-show{-webkit-transform:translateY(200%);-ms-transform:translateY(200%);-o-transform:translateY(200%);transform:translateY(200%);opacity:0;-webkit-animation-name:fomoSlideInVerticalTop;-o-animation-name:fomoSlideInVerticalTop;animation-name:fomoSlideInVerticalTop}.fomo-notification.fomo-notification-position-bottom-right.fomo-notification-animation-vertical.fomo-notification-hide{-webkit-animation-name:fomoSlideOutVerticalBottom;-o-animation-name:fomoSlideOutVerticalBottom;animation-name:fomoSlideOutVerticalBottom}.fomo-notification.fomo-notification-position-bottom-center{left:50%!important;-webkit-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s}.fomo-notification.fomo-notification-position-bottom-center.fomo-notification-animation-vertical.fomo-notification-show{-webkit-transform:translateX(-50%) translateY(200%);-ms-transform:translateX(-50%) translateY(200%);-o-transform:translateX(-50%) translateY(200%);transform:translateX(-50%) translateY(200%);opacity:0;-webkit-animation-name:fomoSlideInVerticalTopCenter;-o-animation-name:fomoSlideInVerticalTopCenter;animation-name:fomoSlideInVerticalTopCenter}.fomo-notification.fomo-notification-position-bottom-center.fomo-notification-animation-vertical.fomo-notification-hide{-webkit-transform:translateX(-50%) translateY(0);-ms-transform:translateX(-50%) translateY(0);-o-transform:translateX(-50%) translateY(0);transform:translateX(-50%) translateY(0);-webkit-animation-name:fomoSlideOutVerticalBottomCenter;-o-animation-name:fomoSlideOutVerticalBottomCenter;animation-name:fomoSlideOutVerticalBottomCenter}.fomo-notification.fomo-notification-position-top-center{bottom:auto;top:20px;left:50%!important;-webkit-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s}.fomo-notification.fomo-notification-position-top-center.fomo-notification-animation-vertical.fomo-notification-show{-webkit-transform:translateX(-50%) translateY(-100%);-ms-transform:translateX(-50%) translateY(-100%);-o-transform:translateX(-50%) translateY(-100%);transform:translateX(-50%) translateY(-100%);opacity:0;-webkit-animation-name:fomoSlideInVerticalTopCenter;-o-animation-name:fomoSlideInVerticalTopCenter;animation-name:fomoSlideInVerticalTopCenter}.fomo-notification.fomo-notification-position-top-center.fomo-notification-animation-vertical.fomo-notification-hide{-webkit-transform:translateX(-50%) translateY(0);-ms-transform:translateX(-50%) translateY(0);-o-transform:translateX(-50%) translateY(0);transform:translateX(-50%) translateY(0);-webkit-animation-name:fomoSlideOutVerticalTopCenter;-o-animation-name:fomoSlideOutVerticalTopCenter;animation-name:fomoSlideOutVerticalTopCenter}@media only screen and (max-width:420px){.fomo-notification.fomo-notification-mobile-position-bottom,.fomo-notification.fomo-notification-mobile-position-top{width:calc(100% - 20px);left:10px!important}}@media only screen and (max-width:420px){.fomo-notification.fomo-notification-mobile-position-bottom{bottom:10px;top:auto}.fomo-notification.fomo-notification-mobile-position-bottom.fomo-notification-animation-vertical.fomo-notification-show{-webkit-transform:translateY(200%);-ms-transform:translateY(200%);-o-transform:translateY(200%);transform:translateY(200%);opacity:0;-webkit-animation-name:fomoSlideInVerticalTop;-o-animation-name:fomoSlideInVerticalTop;animation-name:fomoSlideInVerticalTop}.fomo-notification.fomo-notification-mobile-position-bottom.fomo-notification-animation-vertical.fomo-notification-hide{-webkit-transform:translateX(0) translateY(0);-ms-transform:translateX(0) translateY(0);-o-transform:translateX(0) translateY(0);transform:translateX(0) translateY(0);-webkit-animation-name:fomoSlideOutVerticalBottom;-o-animation-name:fomoSlideOutVerticalBottom;animation-name:fomoSlideOutVerticalBottom}}@media only screen and (max-width:420px){.fomo-notification.fomo-notification-mobile-position-top{top:10px;bottom:auto}.fomo-notification.fomo-notification-mobile-position-top.fomo-notification-animation-vertical.fomo-notification-show{-webkit-transform:translateX(0) translateY(-200%);-ms-transform:translateX(0) translateY(-200%);-o-transform:translateX(0) translateY(-200%);transform:translateX(0) translateY(-200%);opacity:0;-webkit-animation-name:fomoSlideInVerticalTop;-o-animation-name:fomoSlideInVerticalTop;animation-name:fomoSlideInVerticalTop}.fomo-notification.fomo-notification-mobile-position-top.fomo-notification-animation-vertical.fomo-notification-hide{-webkit-transform:translateX(0) translateY(0);-ms-transform:translateX(0) translateY(0);-o-transform:translateX(0) translateY(0);transform:translateX(0) translateY(0);-webkit-animation-name:fomoSlideOutVerticalTop;-o-animation-name:fomoSlideOutVerticalTop;animation-name:fomoSlideOutVerticalTop}}@media only screen and (max-width:420px){.fomo-notification.fomo-notification-mobile-position-top.fomo-notification-ad{top:20px}}.fomo-notification .fomo-animation-count-up{display:none;font-variant-numeric:tabular-nums}.fomo-notification .fomo-animation-tada{-webkit-animation-name:fomo-animation-tada;-o-animation-name:fomo-animation-tada;animation-name:fomo-animation-tada;-webkit-animation-duration:1s;-o-animation-duration:1s;animation-duration:1s;-webkit-animation-delay:1s;-o-animation-delay:1s;animation-delay:1s;-webkit-animation-fill-mode:both;-o-animation-fill-mode:both;animation-fill-mode:both;display:inline-block}.fomo-notification .fomo-animation-arrow svg{-webkit-animation:fomo-animation-arrow 2s infinite;-o-animation:fomo-animation-arrow 2s infinite;animation:fomo-animation-arrow 2s infinite;display:inline-block;height:9px;width:7px;vertical-align:middle;margin:0 5px 1px 2px}.fomo-notification.fomo-notification-font-sm .fomo-animation-arrow svg{height:8px;width:6px}@-webkit-keyframes fomo-animation-tada{0%{-webkit-transform:scale(1);transform:scale(1)}10%,20%{-webkit-transform:scale(.9) rotate(-3deg);transform:scale(.9) rotate(-3deg)}30%,50%,70%,90%{-webkit-transform:scale(1.1) rotate(3deg);transform:scale(1.1) rotate(3deg)}40%,60%,80%{-webkit-transform:scale(1.1) rotate(-3deg);transform:scale(1.1) rotate(-3deg)}to{-webkit-transform:scale(1) rotate(0);transform:scale(1) rotate(0)}}@-o-keyframes fomo-animation-tada{0%{-o-transform:scale(1);transform:scale(1)}10%,20%{-o-transform:scale(.9) rotate(-3deg);transform:scale(.9) rotate(-3deg)}30%,50%,70%,90%{-o-transform:scale(1.1) rotate(3deg);transform:scale(1.1) rotate(3deg)}40%,60%,80%{-o-transform:scale(1.1) rotate(-3deg);transform:scale(1.1) rotate(-3deg)}to{-o-transform:scale(1) rotate(0);transform:scale(1) rotate(0)}}@keyframes fomo-animation-tada{0%{-webkit-transform:scale(1);-o-transform:scale(1);transform:scale(1)}10%,20%{-webkit-transform:scale(.9) rotate(-3deg);-o-transform:scale(.9) rotate(-3deg);transform:scale(.9) rotate(-3deg)}30%,50%,70%,90%{-webkit-transform:scale(1.1) rotate(3deg);-o-transform:scale(1.1) rotate(3deg);transform:scale(1.1) rotate(3deg)}40%,60%,80%{-webkit-transform:scale(1.1) rotate(-3deg);-o-transform:scale(1.1) rotate(-3deg);transform:scale(1.1) rotate(-3deg)}to{-webkit-transform:scale(1) rotate(0);-o-transform:scale(1) rotate(0);transform:scale(1) rotate(0)}}@-webkit-keyframes fomo-animation-arrow{0%,20%,50%,80%,to{-webkit-transform:translateX(0);transform:translateX(0)}40%{-webkit-transform:translateX(5px);transform:translateX(5px)}60%{-webkit-transform:translateX(2px);transform:translateX(2px)}}@-o-keyframes fomo-animation-arrow{0%,20%,50%,80%,to{-o-transform:translateX(0);transform:translateX(0)}40%{-o-transform:translateX(5px);transform:translateX(5px)}60%{-o-transform:translateX(2px);transform:translateX(2px)}}@keyframes fomo-animation-arrow{0%,20%,50%,80%,to{-webkit-transform:translateX(0);-o-transform:translateX(0);transform:translateX(0)}40%{-webkit-transform:translateX(5px);-o-transform:translateX(5px);transform:translateX(5px)}60%{-webkit-transform:translateX(2px);-o-transform:translateX(2px);transform:translateX(2px)}}.fomo-notification.fomo-hover-animation-float,.fomo-notification.fomo-hover-animation-forward{-webkit-transition:margin .3s cubic-bezier(.42,.97,.52,1.49);-o-transition:margin .3s cubic-bezier(.42,.97,.52,1.49);transition:margin .3s cubic-bezier(.42,.97,.52,1.49)}.fomo-notification.fomo-notification-position-bottom-center.fomo-hover-animation-forward:hover,.fomo-notification.fomo-notification-position-bottom-left.fomo-hover-animation-forward:hover,.fomo-notification.fomo-notification-position-none.fomo-hover-animation-forward:hover,.fomo-notification.fomo-notification-position-top-center.fomo-hover-animation-forward:hover,.fomo-notification.fomo-notification-position-top-left.fomo-hover-animation-forward:hover{
+    /* !important - this required because we set `notificationDiv.style.marginLeft = "0px";` in widget.js - legacy from v1 themes. Need to review and remove */margin-left:10px!important}.fomo-notification.fomo-notification-position-bottom-right.fomo-hover-animation-forward:hover,.fomo-notification.fomo-notification-position-top-right.fomo-hover-animation-forward:hover{margin-right:10px}.fomo-notification.fomo-notification-position-bottom-center.fomo-hover-animation-float:hover,.fomo-notification.fomo-notification-position-bottom-left.fomo-hover-animation-float:hover,.fomo-notification.fomo-notification-position-bottom-right.fomo-hover-animation-float:hover,.fomo-notification.fomo-notification-position-none.fomo-hover-animation-float:hover{margin-bottom:10px}.fomo-notification.fomo-notification-position-top-center.fomo-hover-animation-float:hover,.fomo-notification.fomo-notification-position-top-left.fomo-hover-animation-float:hover,.fomo-notification.fomo-notification-position-top-right.fomo-hover-animation-float:hover{margin-top:10px}.fomo-notification.fomo-notification-position-none.fomo-hover-animation-forward:hover{margin-left:10px;margin-right:0}.fomo-notification.fomo-notification-position-none.fomo-hover-animation-float:hover{margin-top:0;margin-bottom:10px}.fomo-notification{display:none;width:320px;border:0;bottom:20px;left:20px;position:fixed;text-align:left;z-index:99999;font-family:inherit;-webkit-box-sizing:border-box;box-sizing:border-box;font-weight:400;border-radius:6px;-webkit-box-shadow:2px 2px 10px 2px hsla(0,0%,60%,.2);box-shadow:2px 2px 10px 2px hsla(0,0%,60%,.2);background-color:#fff}.fomo-notification:hover #fomo-close{opacity:.8;visibility:visible}.fomo-notification *,.fomo-notification :after,.fomo-notification :before{-webkit-box-sizing:border-box;box-sizing:border-box}.fomo-notification .fomo-notification-powered-by{margin-top:3px!important;display:block!important;font-size:10px!important;color:#474ba5;opacity:.5;position:absolute;bottom:3px;right:6px;font-size:10px;vertical-align:bottom}.fomo-notification .fomo-notification-ad-by{display:none;visibility:hidden}.fomo-notification .fomo-notification-ad-by a,.fomo-notification .fomo-notification-ad-by a:hover{text-decoration:none;cursor:pointer}.fomo-notification.fomo-notification-ad{z-index:2147483647}.fomo-notification.fomo-notification-ad .fomo-notification-ad-by{margin:0;display:block!important;visibility:visible;font-size:12px!important;position:absolute;top:-24px!important;left:2px}.fomo-notification .fomo-notification-container{display:table!important;display:-webkit-box!important;display:-ms-flexbox!important;display:flex!important;-webkit-box-align:center;-ms-flex-align:center;align-items:center;height:80px}.fomo-notification .fomo-notification-content-wrapper{margin:0;height:100%;color:gray;padding-left:20px;padding-right:20px;border-radius:0 6px 6px 0;-webkit-box-flex:1;-ms-flex:1;flex:1;display:table-cell!important;display:-webkit-box!important;display:-ms-flexbox!important;display:flex!important;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;vertical-align:middle}.fomo-notification .fomo-notification-content-wrapper .fomo-notification-content{margin:0!important;padding:0!important;font-size:16px;line-height:16px}.fomo-notification .fomo-notification-content-wrapper .fomo-notification-content-info{display:block!important}.fomo-notification .fomo-notification-content-wrapper a{color:inherit;font-weight:700!important;text-decoration:none!important}.fomo-notification .fomo-notification-content-wrapper .fomo-notification-powered-by,.fomo-notification .fomo-notification-content-wrapper small{margin-top:3px!important;display:block!important;font-size:10px!important;opacity:.5}.fomo-notification .fomo-notification-content-wrapper small{margin-right:6px;vertical-align:middle}.fomo-notification .fomo-notification-content-wrapper .fomo-notification-powered-by{font-size:10px;vertical-align:bottom}.fomo-notification .fomo-notification-image-wrapper{height:80px;width:80px;overflow:hidden;display:table-cell!important;display:-webkit-box!important;display:-ms-flexbox!important;display:flex!important;vertical-align:middle;border-radius:6px 0 0 6px;text-align:center}.fomo-notification .fomo-notification-image-wrapper img{max-width:100%!important;width:auto;height:100%}.fomo-notification .fomo-notification-image-wrapper.fomo-notification-image-is-landscape img{position:relative;max-width:100%!important;width:auto;max-height:100%!important;height:auto}.fomo-notification .fomo-notification-image-wrapper-inside{height:100%;width:100%;overflow:hidden;display:-webkit-box!important;display:-ms-flexbox!important;display:flex!important;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-flex:1;-ms-flex:1;flex:1}.fomo-notification.fomo-notification-no-image .fomo-notification-image-wrapper{display:none!important}.fomo-notification.fomo-notification-pointer,.fomo-notification .fomo-notification-pointer{cursor:pointer}.fomo-notification #fomo-close{position:absolute;top:2px;right:2px;height:24px;width:24px;cursor:pointer;opacity:0;visibility:hidden;-webkit-transition:.2s ease-in-out;-o-transition:.2s ease-in-out;transition:.2s ease-in-out;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg)}@media only screen and (max-width:420px){.fomo-notification #fomo-close{opacity:.8;visibility:visible;top:-10px;right:-10px;height:48px;width:48px}}.fomo-notification #fomo-close:before{width:12px;height:2px}.fomo-notification #fomo-close:after,.fomo-notification #fomo-close:before{content:"";display:block;background-color:gray;position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);transform:translate(-50%,-50%)}.fomo-notification #fomo-close:after{height:12px;width:2px}.fomo-notification.fomo-notification-no-shadow{-webkit-box-shadow:none;box-shadow:none}.fomo-notification-no-image .fomo-notification-content-wrapper{padding-left:40px;padding-right:40px;border-radius:6px}.fomo-notification-font-lg.fomo-notification-no-image .fomo-notification-content-wrapper{padding-right:80px}.fomo-notification-font-md .fomo-notification-content-wrapper .fomo-notification-content{font-size:14px;line-height:14px}.fomo-notification-font-sm .fomo-notification-content-wrapper .fomo-notification-content{font-size:12px;line-height:14px}.fomo-notification-font-xs .fomo-notification-content-wrapper{padding-left:20px;padding-right:20px;margin-top:0}.fomo-notification-font-xs .fomo-notification-content-wrapper .fomo-notification-content{font-size:10px;line-height:12px}.fomo-notification-v2-classic .fomo-notification-content-wrapper { color: #304E70; }.fomo-notification-v2-classic #fomo-close:before { background-color: #304E70; }.fomo-notification-v2-classic #fomo-close:after { background-color: #304E70; }.fomo-notification-v2-classic a { color: #FF761A!important; }/* We recommend that you also apply !important */
+/* Note: This will override Fine Tune settings */
+.fomo-notification-v2-classic {}
+
+.fomo-notification-v2-classic .fomo-notification-content-wrapper p {}
+
+.fomo-notification-v2-classic .fomo-notification-content-wrapper a {}
+
+/* Timestamp */
+.fomo-notification-v2-classic .fomo-notification-content-wrapper small {}
+
+.fomo-notification-v2-classic .fomo-notification-image-wrapper {}
+
+.fomo-notification-v2-classic .fomo-notification-image-wrapper img {}</style><script async="" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/VRrmLWeQ3uCcECxLw7VDjw.js"></script></head>
+<body class="" style="margin-bottom: 26px !important;"><script>!function(a,b,c,d,e,f){a.ddjskey=e;a.ddoptions=f||null;var m=b.createElement(c),n=b.getElementsByTagName(c)[0];m.async=1,m.src=d,n.parentNode.insertBefore(m,n)}(window,document,"script","https://js.datadome.co/tags.js","9466E8C70E261F965B9F2A1E841017");</script>
+
+<div id="base">
+<div id="body">
+<meta name="description" content="SnapEDA Plugin for Eagle and Altium Designer, search and download symbols, footprints and 3D models right in the tool">
+<link href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/css2.css" rel="stylesheet">
+<style>
+
+.base{
+	padding-bottom: 0 !important;
+}
+body{
+	overflow: hidden;
+}
+.sct-header{
+    background-color: #fff;
+    padding: 15px;
+    overflow: hidden;
+    height:58px;
+}
+.sct-header.ver2{
+    background-color: #314d6f !important;
+    background-size: 140px auto;
+    padding: 0px !important;
+    height: 88px !important;
+}
+
+.center2{ 
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 12px;
+    display: flex;
+    align-items: center;
+}
+.sct-header.ver2 .center2{
+    background: #fff;
+    overflow: hidden; 
+    border-radius: 5px;
+    height: 64px !important;
+}
+.me-logo{
+    float: left;
+    width: 130px;
+    padding-top: 5px;
+}
+.me-available{
+	float: left;
+    margin: 18px 10px 0px 50px;
+    font-weight: 400;
+    color: #777;
+}
+
+.me-button{
+	float:right;
+	margin-top:12px;
+	padding: 7px 15px;
+}
+.ad_buy{
+
+	margin-right: 10px;
+}
+.me-iframe{
+	width:100%;
+	min-height:100%;
+}
+
+.me-pricing{
+    float: left;
+    margin: 10px 20px 0px 30px;
+    text-align: left;
+}
+
+.part-img{
+    float:left;
+    margin: 0px 0px 0px 30px;
+    width: 53px;
+}
+
+.me-pricing p{
+    margin-bottom: 0;
+    color:#0D4F85;
+}
+
+.me-pricing p span{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.placeholder-i{
+    font-size: 40px;
+    padding-top: 10px;
+    color: #ccc;
+}
+
+
+.me-pricing p{
+  color: #004A85;
+}
+.sct-header.ver2{
+  background-color: #004A85 !important;
+}
+
+.s-btn.blue, .s-btn-icon.blue i{
+  border: 1px solid #304E70;
+  background-color: #304E70;
+  box-shadow: none !important;
+}
+
+.s-btn.blue:hover {
+  color: #304E70;
+  background: #fff;
+}
+
+.ds-bk-section {
+  display: flex !important;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 88px !important;
+  position: relative;
+}
+
+.ml-25 {
+  margin-left: 25px;
+}
+
+.get-symbol {
+  background-image: url(/static_files/images/alert-orange.png);
+  width: 336px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.link-color {
+  text-decoration: none !important;
+  color: #fff !important;
+}
+
+.s-btn {
+  border-radius: 50px;
+  padding: 10px;
+}
+
+.ab-new-design .bg-elipse {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+  width: 320px;
+}
+
+.ab-new-design .order-pricing {
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 48px;
+  display: inline;
+}
+
+.ab-new-design .orders-available {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 33px;
+  text-align: center;
+  color: #1A1A1A;
+}
+
+.ab-new-design .price-start {
+  background: #FF761A;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 4px 10px 4px 10px;
+  width: auto;
+  text-transform: UPPERCASE;
+  display: inline-flex;
+}
+
+.ab-new-design .btn-banner {
+  z-index: 100 !important;
+  border: 1.5px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 24px; 
+  color: #fff; 
+}
+
+.ab-new-design .btn-banner:hover {
+  background: #ffffff;
+  color: #FF761A;
+}
+
+.ab-new-design .banner-buttons {
+  position: absolute;
+  z-index: 1000;
+  right: 24px;
+  top: 4px;
+}
+
+.sct-header.ver2 .ab-new-design .center2 {
+  background: #1E4B7F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ab-new-design .part-img {
+  width: 60px;
+  height: 60px;
+}
+
+.ab-new-design {
+  cursor: pointer;
+  position: absolute;
+  left: calc((100vw /2) - 400px);
+  top: 5px;
+} 
+
+.datasheet-banner {
+  position: absolute;
+  cursor: pointer;
+  left: calc(50vw - 330px);
+}
+
+.datasheet-banner .center2 {
+    background: #fff;
+    overflow: hidden;
+    padding: 0px 10px 0px 10px !important;
+    border-radius: 5px; 
+}
+
+.datasheet-banner .img-section {
+    padding: 20px; 
+}
+
+.datasheet-banner .me-logo { 
+    width: 88px;
+    padding: 0px; 
+    image-rendering: -moz-crisp-edges;         /* Firefox */
+    image-rendering:   -o-crisp-edges;         /* Opera */
+    image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+.datasheet-banner .info-section {
+    display: flex;
+    padding: 6px 10px 6px 20px;
+}
+
+.datasheet-banner .info-text-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 280px; 
+}
+
+.datasheet-banner .t1 {
+    font-weight: 800;
+    font-size: 14px; 
+    font-family: 'Roboto', sans-serif;
+    color: rgb(60,60,80);
+}
+
+.datasheet-banner .t2 {
+    font-weight: 800;
+    font-size: 13px;
+    font-stretch: ultra-condensed;
+    font-style: italic;
+    color: #ff761a;
+    margin-top: 2px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.datasheet-banner .btn-buy-part {
+    margin: 0px 0px 0px 40px !important;
+    padding: 10px 16px 10px 16px !important;
+    box-shadow: 10px 0px 20px rgba(244, 127, 32, 0.3), -10px 4px 20px rgba(255, 118, 26, 0.2);
+}
+ 
+.get-symbol-footprint {
+  margin: 0px 32px 0px 0px !important;
+}
+
+.vertical-divider {
+    position: relative;
+    height: 60px;
+    width: 2px;
+}
+
+.divider-line {
+    position: absolute;
+    width: 1px;
+    height: 100px;
+    top: -16px;
+    left: 0px;
+    background: #1E4B7F;
+}
+
+#nav-logo-link {
+  margin: 0px !important;
+}
+
+.ti-info {
+    margin-left: 45px;
+    min-width: 200px !important;
+}
+
+.ti-info .info-text-section {
+    color: #304E70 !important;
+    width: 180px;
+}
+
+.ti-info .text-1 {
+    color: #304E70 !important;
+    font-size: 11px;
+}
+
+.ti-info .text-2 {
+    color: #304E70 !important;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.pr-20 {
+  padding-right: 20px;
+}
+
+</style>
+<section class="sct-header ver2">
+<div class="ds-bk-section">
+<div class="ml-25 nav-logo">
+<a id="nav-logo-link" href="https://www.snapeda.com/">
+<img src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/snapeda-white.png" title="SnapEDA" width="130">
+</a>
+</div>
+<div class="datasheet-banner" style="left: calc(-326.5px + 50vw);">
+<div class="center2 t_c">
+<div class="img-section">
+<img class="me-logo" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/mouser_logo.png" alt="MOUSER">
+</div>
+<div class="vertical-divider">
+<div class="divider-line"> </div>
+</div>
+<div class="info-section">
+<div class="info-text-section">
+<span class="t1">Start designing with the RB1-125BAG1A</span>
+<span class="t2">Starting from $1.54</span>
+</div>
+<div class="flex-center">
+<a class="s-btn btn-buy-part ghost orange s-btn-medium part-cta buy-now-left ad_buy me-button btn-buy-part" href="https://www.mouser.com/ProductDetail/WIZnet/RB1-125BAG1A?utm_medium=online&amp;utm_source=snapedaonline&amp;utm_campaign=mouser&amp;qs=K8aI8m0%252Bj2HL3CgJHC4yWQ%3D%3D&amp;utm_content=datasheet" data-type="Datasheet - Buy Click" target="_blank">Buy this part now</a>
+</div>
+</div>
+</div>
+</div>
+<a class="s-btn orange s-btn-medium me-button get-symbol-footprint" data-type="Datasheet - Download" href="https://www.snapeda.com/parts/RB1-125BAG1A/WIZnet/view-part/">
+Get Symbol, Footprint &amp; More
+</a>
+</div>
+</section>
+
+<object class="me-iframe" data="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/RB1-125BAG1A_WIZnet.pdf" type="application/pdf" style="height: 794px;">
+<iframe class="me-iframe" src="https://docs.google.com/viewer?url=https://s3.amazonaws.com/snapeda/datasheet/RB1-125BAG1A_WIZnet.pdf&amp;embedded=true" style="height: 794px;"></iframe>
+</object>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/font-awesome.css">
+<script>
+        // google analytics
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-36753380-1', 'auto');
+        ga('send', 'pageview');
+
+        window.intercomSettings = {
+          app_id: "owbpizd5"
+        };
+
+        $(document).ready(function() {
+            
+        });
+
+    </script>
+<script type="text/javascript" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/core.js" charset="utf-8"></script>
+<script>
+  (function () {
+    var height = $(window).height() - 78;
+    $('.me-iframe').css('height', height);
+
+  })();
+
+  $(document).ready(function() {
+
+    $('.datasheet-banner').on('click', function() {
+        window.open($('a.btn-buy-part').attr('href'), '_blank');
+    });
+    
+    $('.datasheet-banner').css('left', 'calc(50vw - ' + $('.datasheet-banner').width()/2 + 'px');
+
+    var startPrice = '$1.54';
+    startPrice = startPrice.replace('$','');
+    startPrice = startPrice.replace('USD','');
+    startPrice = +startPrice;
+    startPrice = '$' + startPrice.toFixed(2);
+    $('.datasheet-banner .t2').text('Starting from ' + startPrice);
+
+    if($('.ad_buy').length > 0) {
+      $('.ab-new-design').on('click', function(event) {
+        var isStop = false;
+        var classList = event.target.classList;
+        for( var i=0 ; i< classList.length ; i++) {
+            if(classList[i] === 'btn-banner') {
+              isStop = true;
+            }
+        }
+        if(!isStop){
+          window.open($('.ad_buy').attr('href'),"_blank");
+        }
+      });
+    }
+  });
+
+  $(window).resize(function () {
+      var height = $(window).height() - 78;
+      $('.me-iframe').css('height', height);
+  });
+
+  var has_ad = false
+  
+      has_ad = true
+      
+          $.ajax({
+              url: '/api/record_mouser_impression_api/datasheet'
+          });
+      
+  
+
+    trackMixpanel({}, 'Datasheet - Impression', true);
+
+
+  $(".me-button").mouseup(function (e) { 
+    type = $(this).attr('data-type'); 
+    trackMixpanel(e, type);
+  });
+
+  $(".datasheet-banner").mouseup(function (e) {
+    if(e.target.className.indexOf('btn-buy-part') === -1) { 
+      type = 'Datasheet - Banner';
+      trackMixpanel(e, type);
+    }
+  });
+
+  function trackMixpanel(event, type, ignoreDB) {
+      let ad_branding = 'MOUSER'
+      if (!has_ad) {
+          ad_branding = ''
+      }
+
+    if (event.which != 3) {
+        var Properties = {
+            'type': type,
+            'unipart': 'RB1-125BAG1A',
+            'manufacturer': 'WIZnet',
+            'userid': 'ndsh',
+            'has_ad': has_ad,
+            'ad_branding': ad_branding,
+            
+                'version': 'new blue',
+            
+            'stock': 'in stock'
+        };
+        mixpanel.track('Datasheet', Properties);
+
+        if (has_ad) {
+            track_db_and_mixpanel('MOUSER', type, 'RB1-125BAG1A');
+        }
+    }
+  }
+
+  function track_db_and_mixpanel(org, action, partname) {
+    $.ajax({
+      url: '/api/track_ad/',
+      type: 'POST',
+      data: {
+        'ad_org': org,
+        'action_type': action,
+        'unipart_id': '226215',
+        'partname': partname
+      }
+    })
+  }
+</script>
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/owbpizd5';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+
+
+<div id="lean_overlay"></div><link rel="stylesheet" type="text/css" href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/s3downbar.css"><link rel="stylesheet" type="text/css" href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/contextmenu.css"><link rel="stylesheet" type="text/css" href="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/tooltip.css"><div id="s3downbar-ibmbeeacmbeeaebmfjpmnlgkhoejinha" style="box-sizing: initial !important; position: fixed; white-space: nowrap; width: 100% !important; left: 0px; bottom: 0px; border-top: 1px solid rgb(153, 153, 153); transform-origin: left bottom 0px; z-index: 2147483647; margin: 0px; padding: 2px 0px; background-color: rgb(238, 238, 238) !important; color: rgb(34, 34, 34); display: flex !important; transform: scale(1) !important;"><style type="text/css" media="print">#s3downbar-ibmbeeacmbeeaebmfjpmnlgkhoejinha { display: none !important; }</style><div style="box-sizing: initial !important; position: absolute !important;" id="s3downbar_resize_pane" is_top="false"><div style="box-sizing: initial !important;" class="tooltip_box" is_top="false"></div><div style="box-sizing: initial !important;" class="tooltip_arrow" is_top="false"></div></div><div style="box-sizing: initial !important; color: rgb(34, 34, 34) !important; position: relative !important; order: 4 !important;" class="s3dmBox" id="s3downbar_hide_button" is_hidden="false"><div id="s3downbar_hide_button_img" style="box-sizing: initial !important; background-image: url(&quot;moz-extension://fdc75b44-4a4a-4842-8a5a-13a6b8c06cd8/skin/s3dm_icons.png&quot;) !important; display: inline-block !important;"></div><div style="box-sizing: initial !important; font-size: 9pt !important;" class="tooltip_box" is_top="false"><div style="box-sizing: initial !important;" class="tooltipText">Download-Leiste ausblenden</div><div style="box-sizing: initial !important;" class="tooltipText">Ctrl + Shift + Z = Download-Leiste einblenden/ausblenden</div></div><div style="box-sizing: initial !important;" class="tooltip_arrow" is_top="false"></div></div><div style="box-sizing: initial !important; color: rgb(34, 34, 34) !important; position: relative !important; background-color: rgb(238, 238, 238) !important; font-size: 9pt !important;" class="s3dmBox" id="s3downbar_main_menu_button" is_hidden="false"><img style="box-sizing: initial !important;" src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/logo16.png"><span style="box-sizing: initial !important;">Downloads</span><div style="box-sizing: initial !important; font-size: 9pt !important;" class="tooltip_box" is_top="false"><div style="box-sizing: initial !important;" class="tooltipText">Download Manager (S3)</div></div><div style="box-sizing: initial !important;" class="tooltip_arrow" is_top="false"></div></div><div style="box-sizing: initial !important; color: rgb(34, 34, 34) !important; position: relative !important; order: 2 !important; background-color: rgb(238, 238, 238) !important; font-size: 9pt !important;" class="s3dmBox" id="s3downbar_clear_button" is_hidden="false">Entfernen<div style="box-sizing: initial !important; font-size: 9pt !important;" class="tooltip_box" is_top="false"><div style="box-sizing: initial !important;" class="tooltipText">Links-Klick: Alle abgeschlossenen Downloads entfernen</div><div style="box-sizing: initial !important;" class="tooltipText">Rechts-Klick: Alles zurück setzen</div></div><div style="box-sizing: initial !important;" class="tooltip_arrow" is_top="false"></div></div><div style="box-sizing: initial !important; color: rgb(34, 34, 34) !important; position: relative !important; order: 1 !important; font-size: 9pt !important;" class="s3dmBox" id="s3downbar_holder_summary_progress" is_hidden="false"><div style="box-sizing: initial !important;">00:13 :: 978 Bytes/s :: 5%</div><div style="box-sizing: initial !important; font-size: 9pt !important;" class="tooltip_box" is_top="false"><div style="box-sizing: initial !important;" class="tooltipText">Download-Manager</div></div><div style="box-sizing: initial !important;" class="tooltip_arrow" is_top="false"></div></div><div style="box-sizing: initial !important;" id="s3downbar_download_data_listbox"><div style="box-sizing: initial !important; max-height: 22px !important;" id="s3downbar_download_data_listbox_scroll" list_count="2"><div style="box-sizing: initial !important;" id="s3downbar_download_data_list_empty">Download-Liste ist leer</div><div id="s3db_45C48CCE2E2D7FBDEA1AFC51C7C6AD26" class="download_data_box db_finishedHbox" style="background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important; max-width: 170px !important; flex-basis: 75px !important; height: 20px !important; border: 1px solid threedshadow !important; background-color: rgb(137, 175, 219) !important;" click_handle="finished_click_handle">
+		<div class="download_data_box_iframe_box"><div id="s3downbar_download_box_iframe" is_hidden="true" class="download_data_box_iframe"></div></div>
+		<div id="s3downbar_download_box_progressremainder" class="download_data_box_progressremainder" style="background-color: rgb(255, 255, 255) !important;" is_hidden="true"></div>
+		<div id="s3downbar_download_box_progress" class="download_data_box_progress" style="background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important; background-color: rgb(129, 165, 206) !important; width: 100% !important; border-right: 1px solid rgb(255, 0, 0) !important;" is_hidden="true"></div>
+		<div id="s3downbar_download_box_data" class="download_data_box_data">
+			<img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" id="s3downbar_download_box_img" class="download_data_box_img" style="background: rgba(0, 0, 0, 0) url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACKUlEQVQ4jY3Ra0uTYRzH8T8qUfQSehHSC+gFBBHRo15BzyII6kkHLLJIhCTNWbCZh3bIbbIZu0WmzHUrzqlbtfverdU25sww54wdXDvw7ckGRfPwg9+j6+LDdf3/Io0oinJ1dXW1PxwODzS7tLTUa7Var4jIKTkm7bFYbKBUKvF38/k8qVSqHggEXorI6aOADl3XB+v1Os3WajWq1SqlUol0Ok0ymXwrImcOBQzDGAQ4KJdJxlcwoiqx8BzRxWmMz2F+lw9Ip9OTInL2sBeY6vU62b09lLGn+Gx9zM54UQIhnIGvOJxOPLbXBINBW6vvdOi6bqpUKkRSBd4sVBlWK1iCZcbUIraFPPPhdRZnXezu7mKz2S63BGq1Gh83fuAOF7DO/6T/3Tp3ny8wNOKlq7sHj8dDoVAgGo0+E5G2/wCA0IrOhYs9XLrWx60n73HPaTinpplRNcwjdjKZDIZhDIpIe0sgkUgy7p1F3/nFp50y4w4v/mkvL7puYh9+RTweR9d1k4h0tAS+b20xFwoxZurBPTmBw+Hg8aMH3L9zg4e3r2McB+zv7/NlY4NviQSZTIZisYiqfqC3+x5TkxNUKpXWgKZpQzTi8/nY3NxkeXmZtbU1stksfr+fXC4HgKZpQ0cCo6OjuN1uFEUhEong8XhwuVwUi8WTARaLhWq1itlsxm63o6oq29vbzeOWQHtzBidJYwb/rLFNRM6JSKeInD+mnY27bSIifwB2ey7QQKh5bgAAAABJRU5ErkJggg==&quot;) no-repeat scroll 50% 50% / contain !important;" no_image="false" is_hidden="false">
+			<img src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/a_002.html" id="s3downbar_download_box_img_queue" class="download_data_box_img" is_hidden="true">
+			<img src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/a_002.html" id="s3downbar_download_box_picToShrink" pictoshrink="true" is_hidden="true" class="download_data_box_img">
+			<div id="s3downbar_download_box_filename" class="download_data_box_filename" style="color: rgb(34, 34, 34) !important; font-size: 9pt !important;">RJ11-Datasheet.pdf</div>
+			<div id="s3downbar_download_box_progress_data" class="download_data_box_progress_data" is_hidden="true">
+				<div id="s3downbar_download_box_progress_percent" class="download_data_box_progress_percent" style="font-size: 5pt !important;" is_hidden="true">100%</div>
+				<div id="s3downbar_download_box_progress_remaintime" class="download_data_box_progress_remaintime" style="font-size: 5pt !important;" is_hidden="false">00:00</div>
+				<div id="s3downbar_download_box_progress_bytesReceived" class="download_data_box_progress_bytesReceived" style="font-size: 5pt !important;" is_hidden="true">59 KB</div>
+				<div id="s3downbar_download_box_progress_speed" class="download_data_box_progress_speed" style="font-size: 5pt !important;" is_hidden="false">125 KB/s</div>
+			</div>
+		</div>
+	<div style="box-sizing: initial !important; position: fixed !important; z-index: 50 !important;"><div style="box-sizing: initial !important; font-size: 9pt !important;" class="tooltip_box" is_top="false"><div id="download_data_tooltip" class="download_data_tooltip">
+		<div class="download_data_tooltip_head">
+			<img src="data:image/png;base64,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" id="s3downbar_download_tooltip_img" class="download_data_tooltip_img" no_image="false">
+			<div id="s3downbar_download_tooltip_filename" class="download_data_tooltip_filename">RJ11-Datasheet.pdf </div>
+		</div>
+		<div class="download_data_tooltip_data_box" id="s3downbar_download_tooltip_data_box" is_hidden_progress="true" is_hidden_finish="false">
+			<table class="download_data_tooltip_data">
+				<tbody><tr id="s3downbar_download_tooltip_source_box" is_hidden="true"><td><div>Quelle:</div></td><td><input type="text" id="s3downbar_download_tooltip_source" class="download_data_tooltip_url" readonly="true"></td></tr>
+				<tr><td><div>Von:</div></td><td><input type="text" id="s3downbar_download_tooltip_from" class="download_data_tooltip_url" readonly="true" title="blob:resource://pdf.js/3a216a4f-9ad2-ff4f-907c-adfd13a19051" value="blob:resource://pdf.js/3a216a4f-9ad2-ff4f-907c-adfd13a19051"></td></tr>
+				<tr><td><div>Nach:</div></td><td><div id="s3downbar_download_tooltip_to">/Users/julianhespenheide/Documents/Development/Git/flipdots/Datasheets/RJ11-Datasheet.pdf</div></td></tr>
+				<tr class="download_progress"><td><div>Status:</div></td><td><div id="s3downbar_download_tooltip_status">59 KB / 59 KB ( 125 KB/s )</div></td></tr>
+				<tr class="download_finish"><td><div>Dateigröße:</div></td><td><div id="s3downbar_download_tooltip_size" filenotfound="false">59 KB</div></td></tr>
+				<tr class="download_finish" id="s3downbar_download_virus_scan_box" is_hidden="true"><td><div id="s3downbar_download_virus_scan_label">Nach Viren scannen:</div></td><td><a id="s3downbar_download_virus_scan" target="_blank"></a></td></tr>
+				<tr><td><div>Start:</div></td><td><div id="s3downbar_download_tooltip_timeStart">2020.10.04 - 19:49:23</div></td></tr>
+				<tr class="download_finish"><td><div>Benötigte Zeit:</div></td><td><div id="s3downbar_download_tooltip_timeEnd">&lt;00:01</div></td></tr>
+				<tr class="download_progress"><td><div>Verbleibende Zeit:</div></td><td><div id="s3downbar_download_tooltip_timeLeft">00:00</div></td></tr>
+				<tr class="download_progress"><td><div>Fortschritt:</div></td><td><div id="s3downbar_download_tooltip_percent">100%</div></td></tr>
+				<tr class="download_finish"><td><div>Geschwindigkeit:</div></td><td><div id="s3downbar_download_tooltip_speed">123 KB/s</div></td></tr>
+			</tbody></table>
+			<div class="download_data_tooltip_img_preview_box download_finish"><div class="download_data_tooltip_img_box">
+				<img src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/a_002.html" id="s3downbar_download_tooltip_img_preview" is_hidden="true" class="download_data_tooltip_img_preview download_finish" width="120" height="120">
+				<div id="s3downbar_download_tooltip_img_size" class="download_data_tooltip_img_size"></div>
+			</div></div>
+		</div>
+		<div class="download_data_tooltip_hint" id="s3downbar_download_tooltip_hint_progress" is_hidden="true">
+			<div>Doppelklick: Download anhalten/fortsetzen</div>
+			<div>Mittelklick: Download abbrechen</div>
+		</div>
+		<div class="download_data_tooltip_hint" id="s3downbar_download_tooltip_hint_finish" is_hidden="false">
+			<div>Doppelklick: Datei öffnen</div>
+			<div>Doppelklick + Strg: Verzeichnis öffnen</div>
+			<div style="padding-top: 4px !important;">Mittelklick: Aus der Liste löschen</div>
+			<div>Mittelklick + Strg: Aus dem System löschen</div>
+			<div style="padding-top: 4px !important;">Maustaste drücken + Strg: drag &amp; drop</div>
+		</div>
+	</div></div><div style="box-sizing: initial !important;" class="tooltip_arrow" is_top="false"></div></div></div><div id="s3db_D3D9446802A44259755D38E6D163E820" class="download_data_box db_progressStack" style="background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important; max-width: 170px !important; flex-basis: 75px !important; height: 20px !important; border: 1px solid threedshadow !important;" click_handle="progress_click_handle">
+		<div class="download_data_box_iframe_box"><div id="s3downbar_download_box_iframe" is_hidden="true" class="download_data_box_iframe"></div></div>
+		<div id="s3downbar_download_box_progressremainder" class="download_data_box_progressremainder" style="background-color: rgb(255, 255, 255) !important;" is_hidden="false"></div>
+		<div id="s3downbar_download_box_progress" class="download_data_box_progress" style="background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)) !important; background-color: rgb(112, 143, 181) !important; width: 5% !important; border-right: 1px solid rgb(255, 0, 0) !important;" is_hidden="false"></div>
+		<div id="s3downbar_download_box_data" class="download_data_box_data">
+			<img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" id="s3downbar_download_box_img" class="download_data_box_img" style="background: rgba(0, 0, 0, 0) url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACJklEQVQ4jY3PTUiTcRzA8f9FGJ2q6Zx71L0/e7Yhyym+RPNl7cVnc3M5x1oNi6I3E4IIJILAkBCyQ10Mck47KFFBb5eIoMJDEXSQjtHLQQpCoQ4RxfbtkhefGf7ge/rx+8BPiH/jtWaH2zyj0xtrdY9MB3edvSCE0In/Tav71IzXkmFjHkuaiP8MJ9Rbz4QQOzYF/K7jBY8lTaVa5BzTI59IB64/FUJs3wQ4VnCbB9G2D485yYOLv7hyZJlMz7X7Fd9pdh4tKI0pKuWUVEz6FsyGDtzmGM2OA2NawDFcUOoTbGxmKs7Lx3FcUhxZiuE09eExDxU0gM+Wn3VJcTqsKuOJdk4G99Lu6qP8oQe+qSxcDRPw9eOS4vhs+VkN0GTJzcomlScDbZQm61iZUngYW+Tt6QV+vkpSft/L69tRZJNKkyVXAWjMFJ11EX7nWilNKJQXZVaLKe5G11i5Mwpvuim9C+Osi9DUmClqAG9DuuioDfEnFIRhH/fyE5zLrnA5852l85PwqJPS814ctSG8DekKgJQq2g1Blu05CHfxcSjJeP9NpgaKrI71wI1mPl8KYTcE8UopLeA2JeZsNd1k9UnW7Acp7w5DuAsSnZTT7fwYDHHIE8RW043blJjTAIpRnbNWB7BWBxja2c+L6sN8qc/z1byfJWOWnCHC+l4xqhWBeat+D1tJMarzGkA2ROeV2hhbSTZEtYDQ6WxVVdv8W0nodLb1s79YLTtVQeQh+wAAAABJRU5ErkJggg==&quot;) no-repeat scroll 50% 50% / contain !important;" no_image="false" is_hidden="true">
+			<img src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/a_002.html" id="s3downbar_download_box_img_queue" class="download_data_box_img" is_hidden="true">
+			<img src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/a_002.html" id="s3downbar_download_box_picToShrink" pictoshrink="true" is_hidden="true" class="download_data_box_img">
+			<div id="s3downbar_download_box_filename" class="download_data_box_filename" style="color: rgb(34, 34, 34) !important; font-size: 9pt !important;">RB1-125BAG1A datasheet by WIZnet | SnapEDA.html</div>
+			<div id="s3downbar_download_box_progress_data" class="download_data_box_progress_data" is_hidden="false">
+				<div id="s3downbar_download_box_progress_percent" class="download_data_box_progress_percent" style="font-size: 5pt !important;" is_hidden="true">5%</div>
+				<div id="s3downbar_download_box_progress_remaintime" class="download_data_box_progress_remaintime" style="font-size: 5pt !important;" is_hidden="false">00:13</div>
+				<div id="s3downbar_download_box_progress_bytesReceived" class="download_data_box_progress_bytesReceived" style="font-size: 5pt !important;" is_hidden="true">721 Bytes</div>
+				<div id="s3downbar_download_box_progress_speed" class="download_data_box_progress_speed" style="font-size: 5pt !important;" is_hidden="false">978 Bytes/s</div>
+			</div>
+		</div>
+	<div style="box-sizing: initial !important; position: fixed !important; z-index: 50 !important;"><div style="box-sizing: initial !important; font-size: 9pt !important;" class="tooltip_box" is_top="false"><div id="download_data_tooltip" class="download_data_tooltip">
+		<div class="download_data_tooltip_head">
+			<img src="data:image/png;base64,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" id="s3downbar_download_tooltip_img" class="download_data_tooltip_img" no_image="false">
+			<div id="s3downbar_download_tooltip_filename" class="download_data_tooltip_filename">RB1-125BAG1A datasheet by WIZnet | SnapEDA.html </div>
+		</div>
+		<div class="download_data_tooltip_data_box" id="s3downbar_download_tooltip_data_box" is_hidden_progress="false" is_hidden_finish="true">
+			<table class="download_data_tooltip_data">
+				<tbody><tr id="s3downbar_download_tooltip_source_box" is_hidden="true"><td><div>Quelle:</div></td><td><input type="text" id="s3downbar_download_tooltip_source" class="download_data_tooltip_url" readonly="true"></td></tr>
+				<tr><td><div>Von:</div></td><td><input type="text" id="s3downbar_download_tooltip_from" class="download_data_tooltip_url" readonly="true" title="https://www.snapeda.com/parts/RB1-125BAG1A/WIZnet/datasheet/" value="https://www.snapeda.com/parts/RB1-125BAG1A/WIZnet/datasheet/"></td></tr>
+				<tr><td><div>Nach:</div></td><td><div id="s3downbar_download_tooltip_to">/Users/julianhespenheide/Documents/Development/Git/flipdots/Datasheets/RB1-125BAG1A datasheet by WIZnet | SnapEDA.html</div></td></tr>
+				<tr class="download_progress"><td><div>Status:</div></td><td><div id="s3downbar_download_tooltip_status">721 Bytes / 13 KB ( 978 Bytes/s )</div></td></tr>
+				<tr class="download_finish"><td><div>Dateigröße:</div></td><td><div id="s3downbar_download_tooltip_size" filenotfound="false">13 KB</div></td></tr>
+				<tr class="download_finish" id="s3downbar_download_virus_scan_box" is_hidden="true"><td><div id="s3downbar_download_virus_scan_label">Nach Viren scannen:</div></td><td><a id="s3downbar_download_virus_scan" target="_blank"></a></td></tr>
+				<tr><td><div>Start:</div></td><td><div id="s3downbar_download_tooltip_timeStart">2020.10.04 - 19:49:52</div></td></tr>
+				<tr class="download_finish"><td><div>Benötigte Zeit:</div></td><td><div id="s3downbar_download_tooltip_timeEnd">Unbekannt</div></td></tr>
+				<tr class="download_progress"><td><div>Verbleibende Zeit:</div></td><td><div id="s3downbar_download_tooltip_timeLeft">00:13</div></td></tr>
+				<tr class="download_progress"><td><div>Fortschritt:</div></td><td><div id="s3downbar_download_tooltip_percent">5%</div></td></tr>
+				<tr class="download_finish"><td><div>Geschwindigkeit:</div></td><td><div id="s3downbar_download_tooltip_speed">Unbekannt</div></td></tr>
+			</tbody></table>
+			<div class="download_data_tooltip_img_preview_box download_finish"><div class="download_data_tooltip_img_box">
+				<img src="RB1-125BAG1A%20datasheet%20by%20WIZnet%20|%20SnapEDA-Dateien/a_002.html" id="s3downbar_download_tooltip_img_preview" is_hidden="true" class="download_data_tooltip_img_preview download_finish" width="120" height="120">
+				<div id="s3downbar_download_tooltip_img_size" class="download_data_tooltip_img_size"></div>
+			</div></div>
+		</div>
+		<div class="download_data_tooltip_hint" id="s3downbar_download_tooltip_hint_progress" is_hidden="false">
+			<div>Doppelklick: Download anhalten/fortsetzen</div>
+			<div>Mittelklick: Download abbrechen</div>
+		</div>
+		<div class="download_data_tooltip_hint" id="s3downbar_download_tooltip_hint_finish" is_hidden="true">
+			<div>Doppelklick: Datei öffnen</div>
+			<div>Doppelklick + Strg: Verzeichnis öffnen</div>
+			<div style="padding-top: 4px !important;">Mittelklick: Aus der Liste löschen</div>
+			<div>Mittelklick + Strg: Aus dem System löschen</div>
+			<div style="padding-top: 4px !important;">Maustaste drücken + Strg: drag &amp; drop</div>
+		</div>
+	</div></div><div style="box-sizing: initial !important;" class="tooltip_arrow" is_top="false"></div></div></div></div></div></div><iframe id="intercom-frame" style="position: absolute !important; opacity: 0 !important; width: 1px !important; height: 1px !important; top: 0 !important; left: 0 !important; border: none !important; display: block !important; z-index: -1 !important; pointer-events: none;" aria-hidden="true" tabindex="-1" title="Intercom"></iframe><div class="intercom-lightweight-app" aria-live="polite"><div class="intercom-lightweight-app-launcher intercom-launcher" role="button" tabindex="0" aria-label="Open Intercom Messenger"><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 32"><path d="M28 32s-4.714-1.855-8.527-3.34H3.437C1.54 28.66 0 27.026 0 25.013V3.644C0 1.633 1.54 0 3.437 0h21.125c1.898 0 3.437 1.632 3.437 3.645v18.404H28V32zm-4.139-11.982a.88.88 0 00-1.292-.105c-.03.026-3.015 2.681-8.57 2.681-5.486 0-8.517-2.636-8.571-2.684a.88.88 0 00-1.29.107 1.01 1.01 0 00-.219.708.992.992 0 00.318.664c.142.128 3.537 3.15 9.762 3.15 6.226 0 9.621-3.022 9.763-3.15a.992.992 0 00.317-.664 1.01 1.01 0 00-.218-.707z"></path></svg></div><div class="intercom-lightweight-app-launcher-icon intercom-lightweight-app-launcher-icon-minimize"><svg viewBox="0 0 16 14" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M.116 4.884l1.768-1.768L8 9.232l6.116-6.116 1.768 1.768L8 12.768.116 4.884z"></path></svg></div></div><style id="intercom-lightweight-app-style" type="text/css">
+  @keyframes intercom-lightweight-app-launcher {
+    from {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes intercom-lightweight-app-gradient {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes intercom-lightweight-app-messenger {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .intercom-lightweight-app {
+    position: fixed;
+    z-index: 2147483001;
+    width: 0;
+    height: 0;
+    font-family: intercom-font, "Helvetica Neue", "Apple Color Emoji", Helvetica, Arial, sans-serif;
+    
+  }
+
+  .intercom-lightweight-app-gradient {
+    position: fixed;
+    z-index: 2147483002;
+    width: 500px;
+    height: 500px;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at bottom right,
+      rgba(29, 39, 54, 0.16) 0%,
+      rgba(29, 39, 54, 0) 72%);
+    animation: intercom-lightweight-app-gradient 200ms ease-out;
+  }
+
+  
+  .intercom-lightweight-app-launcher {
+    position: fixed;
+    z-index: 2147483003;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #ff761a;
+    cursor: pointer;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.06), 0 2px 32px 0 rgba(0, 0, 0, 0.16);
+    animation: intercom-lightweight-app-launcher 250ms ease;
+  }
+
+  .intercom-lightweight-app-launcher:focus {
+    outline: none;
+    
+  }
+
+
+  .intercom-lightweight-app-launcher-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    transition: transform 100ms linear, opacity 80ms linear;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg {
+    width: 28px;
+    height: 32px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-open svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve {
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg {
+    height: 56px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-self-serve svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-launcher-custom-icon-open {
+    max-height: 36px;
+    max-width: 36px;
+    
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize {
+    
+        opacity: 0;
+        transform: rotate(-60deg) scale(0);
+      
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg {
+    width: 16px;
+  }
+
+  .intercom-lightweight-app-launcher-icon-minimize svg path {
+    fill: rgb(255, 255, 255);
+  }
+
+  .intercom-lightweight-app-messenger {
+    position: fixed;
+    z-index: 2147483003;
+    overflow: hidden;
+    background-color: white;
+    animation: intercom-lightweight-app-messenger 250ms ease-out;
+    
+        width: 376px;
+        height: calc(100% - 120px);
+        max-height: 704px;
+        min-height: 250px;
+        right: 20px;
+        bottom: 100px;
+        box-shadow: 0 5px 40px rgba(0,0,0,0.16);
+        border-radius: 8px;
+      
+  }
+
+  .intercom-lightweight-app-messenger-header {
+    height: 75px;
+    background: linear-gradient(
+      135deg,
+      rgb(48, 78, 112) 0%,
+      rgb(17, 28, 41) 100%
+    );
+  }
+
+  @media print {
+    .intercom-lightweight-app {
+      display: none;
+    }
+  }
+</style></div></body></html>

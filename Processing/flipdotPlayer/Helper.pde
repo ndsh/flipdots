@@ -13,6 +13,14 @@ void keyPressed() {
   } else if (key == 'd') {
     dither = !dither;
     println("dither= " + dither);
+    float r[] = {dither?1f:0f};
+    ditherCheckbox.setArrayValue(r);
+  } else if (key == 's') {
+    stretchMode = !stretchMode;
+    println("stretchMode= " + stretchMode);
+    float r[] = {stretchMode?1f:0f};
+    stretchModeCheckbox.setArrayValue(r);
+  
   } else if(key == ' ') {
     isPlaying = !isPlaying;
     println("isPlaying= "+ isPlaying);
@@ -131,12 +139,14 @@ byte[] grabFrame(PImage p, int panel) {
 
 void feedVideo(PApplet pa, String s) {
   println("Flipdots movie= " + getBasename(s));
+  
   if(myMovie != null) myMovie.stop();
   myMovie = new Movie(pa, s);
   myMovie.loop();
   myMovie.volume(movieVolume);
   //myMovie.jump(160.0);}
   System.gc();
+  if(fileLabel != null) fileLabel.setText("File: " + getBasename(s));
 }
 
 void setVolume(float f) {
@@ -154,6 +164,7 @@ void initVariables() {
   black = color(0, 0, 0);
   white = color(0, 0, 100);
   gray = color(90);
+  
 }
 void initObjects(PApplet pa) {
   cp5 = new ControlP5(pa);
@@ -174,8 +185,14 @@ void initObjects(PApplet pa) {
       }
     }
   }
-  if(movieFiles.size() > 0) feedVideo(pa, movieFiles.get(currentMovie)); 
-  
+  if(movieFiles.size() > 0) feedVideo(pa, movieFiles.get(currentMovie));
+  font = loadFont("04b-25-12.vlw");
+  textFont(font, 12);
+  textOverlay = createGraphics(28, 98);
+  textOverlay.beginDraw();
+  textOverlay.textFont(font, 12);
+  textOverlay.textAlign(CENTER, CENTER);
+  textOverlay.endDraw();
 }
 
 void nextMovie(PApplet pa) {
@@ -194,8 +211,18 @@ void initArtnet() {
   artnet = new ArtNetClient(null);
   artnet.start();
 }
+
 // cp5
 void initCP5() {
+  stateLabel = cp5.addTextlabel("label2")
+  .setText("State: ")
+  .setPosition(5, height-40)
+  ;
+  fileLabel = cp5.addTextlabel("label3")
+  .setText("File: ")
+  .setPosition(5, height-50)
+  ;
+  
   onlineCheckbox = cp5.addCheckBox("onlineCheckbox")
   .setPosition(width-100,height-20)
   .setSize(32, 8)
@@ -212,6 +239,11 @@ void initCP5() {
   .setPosition(width-100,height-40)
   .setSize(32, 8)
   .addItem("Dither", 1)
+  ;
+  stretchModeCheckbox = cp5.addCheckBox("stretchModeCheckbox")
+  .setPosition(width-100,height-50)
+  .setSize(32, 8)
+  .addItem("Stretch", 1)
   ;
   
   if(panelLayout == 0) {
@@ -251,7 +283,12 @@ void ditherCheckbox(float[] a) {
   else dither = false;
   println("dither: " + dither);
 }
-
+void stretchModeCheckbox(float[] a) {
+  if(state == INTRO) return;
+  if (a[0] == 1f) stretchMode = true;
+  else stretchMode = false;
+  println("stretchMode: " + stretchMode);
+}
 
 void movieVolume(float theVol) {
   if(state == INTRO) return;

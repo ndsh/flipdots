@@ -194,11 +194,6 @@ class Panel {
     }
   }
   
-  byte[][] getData() {
-    byte[][] result = {dataUp, dataDown};
-    return result;
-  }
-  
   // BEGIN DOT CLASS
   class Dot {
     boolean state = false;

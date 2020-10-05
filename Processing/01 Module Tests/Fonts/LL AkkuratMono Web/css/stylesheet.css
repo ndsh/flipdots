@@ -1,0 +1,24 @@
+/*
+ * Legal Disclaimer
+ *
+ * These Fonts are licensed only for use on these domains and their subdomains:
+ * www.thegreeneyl.com
+ *
+ * It is illegal to download or use them on other websites.
+ *
+ * While the @font-face statements below may be modified by the client, this
+ * disclaimer may not be removed.
+ *
+ * Lineto.com, 2014
+ */
+
+@font-face {
+    font-family: "Akkuratmono-Regular";
+    src:url("fonts/lineto-akkuratmono-regular.eot");
+    src:url("fonts/lineto-akkuratmono-regular.eot?#iefix") format("embedded-opentype"),
+        url("fonts/lineto-akkuratmono-regular.woff") format("woff"),
+        url("fonts/lineto-akkuratmono-regular.ttf") format("truetype"),
+        url("fonts/lineto-akkuratmono-regular.svg#lineto-akkuratmono-regular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}

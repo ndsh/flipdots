@@ -1,0 +1,8 @@
+
+
+Modul 7x28:
+- Platine Hinterkante bis Dot Vorderkante 31mm (ohne Controllerplatinen)
+- Controller+Kabel Hinterkante bis Dot Vorderkante 75mmm
+- Modulhöhe: 107mmm
+- Modulbreite: 426mm
+- Durchmesser Flipdot: 13,5mm

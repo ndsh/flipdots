@@ -1,10 +1,9 @@
 // todo:
-// dither filter geht noch nicht
 // updates (zahlen, wieviele bytes per panel, histogram, )
-// difference between frames (noch nicht ganz korrekt)
-// impprterClass
-// cp5 stylen
-// pause button
+// histogram?
+
+// https://github.com/natcl/Artnet/issues/44
+// https://github.com/natcl/Artnet/issues/44#issuecomment-609733932
 
 void setup() {
   size(1000, 550);
@@ -17,7 +16,6 @@ void setup() {
   staticImage = loadImage("source3.png");
   pa = this;
   runInits(pa);
-  //feedVideo(this, "1183361194.mp4");
 }
 
 void draw() {
