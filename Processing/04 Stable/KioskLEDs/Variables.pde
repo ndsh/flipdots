@@ -20,7 +20,7 @@ PImage shrink;
 PImage source;
 PGraphics pg;
 Movie ledMovie;
-boolean online = true;
+boolean online = false;
 boolean dither = false;
 boolean isPlaying = true;
 PFont monoFont;
@@ -59,7 +59,8 @@ int maxBrightness = 120;
 String[] scrollSource;
 int currentScrollText = 0;
 float scrollPosition = 0;
-String usedFont = "Nobile-italic-16.vlw";
+//String usedFont = "Nobile-italic-16.vlw";
+String usedFont = "OdinRounded-LightItalic-16.vlw";
 String[] leaHashtags; // hashtags die lea per mail gesendet hat
 String[] leaResults = {"a", "b"};
 //String usedFont = "LKEuropaGroteskCity-MediumItalic-16.vlw";

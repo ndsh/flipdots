@@ -131,14 +131,20 @@ void stateMachine_LED(int state) {
         if(ledMovie != null) ledMovie.stop();
         String currentString = scrollSource[currentScrollText];
         float sw = textWidth(currentString);
-        ledTemp.smooth();
+        
+        //ledTemp.smooth();
         ledTemp.beginDraw();
-        ledTemp.clear();
-        scrollPosition -= 0.5;
+        ledTemp.push();
+        //ledTemp.background(black);
+        ledTemp.fill(black, 60);
+        ledTemp.rect(0,0,ledTemp.width, ledTemp.height);
+        ledTemp.pop();
+        scrollPosition -= 0.75;
         ledTemp.text(currentString, scrollPosition, 13);
         ledTemp.endDraw();
         
         image(ledTemp, 20, 80, 320*2.99, 16*2.99);
+        
         push();
         noFill();
         stroke(black);

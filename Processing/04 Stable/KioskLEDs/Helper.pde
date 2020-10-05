@@ -156,6 +156,7 @@ void initVariables() {
   followerIcon = loadImage("f.png");
   diameter = pg.width - 10;
 }
+
 void initObjects(PApplet pa) {
   cp5 = new ControlP5(pa);
   //frameRate(15);
@@ -197,7 +198,7 @@ void initObjects(PApplet pa) {
   
   ledTemp.beginDraw();
   ledTemp.textFont(europaGrotesk, 16);
-  ledTemp.textSize(16);
+  //ledTemp.textSize(16);
   ledTemp.endDraw();
   
   grid = new Cell[cols][rows];
