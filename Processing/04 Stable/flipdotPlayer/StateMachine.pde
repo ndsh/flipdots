@@ -27,7 +27,7 @@ void stateMachine(int state) {
   
    switch(state) {
     case INTRO:
-      setState(VIDEO);
+      setState(WORDS);
     break;
     
     case VIDEO:
