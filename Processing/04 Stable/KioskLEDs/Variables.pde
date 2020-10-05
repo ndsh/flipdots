@@ -20,7 +20,7 @@ PImage shrink;
 PImage source;
 PGraphics pg;
 Movie ledMovie;
-boolean online = false;
+boolean online = true;
 boolean dither = false;
 boolean isPlaying = true;
 PFont monoFont;
