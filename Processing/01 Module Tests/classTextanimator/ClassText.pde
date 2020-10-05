@@ -36,5 +36,19 @@ class Textanimation {
   void setEasing() {
   }
   
+  class TextElement {
+    public TextElement() {
+    }
+    
+    void update() {
+    }
+    
+    void display() {
+    }
+    
+    void rotate(float r) {
+    }
+    
+  } // End of Class TextElement
   
 }
