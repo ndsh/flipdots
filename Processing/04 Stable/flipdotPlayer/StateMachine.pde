@@ -95,7 +95,7 @@ void stateMachine(int state) {
       if(myMovie.available()) {
         background(gray);
         myMovie.read();
-        String displayText = "#\nL\nT\nC\n";
+        String displayText = "L\nT\nC\n";
         source = myMovie.get();
         newFrame = myMovie;
         shrink = shrinkToFormat(newFrame);
