@@ -166,6 +166,9 @@ void stateMachine_LED(int state) {
         }
         
       pop();
+        stateLabel.setText("Next state in: " + (randomCheckInterval-(millis() - randomCheckTimestamp))/1000 +" seconds");
+        if(millis() - checkTimestamp < checkInterval) return;
+        checkTimestamp = millis();
         setState(CHECK);
     break;
     

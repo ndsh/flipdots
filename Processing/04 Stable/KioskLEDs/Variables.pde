@@ -49,6 +49,8 @@ Textlabel stateLabel;
 JSONObject json;
 long followerTimestamp = 0;
 long followerInterval = 120000;
+long checkTimestamp = 0;
+long checkInterval = 15000;
 int followers = 0;
 PImage followerIcon;
 
