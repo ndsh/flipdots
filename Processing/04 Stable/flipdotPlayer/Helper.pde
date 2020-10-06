@@ -158,6 +158,8 @@ void runInits(PApplet pa) {
   initVariables();
   initArtnet();
   initCP5();
+  
+  importerLabel.setText("Importer\nSequences: " + importer.getFiles().size() + " loaded\n--------------------");
 }
 
 void initVariables() {
@@ -172,7 +174,7 @@ void initObjects(PApplet pa) {
   if(panelLayout == 0) pg = createGraphics(196, 14); // 2744 pixel
   else if(panelLayout  == 1) pg = createGraphics(28, 98); // 2744 pixels
   
-  flipdots = new FlipdotDisplay(panels, panelLayout, 10, 10);
+  flipdots = new FlipdotDisplay(panels, panelLayout, w6*3+3+30, h24+3+22);
   d = new Dither();
   d.setCanvas(pg.width, pg.height);
   
@@ -185,6 +187,7 @@ void initObjects(PApplet pa) {
       }
     }
   }
+  
   if(movieFiles.size() > 0) feedVideo(pa, movieFiles.get(currentMovie));
   font = loadFont("04b-25-12.vlw");
   textFont(font, 12);
@@ -193,6 +196,11 @@ void initObjects(PApplet pa) {
   textOverlay.textFont(font, 12);
   textOverlay.textAlign(CENTER, CENTER);
   textOverlay.endDraw();
+  
+  sendDataViz = createGraphics((int)(w3*2+w6), (int)h12);
+  sendDataViz.beginDraw();
+  sendDataViz.fill(white);
+  sendDataViz.endDraw();
 }
 
 void nextMovie(PApplet pa) {
@@ -214,34 +222,119 @@ void initArtnet() {
 
 // cp5
 void initCP5() {
+   overviewLabel = cp5.addTextlabel("overviewLabel")
+  .setText("Overview")
+  .setPosition(10,10)
+  ;
+  
+  importerLabel = cp5.addTextlabel("importerLabel")
+  .setText("Hello")
+  .setPosition(10,h24+10)
+  ;
+  
+  movieTimeLabel = cp5.addTextlabel("movieTimeLabel")
+  .setText("Movie Time")
+  .setPosition(10,h3*2-15)
+  ;
+  movieTimeRestLabel = cp5.addTextlabel("movieTimeRestLabel")
+  .setText("200 secs left")
+  .setPosition(10,h3*2+15)
+  ;
+  movieTimePercentageLabel = cp5.addTextlabel("movieTimePercentageLabel")
+  .setText("0%")
+  .setPosition(10+w6-60,h3*2)
+  ;
+  
+
   stateLabel = cp5.addTextlabel("label2")
-  .setText("State: ")
-  .setPosition(5, height-40)
+  .setText("StateMachine\n")
+  .setPosition(10,h24+10+h12)
+  ;
+  dynamicLabel = cp5.addTextlabel("dynamicLabel")
+  .setText("FPS")
+  .setPosition(w6+10, h24+h6+h3+10)
   ;
   fileLabel = cp5.addTextlabel("label3")
   .setText("File: ")
-  .setPosition(5, height-50)
+  .setPosition(w6+10, h24+h6+h3+h6+10)
+  .setHeight(40)
+  ;
+  currentBytesLabel = cp5.addTextlabel("currentBytesLabel")
+  .setText("Current: ")
+  .setPosition(w3*2+w6+10, h3+h3+h6+h12+10)
+  .setHeight(40)
+  .setColorBackground(black)
+  ;
+  
+  stateVisualOutputLabel = cp5.addTextlabel("stateVisualOutputLabel")
+  .setText("State Visual Output")
+  .setPosition(w6+10, 0+10)
+  .setHeight(40)
+  .setColorBackground(black)
+  ;
+  
+  sourceFlipdotsLabel = cp5.addTextlabel("sourceFlipdotsLabel")
+  .setText("Source Flipdots")
+  .setPosition(w6*2+10, 0+10)
+  .setHeight(40)
+  .setColorBackground(black)
+  ;
+  
+  virtualFlipdotsLabel = cp5.addTextlabel("virtualFlipdotsLabel")
+  .setText("Source Flipdots")
+  .setPosition(w6*3+10, 0+10)
+  .setHeight(40)
+  .setColorBackground(black)
+  ;
+  
+  consoleLabel = cp5.addTextlabel("consoleLabel")
+  .setText("Source Console")
+  .setPosition(w6*4+10, 0+10)
+  .setHeight(40)
+  .setColorBackground(black)
+  ;
+  
+  stateControlLabel = cp5.addTextlabel("stateControlLabel")
+  .setText("State Control")
+  .setPosition(0+10,h24*2+h12*8+10)
+  .setHeight(40)
+  .setColorBackground(black)
+  ;
+  
+  panelActivityLabel = cp5.addTextlabel("panelActivityLabel")
+  .setText("Panel Activity")
+  .setPosition(w6*1+10, h3+h3+h6+10)
+  .setHeight(40)
+  .setColorBackground(black)
+  ;
+  
+  
+  networkLabel = cp5.addTextlabel("networkLabel")
+  .setText("Network")
+  .setPosition(w6*4+10, h24+h3+h8+10)
+  .setHeight(40)
+  .setColorBackground(black)
   ;
   
   onlineCheckbox = cp5.addCheckBox("onlineCheckbox")
-  .setPosition(width-100,height-20)
+  .setPosition(w3*2+w6+10, h3+h3+h6+10)
   .setSize(32, 8)
-  .addItem("online", 1)
+  .addItem("Send Data", 1)
   ;
   
   isPlayingCheckbox = cp5.addCheckBox("isPlayingCheckbox")
-  .setPosition(width-100,height-30)
+  .setPosition(10, h24*3+h12*8+10)
   .setSize(32, 8)
   .addItem("Playing", 1)
   ;
   
   ditherCheckbox = cp5.addCheckBox("ditherCheckbox")
-  .setPosition(width-100,height-40)
+  .setPosition(w6+w6/4, h24+h6+h6/4)
   .setSize(32, 8)
   .addItem("Dither", 1)
   ;
   stretchModeCheckbox = cp5.addCheckBox("stretchModeCheckbox")
-  .setPosition(width-100,height-50)
+  .setPosition(w6+10, h24+h6+h12+h6+10)
   .setSize(32, 8)
   .addItem("Stretch", 1)
   ;
@@ -254,7 +347,7 @@ void initCP5() {
     ;
   } else if(panelLayout == 1) {
     cp5.addSlider("movieVolume")
-    .setPosition(330,8)
+    .setPosition(10,height-190)
     .setRange(0f,1f)
     .setLabel("Volume")
     ;
@@ -297,5 +390,64 @@ void movieVolume(float theVol) {
 
 String getBasename(String s) {
   String[] split = split(s, "/");
-  return split[split.length-1];
+  String out = truncate(split[split.length-1], 36);
+  return out;
+}
+
+String truncate(String s, int n){
+  return (s.length() > n) ? s.substring(0, n-1) + "..." : s;
+};
+
+void drawUserInterface() {
+  // grid stuff, erstmal hier. später in variables
+  
+  push();
+  noFill();
+  //background(0);
+  stroke(white);
+    // #### column 1
+    rect(0,0,w6, h24); // overview
+    rect(0,h24,w6, h24+h12*8); // overview content
+    rect(0,h24*2+h12*8,w6, h24); // state control label
+    rect(0, h24*3+h12*8, w6, h24); // play/pause state
+    rect(0,h24*4+h12*8,w6, h24); // force state
+    rect(0,h24*5+h12*8,w6, h12+h24); // left / right buttons for states
+    
+    // #### column 2
+    rect(w6, 0, w6, h24); // state visual output
+    rect(w6, h24, w6, h6); // pimage
+    rect(w6, h24+h6, w6, h12); // dither options
+    rect(w6, h24+h6+h12, w6, h6); // dither preview, if activated
+    rect(w6, h24+h6+h12+h6, w6, h24); // stretch options
+    rect(w6, h24+h6+h12+h6+h24, w6, h24); // dynamic information label
+    rect(w6, h24+h6+h12+h6+h24+h24, w6, h6+h12+h24); // dynamic information content
+    
+    
+    // #### column 3
+    rect(w6*2, 0, w6, h24); // source flipdots
+    rect(w6*2, h24, w6, h2+h4+h24); // source object outputs
+    
+    // #### column 4
+    rect(w6*3, 0, w6, h24); // virtual flipdots
+    rect(w6*3, h24, w6, h2+h4+h24); // virtual flipdots outputs
+    
+    // #### column 5
+    rect(w6*4, 0, w3, h24); // console
+    rect(w6*4, h24, w3, h3+h8); // console content
+    rect(w6*4, h24+h3+h8, w3, h24); // network
+    rect(w6*4, h24+h3+h8, w3, h4+h12); // network
+    
+    // #### row 1
+    rect(w6*1, h3+h3+h6, w3*2+w6, h24); // panel activity
+    rect(w3*2+w6, h3+h3+h6, w6, h24); // send data button
+    rect(w6*1, h3+h3+h6+h24, w3*2+w6, h24); // panel outputs
+    rect(w6*1, h3+h3+h6+h12, w3*2, h12); // total output, history
+    rect(w3*2+w6, h3+h3+h6+h12, w6, h12); // current output
+    stroke(white);
+    rect(0,0,width-1, height-1);
+  pop();
+}
+
+void updateLabels() {
+  dynamicLabel.setText("FPS: " + frameRate +"\nBytes sent: " + bytesTotal +" bytes\nSending to: " + ip);
 }

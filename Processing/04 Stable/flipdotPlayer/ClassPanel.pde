@@ -18,7 +18,7 @@ class Panel {
     pos = new PVector(_x, _y);
     for(int x = 0; x<28; x++) {
       for(int y = 0; y<14; y++) {
-        dots[x][y] = new Dot(int(flipdotSize+1)*x, int(flipdotSize+1)*y);
+        dots[x][y] = new Dot(int(flipdotSize+1.0f)*x, int(flipdotSize+1.0f)*y);
       }
     } 
   }
@@ -52,7 +52,8 @@ class Panel {
     if(panelLayout == 0) {
       rect(-(flipdotSize/2), 70, 28*(flipdotSize+1)-2, 1*(flipdotSize+1));
     } else if(panelLayout == 1) {
-      rect(140, -2, 27, 7*(flipdotSize+1)-2);
+      //rect(140, -2, 27, 7*(flipdotSize+1)-2);
+      ellipse(150, 13, 5, 5);
     }
     pop();
     
@@ -63,7 +64,8 @@ class Panel {
     if(panelLayout == 0) {
       rect(-(flipdotSize/2), 72+(1*(flipdotSize+1)), 28*(flipdotSize+1)-2, 1*(flipdotSize+1));
     } else if(panelLayout == 1) {
-      rect(140, 7*(flipdotSize+1)-2, 27, 7*(flipdotSize+1)-2);
+      //rect(140, 7*(flipdotSize+1)-2, 27, 7*(flipdotSize+1)-2);
+      ellipse(150, 7*(flipdotSize+1.0f)+5, 5, 5);
     } 
     
     pop();
@@ -123,8 +125,10 @@ class Panel {
       for(int y = y_start; y<y_end; y++) {
         //pixel = currentFrame.get(x, y);
         pixel = currentFrame.pixels[y*28+x];
-        if(brightness(pixel) > 50.0) toSend = 1 + toSend;
-        else toSend = 0 + toSend;
+        if(brightness(pixel) > 50.0) {
+          toSend = 1 + toSend;
+          bytesSent++;
+        } else toSend = 0 + toSend;
       }
       data[x] = (byte) unbinary(toSend);
     }
@@ -196,6 +200,11 @@ class Panel {
   
   byte[][] getData() {
     byte[][] result = {dataUp, dataDown};
+    return result;
+  }
+  
+  boolean[] getChangeIndicator() {
+    boolean[] result = {changeUp, changeDown};
     return result;
   }
   

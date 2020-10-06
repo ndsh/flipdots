@@ -6,7 +6,7 @@
 // https://github.com/natcl/Artnet/issues/44#issuecomment-609733932
 
 void setup() {
-  size(1000, 550);
+  size(1200, 675);
   //frameRate(20);
   surface.setLocation(0, 0);
   colorMode(HSB, 360, 100, 100);
@@ -20,4 +20,6 @@ void setup() {
 
 void draw() {
   stateMachine(state);
+  drawUserInterface();
+  updateLabels();
 }

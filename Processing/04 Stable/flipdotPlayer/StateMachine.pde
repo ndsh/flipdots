@@ -16,7 +16,7 @@ static final String[] stateNames = {
   "Intro", "Video", "Images",
   "Calendar", "Input", "Time",
   "Intervention", "Transition", "Words",
-  "Idle"
+  "Idle", "OSC"
 };
 
 String getStateName(int state) {
@@ -27,13 +27,14 @@ void stateMachine(int state) {
   
    switch(state) {
     case INTRO:
-      setState(WORDS);
+      setState(VIDEO);
     break;
     
     case VIDEO:
       if(!isPlaying) return;
       if(myMovie.available()) {
-        background(gray);
+        
+        background(black);
         myMovie.read();
         
         source = myMovie.get();
@@ -41,18 +42,26 @@ void stateMachine(int state) {
         shrink = shrinkToFormat(newFrame);
         
         push();
-          source.resize(196, 0);
+          source.resize((int)w6, (int)h6);
           if(panelLayout == 0) {
             translate(8, 200);
           } else if(panelLayout == 1) {
-            translate(330, 22);
+            translate(w6, h24);
           }
           
           image(source, 0, 0);
           if(dither) {
             d.feed(source);
-            image(d.floyd_steinberg(), 200, 0);
+            image(d.floyd_steinberg(), 0, h6+h12);
+          } else {
+            push();
+            stroke(white);
+            line(0, h6+h12, w6, h6*2+h12);
+            line(w6, h6+h12, 0, h6*2+h12);
+            //rect(w6, h24+h6+h12, w6, h6); // dither preview, if activated
+            pop();
           }
+          
         pop();
         
         if(dither) {
@@ -67,7 +76,7 @@ void stateMachine(int state) {
           if(panelLayout == 0) {
             image(pg, 8, 95, width-22, 71);
           } else if(panelLayout == 1) {
-            image(pg, 180, 8, 140, height-61);
+            image(pg, w6*2+30, h24+22, 140, 490);
           }
         pop();
         
@@ -76,17 +85,19 @@ void stateMachine(int state) {
         if(online) flipdots.send();
         
         push();
-          if(panelLayout == 0) {
-            translate(8, 170);
-          } else if(panelLayout == 1) {
-            translate(8, height-20);
-          }
-          
+          translate(10,h3*2);
           noStroke();
-          rect(0, 0, map(myMovie.time(), 0, myMovie.duration(), 0, width-22), 6);
+          rect(0, 0, map(myMovie.time(), 0, myMovie.duration(), 0, w6-60), 6);
+          float percentage = map(myMovie.time(), 0, myMovie.duration(), 0, 100);
+          float restSecs = myMovie.duration()-myMovie.time();
+          movieTimePercentageLabel.setText(nf((int)percentage,2) + "%");
+          movieTimeRestLabel.setText(nf((int)restSecs,2) + " secs left");
+          stroke(white);
+          line(0,6,w6-60,6);
         pop();
         
       }
+      
     break;
     
     case WORDS:
