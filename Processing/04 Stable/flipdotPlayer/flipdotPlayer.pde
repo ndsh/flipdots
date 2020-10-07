@@ -1,9 +1,13 @@
 // todo:
-// updates (zahlen, wieviele bytes per panel, histogram, )
-// histogram?
 
 // https://github.com/natcl/Artnet/issues/44
 // https://github.com/natcl/Artnet/issues/44#issuecomment-609733932
+
+// flipdot outputs an größe vom grid anpassen
+// force output implementieren
+// alle cp5 buttons durchstylen
+// histogram
+// buttons müssen richtig "gebangt" werden
 
 void setup() {
   size(1200, 675);

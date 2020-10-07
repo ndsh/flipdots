@@ -1,5 +1,6 @@
 class Panel {
   // 28x14 dots
+  PGraphics pg;
   int panelID = 0;
   Dot[][] dots = new Dot[28][14];
   PVector pos;

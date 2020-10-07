@@ -20,7 +20,11 @@ void keyPressed() {
     println("stretchMode= " + stretchMode);
     float r[] = {stretchMode?1f:0f};
     stretchModeCheckbox.setArrayValue(r);
-  
+  } else if (key == 'f') {
+    forceState = !forceState;
+    println("forceState= " + forceState);
+    float r[] = {forceState?1f:0f};
+    forceStateCheckbox.setArrayValue(r);
   } else if(key == ' ') {
     isPlaying = !isPlaying;
     println("isPlaying= "+ isPlaying);
@@ -67,10 +71,8 @@ PImage shrinkToFormat(PImage p) {
   int calcWidth = 0;
   if(panelLayout == 0) calcHeight = (pg.width*p.height)/p.width;
   else if(panelLayout == 1) calcWidth = (pg.height*p.width)/p.height;
-  //pg_t.image(p, 0, 0, pg.width, calcHeight);
   if(panelLayout == 0) pg_t.image(p, 0, map(mouseY, 0, height, 0, -calcHeight), pg.width, 147);
   else if(panelLayout == 1)  pg_t.image(p, map(mouseX, 0, width, 0, -calcWidth), 0, calcWidth, pg.height);
-  //pg_t.image(p, 0, -50, pg.width, 147);
   pg_t.endDraw();
   return pg_t;
 } 
@@ -158,16 +160,9 @@ void runInits(PApplet pa) {
   initVariables();
   initArtnet();
   initCP5();
-  
-  importerLabel.setText("Importer\nSequences: " + importer.getFiles().size() + " loaded\n--------------------");
+  initLabels();
 }
 
-void initVariables() {
-  black = color(0, 0, 0);
-  white = color(0, 0, 100);
-  gray = color(90);
-  
-}
 void initObjects(PApplet pa) {
   cp5 = new ControlP5(pa);
   //frameRate(15);
@@ -188,6 +183,16 @@ void initObjects(PApplet pa) {
     }
   }
   
+  importer = new Importer("footage");
+  for(int i = 0; i<importer.folders.size(); i++) {
+    if(importer.folders.get(i).equals("transitions")) {
+      importer.loadFiles(importer.folders.get(i));
+      for (int j = 0; j <importer.getFiles().size(); j++) {   
+        transitionFiles.append(importer.getFiles().get(j));
+      }
+    }
+  }
+  
   if(movieFiles.size() > 0) feedVideo(pa, movieFiles.get(currentMovie));
   font = loadFont("04b-25-12.vlw");
   textFont(font, 12);
@@ -203,21 +208,19 @@ void initObjects(PApplet pa) {
   sendDataViz.endDraw();
 }
 
-void nextMovie(PApplet pa) {
-  currentMovie++;
-  currentMovie %= movieFiles.size();
-  feedVideo(pa, movieFiles.get(currentMovie));
-}
-
-void prevMovie(PApplet pa) {
-  currentMovie--;
-  if(currentMovie < 0) currentMovie = movieFiles.size()-1;
-  feedVideo(pa, movieFiles.get(currentMovie));
+void initVariables() {
+  black = color(0, 0, 0);
+  white = color(0, 0, 100);
+  gray = color(90);
 }
 
 void initArtnet() {
   artnet = new ArtNetClient(null);
   artnet.start();
+}
+
+void initLabels() {
+  importerLabel.setText("IMPORTER\nSEQUENCES: " + movieFiles.size() + " LOADED\nTRANSITIONS: " + transitionFiles.size() + " LOADED\n\n--------------------");
 }
 
 // cp5
@@ -245,15 +248,33 @@ void initCP5() {
   .setPosition(10+w6-60,h3*2)
   ;
   
+  stateTimeLabel = cp5.addTextlabel("stateTimeLabel")
+  .setText("Next State")
+  .setPosition(10,h3+h6+h12-15)
+  ;
+  stateTimeRestLabel = cp5.addTextlabel("stateTimeRestLabel")
+  .setText("200 secs left")
+  .setPosition(10,h3+h6+h12+15)
+  ;
+  stateTimePercentageLabel = cp5.addTextlabel("stateTimePercentageLabel")
+  .setText("0%")
+  .setPosition(10+w6-60,h3+h6+h12)
+  ;
+  
 
   stateLabel = cp5.addTextlabel("label2")
   .setText("StateMachine\n")
   .setPosition(10,h24+10+h12)
   ;
   dynamicLabel = cp5.addTextlabel("dynamicLabel")
+  .setText("Dynamic Information")
+  .setPosition(w6+10, h6+h6+h6+10)
+  ;
+  dynamicContentLabel = cp5.addTextlabel("dynamicContentLabel")
   .setText("FPS")
   .setPosition(w6+10, h24+h6+h3+10)
   ;
+  
   fileLabel = cp5.addTextlabel("label3")
   .setText("File: ")
   .setPosition(w6+10, h24+h6+h3+h6+10)
@@ -281,14 +302,14 @@ void initCP5() {
   ;
   
   virtualFlipdotsLabel = cp5.addTextlabel("virtualFlipdotsLabel")
-  .setText("Source Flipdots")
+  .setText("Virtual Flipdots")
   .setPosition(w6*3+10, 0+10)
   .setHeight(40)
   .setColorBackground(black)
   ;
   
   consoleLabel = cp5.addTextlabel("consoleLabel")
-  .setText("Source Console")
+  .setText("Console")
   .setPosition(w6*4+10, 0+10)
   .setHeight(40)
   .setColorBackground(black)
@@ -328,6 +349,12 @@ void initCP5() {
   .addItem("Playing", 1)
   ;
   
+  forceStateCheckbox = cp5.addCheckBox("forceStateCheckbox")
+  .setPosition(10, h24*3+h12*8+h24+10)
+  .setSize(32, 8)
+  .addItem("Force State", 1)
+  ;
+  
   ditherCheckbox = cp5.addCheckBox("ditherCheckbox")
   .setPosition(w6+w6/4, h24+h6+h6/4)
   .setSize(32, 8)
@@ -339,24 +366,24 @@ void initCP5() {
   .addItem("Stretch", 1)
   ;
   
-  if(panelLayout == 0) {
-    cp5.addSlider("movieVolume")
-    .setPosition(8,180)
-    .setRange(0f,1f)
-    .setLabel("Volume")
-    ;
-  } else if(panelLayout == 1) {
-    cp5.addSlider("movieVolume")
-    .setPosition(10,height-190)
-    .setRange(0f,1f)
-    .setLabel("Volume")
-    ;
-  }    
+  cp5.addSlider("movieVolume")
+  .setPosition(10,height-190)
+  .setRange(0f,1f)
+  .setLabel("Volume")
+  ;
   
   cp5.setColorForeground(gray);
   cp5.setColorBackground(black);
   cp5.setColorActive(white);
+  
+  onlineCheckbox.setArrayValue((online?y:n));
+  ditherCheckbox.setArrayValue((dither?y:n));
+  isPlayingCheckbox.setArrayValue((isPlaying?y:n));
+  forceStateCheckbox.setArrayValue((forceState?y:n));
+  
+  
 }
+
 void onlineCheckbox(float[] a) {
   if(state == INTRO) return;
   if (a[0] == 1f) online = true;
@@ -388,6 +415,18 @@ void movieVolume(float theVol) {
   setVolume(theVol);
 }
 
+void nextMovie(PApplet pa) {
+  currentMovie++;
+  currentMovie %= movieFiles.size();
+  feedVideo(pa, movieFiles.get(currentMovie));
+}
+
+void prevMovie(PApplet pa) {
+  currentMovie--;
+  if(currentMovie < 0) currentMovie = movieFiles.size()-1;
+  feedVideo(pa, movieFiles.get(currentMovie));
+}
+
 String getBasename(String s) {
   String[] split = split(s, "/");
   String out = truncate(split[split.length-1], 36);
@@ -400,7 +439,10 @@ String truncate(String s, int n){
 
 void drawUserInterface() {
   // grid stuff, erstmal hier. später in variables
-  
+  if(refreshUI) {
+    cp5.setAutoDraw(true);
+    refreshUI = false;
+  } else cp5.setAutoDraw(false);
   push();
   noFill();
   //background(0);
@@ -449,5 +491,62 @@ void drawUserInterface() {
 }
 
 void updateLabels() {
-  dynamicLabel.setText("FPS: " + frameRate +"\nBytes sent: " + bytesTotal +" bytes\nSending to: " + ip);
+  dynamicContentLabel.setText("FPS: " + frameRate +"\nBytes sent: " + bytesTotal +" bytes\nSending to: " + ip);
+}
+
+void drawProgessbar(Textlabel percentLabel, Textlabel leftLabel, float current, float duration, float w, float x, float y) {
+  push();
+    translate(x, y);
+    noStroke();
+    rect(0, 0, map(current, 0, duration, 0, w6-60), 6);
+    float percentage = map(current, 0, duration, 0, 100);
+    float restSecs = duration-current;
+    percentLabel.setText(nf((int)percentage,2) + "%");
+    leftLabel.setText(nf((int)restSecs,2) + " secs left");
+    stroke(white);
+    line(0,6,w6-60,6);
+  pop();
+}
+
+void listStates() {
+  String out = "";
+  for(int i = 0; i<stateNames.length; i++) {
+    if(i == state) out += "[x] " + stateNames[i].toUpperCase() + "\n";
+    else out += "[   ] " + stateNames[i].toUpperCase() + "\n";
+  }
+  stateLabel.setText(out);
+}
+
+void visualOutput() {
+  push();
+    source.resize((int)w6, (int)h6);
+    if(panelLayout == 0) translate(8, 200);
+    else if(panelLayout == 1) translate(w6, h24);
+    image(source, 0, 0);
+  pop();
+}
+
+void ditherOutput() {
+  if(dither) {
+    
+    
+    push();
+      if(panelLayout == 0) translate(8, 200);
+      else if(panelLayout == 1) translate(w6, h24);
+       d.feed(source);
+      image(d.floyd_steinberg(), 0, h6+h12);
+    pop();
+    
+    d.feed(shrink);
+    shrink = d.floyd_steinberg();
+  } else {
+    push();
+    if(panelLayout == 0) translate(8, 200);
+    else if(panelLayout == 1) translate(w6, h24);
+    stroke(white);
+    line(0, h6+h12, w6, h6*2+h12);
+    line(w6, h6+h12, 0, h6*2+h12);
+    //rect(w6, h24+h6+h12, w6, h6); // dither preview, if activated
+    pop();
+  }
 }

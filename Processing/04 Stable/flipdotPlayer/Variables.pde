@@ -29,6 +29,8 @@ PFont font;
 boolean online = true;
 boolean dither = false;
 boolean isPlaying = true;
+boolean forceState = false;
+boolean stateHasFinished = false; // z.B. für animationen
 
 FlipdotDisplay flipdots;
 Panel panel;
@@ -47,6 +49,7 @@ float movieVolume = 0;
 boolean stretchMode = true; // true = fit to width, false = no fitting. source must be 1:1 (that is 196x14 pixels)
 
 StringList movieFiles = new StringList();
+StringList transitionFiles = new StringList();
 int currentMovie = 0;
 
 PApplet pa;
@@ -56,14 +59,19 @@ CheckBox onlineCheckbox;
 CheckBox isPlayingCheckbox;
 CheckBox ditherCheckbox;
 CheckBox stretchModeCheckbox;
+CheckBox forceStateCheckbox;
 Textlabel stateLabel;
 Textlabel fileLabel;
 Textlabel dynamicLabel;
+Textlabel dynamicContentLabel;
 Textlabel overviewLabel;
 Textlabel importerLabel;
 Textlabel movieTimeLabel;
 Textlabel movieTimeRestLabel;
 Textlabel movieTimePercentageLabel;
+Textlabel stateTimeLabel;
+Textlabel stateTimeRestLabel;
+Textlabel stateTimePercentageLabel;
 Textlabel currentBytesLabel;
 
 Textlabel stateVisualOutputLabel;
@@ -76,10 +84,12 @@ Textlabel panelActivityLabel;
 
 int panelLayout = 1; // horizontal
 
-long idleTime = 5000;
-long idleTimestamp = 0;
+long checkTimestamp = 0;
+long checkInterval = 15000;
 
 boolean refreshUI = false;
+float[] y = {1f};
+float[] n = {0f};
 /*
   0
  ▀ ▀ ▀ ▀ ▀ ▀ ▀

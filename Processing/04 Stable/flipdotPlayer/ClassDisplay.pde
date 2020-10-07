@@ -112,7 +112,6 @@ class FlipdotDisplay {
     temp = sendDataViz.copy();
     sendDataViz.beginDraw();
     sendDataViz.clear();
-    //sendDataViz.background(white);
     sendDataViz.stroke(white);
     sendDataViz.image(temp, -1, 0);
     sendDataViz.rect(sendDataViz.width-1, dataHeight, 1,1);
@@ -142,7 +141,6 @@ class FlipdotDisplay {
           }
           rect(indicatorWidth*i, 0, indicatorWidth, h24);
           panel = (int)i/2;
-          
       } 
     pop();
   }

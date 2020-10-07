@@ -2,21 +2,24 @@ static final int INTRO = 0;
 static final int VIDEO = 1; // videos von festplatte laden
 static final int IMAGES = 2; // bilder von festplatte laden
 static final int CALENDAR = 3; // events aus kalender lesen
-static final int INPUT = 4; // input via web auslesen
+static final int CHECK = 4; // regular checks
 static final int TIME = 5; // uhrzeit, z.B. jede viertel oder halbe stunde
 static final int INTERVENTION = 6; // störer oder marquee? z.B. livingthecity.eu
 static final int TRANSITION = 7; // plays random transition from the transition folder
 static final int WORDS = 8; // plays random text from file
 static final int IDLE = 9; // idle for a certain amount off time
 static final int OSC = 10;
+static final int NETWORK = 11;
+static final int SEND = 12;
+static final int GIFS = 13;
 
 int state = INTRO;
 
 static final String[] stateNames = {
   "Intro", "Video", "Images",
-  "Calendar", "Input", "Time",
+  "Calendar", "Check", "Time",
   "Intervention", "Transition", "Words",
-  "Idle", "OSC"
+  "Check", "OSC", "Network", "Send"
 };
 
 String getStateName(int state) {
@@ -26,14 +29,14 @@ String getStateName(int state) {
 void stateMachine(int state) {
   
    switch(state) {
+     
     case INTRO:
-      setState(VIDEO);
+      setState(WORDS);
     break;
     
     case VIDEO:
       if(!isPlaying) return;
       if(myMovie.available()) {
-        
         background(black);
         myMovie.read();
         
@@ -41,75 +44,41 @@ void stateMachine(int state) {
         newFrame = myMovie;
         shrink = shrinkToFormat(newFrame);
         
-        push();
-          source.resize((int)w6, (int)h6);
-          if(panelLayout == 0) {
-            translate(8, 200);
-          } else if(panelLayout == 1) {
-            translate(w6, h24);
-          }
-          
-          image(source, 0, 0);
-          if(dither) {
-            d.feed(source);
-            image(d.floyd_steinberg(), 0, h6+h12);
-          } else {
-            push();
-            stroke(white);
-            line(0, h6+h12, w6, h6*2+h12);
-            line(w6, h6+h12, 0, h6*2+h12);
-            //rect(w6, h24+h6+h12, w6, h6); // dither preview, if activated
-            pop();
-          }
-          
-        pop();
-        
-        if(dither) {
-          d.feed(shrink);
-          shrink = d.floyd_steinberg();
-        }
+        visualOutput();
+        ditherOutput();
         feedBuffer(shrink);
         flipdots.feed(shrink);
         
-        
         push();
-          if(panelLayout == 0) {
-            image(pg, 8, 95, width-22, 71);
-          } else if(panelLayout == 1) {
-            image(pg, w6*2+30, h24+22, 140, 490);
-          }
+          if(panelLayout == 0) image(pg, 8, 95, width-22, 71);
+          else if(panelLayout == 1) image(pg, w6*2+30, h24+22, 140, 490);
         pop();
         
         flipdots.update();
         flipdots.display();
         if(online) flipdots.send();
-        
-        push();
-          translate(10,h3*2);
-          noStroke();
-          rect(0, 0, map(myMovie.time(), 0, myMovie.duration(), 0, w6-60), 6);
-          float percentage = map(myMovie.time(), 0, myMovie.duration(), 0, 100);
-          float restSecs = myMovie.duration()-myMovie.time();
-          movieTimePercentageLabel.setText(nf((int)percentage,2) + "%");
-          movieTimeRestLabel.setText(nf((int)restSecs,2) + " secs left");
-          stroke(white);
-          line(0,6,w6-60,6);
-        pop();
-        
+        drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
+        drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-checkTimestamp)/1000f, checkInterval/1000f, w6-60, 10f, h3+h6+h12);
+        refreshUI = true;
       }
-      
+      if(millis() - checkTimestamp < checkInterval) return;
+      checkTimestamp = millis();
+      setState(CHECK);
     break;
     
     case WORDS:
       
       if(!isPlaying) return;
       if(myMovie.available()) {
-        background(gray);
+        background(black);
         myMovie.read();
+        
         String displayText = "L\nT\nC\n";
         source = myMovie.get();
         newFrame = myMovie;
         shrink = shrinkToFormat(newFrame);
+        
+        // content
         textOverlay.beginDraw();
         textOverlay.image(shrink, 0, 0);
         textOverlay.fill(black);
@@ -125,51 +94,29 @@ void stateMachine(int state) {
         textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2);
         textOverlay.endDraw();
         shrink = textOverlay.copy();
+        // content end
         
-        push();
-          source.resize(196, 0);
-          if(panelLayout == 0) {
-            translate(8, 200);
-          } else if(panelLayout == 1) {
-            translate(330, 22);
-          }
-          
-          image(source, 0, 0);
-          if(dither) {
-            d.feed(source);
-            image(d.floyd_steinberg(), 200, 0);
-          }
-        pop();
-        
-        if(dither) {
-          d.feed(shrink);
-          d.setMode(0);
-          shrink = d.dither();
-        }
+        visualOutput();
+        ditherOutput();
         feedBuffer(shrink);
         flipdots.feed(shrink);
         
-        
         push();
-          if(panelLayout == 0) {
-            image(pg, 8, 95, width-22, 71);
-          } else if(panelLayout == 1) {
-            image(pg, 180, 8, 140, height-61);
-          }
+          if(panelLayout == 0) image(pg, 8, 95, width-22, 71);
+          else if(panelLayout == 1) image(pg, w6*2+30, h24+22, 140, 490);
         pop();
         
         flipdots.update();
         flipdots.display();
         if(online) flipdots.send();
         
-        push();
-          if(panelLayout == 0)       translate(8, 170);
-          else if(panelLayout == 1)  translate(8, height-20);
-          noStroke();
-          rect(0, 0, map(myMovie.time(), 0, myMovie.duration(), 0, width-22), 6);
-        pop();  
+        drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
+        drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-checkTimestamp)/1000f, checkInterval/1000f, w6-60, 10f, h3+h6+h12);
+        refreshUI = true;
       }
-      
+      if(millis() - checkTimestamp < checkInterval) return;
+      checkTimestamp = millis();
+      setState(CHECK);
     break;
     
     case IMAGES:
@@ -184,10 +131,21 @@ void stateMachine(int state) {
       flipdots.display();
       if(online) flipdots.send();
     break;
+    
+    case CHECK:
+      float r = random(2);
+      if(r == 0) setState(VIDEO);
+      else setState(WORDS);
+    break;
+    
+    case SEND:
+    
+    break;
    }
 }
 
 void setState(int s) {
   state = s;
-  stateLabel.setText("State: " + getStateName(s));
+  //stateLabel.setText("State: " + getStateName(s));
+  listStates();
 }
