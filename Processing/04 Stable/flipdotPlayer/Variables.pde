@@ -6,6 +6,7 @@ ArtNetClient artnet;
 ControlP5 cp5;
 Importer importer;
 Dither d;
+PerlinGrid grid;
 //String ip = "2.0.0.3"; // flipdoteeny
 //String ip = "2.0.0.23"; // local, ndsh macbook
 String ip = "2.0.0.24"; // local, iMac
@@ -30,7 +31,7 @@ boolean online = true;
 boolean dither = false;
 boolean isPlaying = true;
 boolean forceState = false;
-boolean stateHasFinished = false; // z.B. für animationen
+
 
 FlipdotDisplay flipdots;
 Panel panel;
@@ -51,6 +52,7 @@ boolean stretchMode = true; // true = fit to width, false = no fitting. source m
 StringList movieFiles = new StringList();
 StringList transitionFiles = new StringList();
 int currentMovie = 0;
+boolean moviePlaying = false;
 
 PApplet pa;
 
@@ -62,7 +64,7 @@ CheckBox stretchModeCheckbox;
 CheckBox forceStateCheckbox;
 Textlabel stateLabel;
 Textlabel fileLabel;
-Textlabel dynamicLabel;
+Textlabel inputLabel;
 Textlabel dynamicContentLabel;
 Textlabel overviewLabel;
 Textlabel importerLabel;
@@ -84,8 +86,14 @@ Textlabel panelActivityLabel;
 
 int panelLayout = 1; // horizontal
 
-long checkTimestamp = 0;
-long checkInterval = 15000;
+long idleTimestamp = 0;
+long idleInterval = 2000;
+
+long stateTimestamp = 0;
+long stateRuntime = 15000;
+boolean stateHasFinished = false; // z.B. für animationen
+boolean movieFinished = false;
+boolean stateHasOutput = false;
 
 boolean refreshUI = false;
 float[] y = {1f};
@@ -124,6 +132,7 @@ float h4 = 168.75;
 float h3 = 225;
 float h2 = 337.5;
 
+float w24 = 50;
 float w12 = 100;
 float w6 = 200;
 float w4 = 300;

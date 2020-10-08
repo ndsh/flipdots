@@ -12,6 +12,8 @@ static final int OSC = 10;
 static final int NETWORK = 11;
 static final int SEND = 12;
 static final int GIFS = 13;
+static final int DRAWING = 14; // draw directly to the flipdots
+static final int PERLINGRID = 15; // draw directly to the flipdots
 
 int state = INTRO;
 
@@ -19,7 +21,39 @@ static final String[] stateNames = {
   "Intro", "Video", "Images",
   "Calendar", "Check", "Time",
   "Intervention", "Transition", "Words",
-  "Check", "OSC", "Network", "Send"
+  "Check", "OSC", "Network",
+  "Send", "GIFs", "Drawing",
+  "PerlinGrid"
+};
+
+// state that finish by themself, have a runtime of 0
+static final long[] stateRuntimes = {
+  0, 0, 5000,
+  0, 0, 2000,
+  5000, 0, 0,
+  0, 0, 0,
+  0, 5000, 0,
+  15000
+};
+
+// if a state "finishes" by itself, eg. a movie file such as a transition, it will switch to the next state
+static final boolean[] stateFinishes = {
+  true, true, false,
+  true, true, false,
+  false, true, true,
+  true, true, true,
+  true, false, true,
+  false
+};
+
+// if a state needs dither, it can be defined here!
+static final boolean[] stateDither = {
+  false, false, false,
+  false, false, false,
+  false, false, false,
+  false, false, false,
+  false, false, false,
+  false
 };
 
 String getStateName(int state) {
@@ -31,92 +65,139 @@ void stateMachine(int state) {
    switch(state) {
      
     case INTRO:
-      setState(WORDS);
+      setState(CHECK);
     break;
     
     case VIDEO:
+      stateHasOutput = false;
       if(!isPlaying) return;
-      if(myMovie.available()) {
-        background(black);
-        myMovie.read();
-        
-        source = myMovie.get();
-        newFrame = myMovie;
-        shrink = shrinkToFormat(newFrame);
-        
-        visualOutput();
-        ditherOutput();
-        feedBuffer(shrink);
-        flipdots.feed(shrink);
-        
-        push();
-          if(panelLayout == 0) image(pg, 8, 95, width-22, 71);
-          else if(panelLayout == 1) image(pg, w6*2+30, h24+22, 140, 490);
-        pop();
-        
-        flipdots.update();
-        flipdots.display();
-        if(online) flipdots.send();
-        drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
-        drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-checkTimestamp)/1000f, checkInterval/1000f, w6-60, 10f, h3+h6+h12);
-        refreshUI = true;
+      if(!moviePlaying) {
+        nextMovie(this);
+        playMovie();
       }
-      if(millis() - checkTimestamp < checkInterval) return;
-      checkTimestamp = millis();
-      setState(CHECK);
+      //if(myMovie.available()) {
+      //background(black);
+      //myMovie.read();
+      
+      source = myMovie.get();
+      newFrame = myMovie;
+      if(newFrame.height == 0) return;
+      shrink = shrinkToFormat(newFrame);
+      
+      visualOutput();
+      ditherOutput();
+      feedBuffer(shrink);
+      flipdots.feed(shrink);
+      
+      sourceFlipdots();
+      
+      flipdots.update();
+      flipdots.display();
+      
+    //  refreshUI = true;
+      stateHasOutput = true;
+      //}
+      if(online && stateHasOutput) flipdots.send();
+      drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
+      if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
+        
+      stateHasFinished = movieFinished();
+      if(stateHasFinished) nextMovie(this);
+      stateCheckTime();
+    break;
+    
+    case TRANSITION:
+      stateHasOutput = false;
+      if(!isPlaying) return;
+      if(!moviePlaying) {
+        randomTransition(this);
+        playMovie();
+      }
+      //if(myMovie.available()) {
+      //background(black);
+      //myMovie.read();
+      
+      source = myMovie.get();
+      newFrame = myMovie;
+      if(newFrame.height == 0) return;
+      shrink = shrinkToFormat(newFrame);
+      
+      visualOutput();
+      ditherOutput();
+      feedBuffer(shrink);
+      flipdots.feed(shrink);
+      
+      sourceFlipdots();
+      
+      flipdots.update();
+      flipdots.display();
+      
+    //  refreshUI = true;
+      stateHasOutput = true;
+      //}
+      if(online && stateHasOutput) flipdots.send();
+      drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
+      if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
+        
+      stateHasFinished = movieFinished();
+      if(stateHasFinished) randomTransition(this);
+      stateCheckTime();
     break;
     
     case WORDS:
       
       if(!isPlaying) return;
-      if(myMovie.available()) {
-        background(black);
-        myMovie.read();
-        
-        String displayText = "L\nT\nC\n";
-        source = myMovie.get();
-        newFrame = myMovie;
-        shrink = shrinkToFormat(newFrame);
-        
-        // content
-        textOverlay.beginDraw();
-        textOverlay.image(shrink, 0, 0);
-        textOverlay.fill(black);
-        textOverlay.text(displayText, textOverlay.width/2-1, textOverlay.height/2);
-        
-        textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2-1);
-        
-        textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2+1);
-        textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2+2);
-        textOverlay.text(displayText, textOverlay.width/2+1, textOverlay.height/2);
-        textOverlay.text(displayText, textOverlay.width/2+2, textOverlay.height/2);
-        textOverlay.fill(white);
-        textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2);
-        textOverlay.endDraw();
-        shrink = textOverlay.copy();
-        // content end
-        
-        visualOutput();
-        ditherOutput();
-        feedBuffer(shrink);
-        flipdots.feed(shrink);
-        
-        push();
-          if(panelLayout == 0) image(pg, 8, 95, width-22, 71);
-          else if(panelLayout == 1) image(pg, w6*2+30, h24+22, 140, 490);
-        pop();
-        
-        flipdots.update();
-        flipdots.display();
-        if(online) flipdots.send();
-        
-        drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
-        drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-checkTimestamp)/1000f, checkInterval/1000f, w6-60, 10f, h3+h6+h12);
-        refreshUI = true;
+      if(!moviePlaying) {
+        nextMovie(this);
+        playMovie();
       }
-      if(millis() - checkTimestamp < checkInterval) return;
-      checkTimestamp = millis();
-      setState(CHECK);
+      //if(myMovie.available()) {
+      //background(black);
+      //myMovie.read();
+      
+      // content
+      String displayText = "L\nT\nC\n";
+      source = myMovie.get();
+      newFrame = myMovie;
+      if(newFrame.height == 0) return;
+      shrink = shrinkToFormat(newFrame);
+      
+      
+      textOverlay.beginDraw();
+      textOverlay.image(shrink, 0, 0);
+      textOverlay.fill(black);
+      textOverlay.text(displayText, textOverlay.width/2-1, textOverlay.height/2);
+      
+      textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2-1);
+      
+      textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2+1);
+      textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2+2);
+      textOverlay.text(displayText, textOverlay.width/2+1, textOverlay.height/2);
+      textOverlay.text(displayText, textOverlay.width/2+2, textOverlay.height/2);
+      textOverlay.fill(white);
+      textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2);
+      textOverlay.endDraw();
+      shrink = textOverlay.copy();
+      // content end
+      
+      visualOutput();
+      ditherOutput();
+      feedBuffer(shrink);
+      flipdots.feed(shrink);
+      
+      sourceFlipdots();
+      
+      flipdots.update();
+      flipdots.display();
+      if(online) flipdots.send();
+      
+      drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
+      if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
+    //  refreshUI = true;
+    //  }
+      stateHasFinished = movieFinished();
+      if(stateHasFinished) nextMovie(this);
+      stateCheckTime();
     break;
     
     case IMAGES:
@@ -133,13 +214,56 @@ void stateMachine(int state) {
     break;
     
     case CHECK:
-      float r = random(2);
+      drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-idleTimestamp)/1000f, idleInterval/1000f, w6-60, 10f, h3+h6+h12);
+      if(millis() - idleTimestamp < idleInterval) return;
+      idleTimestamp = millis();
+      //setState(TRANSITION);
+      
+      // markov chain hier?
+      
+      int r = (int)random(2);
       if(r == 0) setState(VIDEO);
-      else setState(WORDS);
+      else if(r == 1) setState(WORDS);
+      else if(r == 2) setState(TRANSITION);
+      
     break;
     
     case SEND:
     
+    break;
+    
+    case PERLINGRID:
+      if(!isPlaying) return;
+      
+      grid.update(); 
+      grid.display();
+      PImage t = grid.getDisplay();
+      source = t.copy();
+      newFrame = source;
+      
+      if(newFrame.height == 0) return;
+      shrink = shrinkToFormat(newFrame);
+      
+      visualOutput();
+      ditherOutput();
+      feedBuffer(shrink);
+      flipdots.feed(shrink);
+      
+      sourceFlipdots();
+      
+      flipdots.update();
+      flipdots.display();
+      
+    //  refreshUI = true;
+      stateHasOutput = true;
+      //}
+      if(online && stateHasOutput) flipdots.send();
+      drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
+      if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
+        
+      stateHasFinished = movieFinished();
+      if(stateHasFinished) nextMovie(this);
+      stateCheckTime();
     break;
    }
 }
@@ -148,4 +272,31 @@ void setState(int s) {
   state = s;
   //stateLabel.setText("State: " + getStateName(s));
   listStates();
+  setStateRuntime();
+  stateHasFinished = false;
+}
+
+void stateCheckTime() {
+  boolean b = stateFinishes[state];
+  if(!b) {
+    if(millis() - stateTimestamp > stateRuntime) {
+      stateTimestamp = millis();
+      setState(CHECK);
+      return;
+    }
+  } else {
+    if(stateHasFinished) {
+      idleTimestamp = millis();
+      setState(CHECK);
+    } else setState(state);
+  }
+  
+}
+
+void setStateRuntime() {
+  stateRuntime = stateRuntimes[state];
+}
+
+boolean stateTerminates() {
+  return stateFinishes[state];
 }

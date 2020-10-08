@@ -8,6 +8,7 @@
 // alle cp5 buttons durchstylen
 // histogram
 // buttons müssen richtig "gebangt" werden
+// input window für states (z.B. malfläche oder buttons etc)
 
 void setup() {
   size(1200, 675);
@@ -23,6 +24,7 @@ void setup() {
 }
 
 void draw() {
+  background(black);
   stateMachine(state);
   drawUserInterface();
   updateLabels();

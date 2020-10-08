@@ -4,6 +4,7 @@ class FlipdotDisplay {
   Panel[] panels;
   PVector pos;
   int layout;
+  PGraphics pg;
   
   public FlipdotDisplay(int _amountPanels, int _panelLayout, int x, int y) {
     pos = new PVector(x, y);
