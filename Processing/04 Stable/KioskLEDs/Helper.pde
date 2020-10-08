@@ -46,11 +46,11 @@ byte[] grabFrame(boolean panelPart) {
   }
   return data;
 }
-/*
+
 void movieEvent(Movie m) {
   m.read();
 }
-*/
+
 
 PImage shrinkToFormat(PImage p) {
   //float[] aspectRatio = calculateAspectRatioFit(pg.width, pg.height, 196, 34);

@@ -31,8 +31,8 @@ void stateMachine_LED(int state) {
     
     case VIDEO:
       if(!isPlaying) return;
-      if(ledMovie.available()) {
-        ledMovie.read();
+      //if(ledMovie.available()) {
+        //ledMovie.read();
         push();
         fill(gray);
         noStroke();
@@ -64,7 +64,7 @@ void stateMachine_LED(int state) {
         rect(0, 0, map(ledMovie.time(), 0, ledMovie.duration(), 0, width-22), 6);
         pop();
         
-      }
+     // }
     break;
     
     case IMAGES:      
