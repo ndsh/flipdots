@@ -4,6 +4,10 @@
   animation curves! via ani.js from b-g
   animation duration
   pick a font and set the size 
+  
+    
+  pseudo 3d with "thickness"
+  pseudo split-flap style
 */
 
 class Textanimation {
@@ -37,7 +41,10 @@ class Textanimation {
   }
   
   class TextElement {
-    public TextElement() {
+    String s = "";
+    
+    public TextElement(String _s) {
+      s = _s;
     }
     
     void update() {
