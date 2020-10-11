@@ -16,10 +16,10 @@ void keyPressed() {
     float r[] = {dither?1f:0f};
     ditherCheckbox.setArrayValue(r);
   } else if (key == 's') {
-    stretchMode = !stretchMode;
-    println("stretchMode= " + stretchMode);
-    float r[] = {stretchMode?1f:0f};
-    stretchModeCheckbox.setArrayValue(r);
+    scaleMode = !scaleMode;
+    println("scaleMode= " + scaleMode);
+    float r[] = {scaleMode?1f:0f};
+    scaleModeCheckbox.setArrayValue(r);
   } else if (key == 'f') {
     forceState = !forceState;
     println("forceState= " + forceState);
@@ -45,7 +45,10 @@ PImage shrinkToFormat(PImage p) {
   if(panelLayout == 0) calcHeight = (pg.width*p.height)/p.width;
   else if(panelLayout == 1) calcWidth = (pg.height*p.width)/p.height;
   if(panelLayout == 0) pg_t.image(p, 0, map(mouseY, 0, height, 0, -calcHeight), pg.width, 147);
-  else if(panelLayout == 1)  pg_t.image(p, map(mouseX, 0, width, 0, -calcWidth), 0, calcWidth, pg.height);
+  else if(panelLayout == 1) {
+    if(scaleMode) pg_t.image(p, map(mouseX, 0, width, 0, -calcWidth), 0, calcWidth, pg.height);
+    else pg_t.image(p, 0, 0);
+  }
   pg_t.endDraw();
   return pg_t;
 } 
@@ -333,8 +336,8 @@ void ditherOutput() {
 void sourceFlipdots() {
   push();
     if(panelLayout == 0) image(pg, 8, 95, width-22, 71);
-    //else if(panelLayout == 1) image(pg, w6*2+30, h24+22, 140, 490);
-    else if(panelLayout == 1) image(pg, w6*2, h24, w6, h2+h4+h24);
+    else if(panelLayout == 1) image(pg, w6*2+30, h24+22, 140, 490);
+    //else if(panelLayout == 1) image(pg, w6*2+23.6605, h24, 152.679, h2+h4+h24);
   pop();
 }
 
@@ -358,7 +361,7 @@ void feedVideo(PApplet pa, String s) {
   
   //myMovie.loop();
   moviePlaying = false;
-  myMovie.volume(movieVolume);
+  //myMovie.volume(movieVolume);
   //myMovie.jump(160.0);}
   System.gc();
   if(fileLabel != null) fileLabel.setText("File: " + getBasename(s));
@@ -367,6 +370,7 @@ void feedVideo(PApplet pa, String s) {
 void playMovie() {
   if(myMovie != null) {
     myMovie.play();
+    myMovie.volume(movieVolume);
     moviePlaying = true;
   }
 }
@@ -397,12 +401,14 @@ void nextMovie(PApplet pa) {
   currentMovie++;
   currentMovie %= movieFiles.size();
   feedVideo(pa, movieFiles.get(currentMovie));
+  playMovie();
 }
 
 void prevMovie(PApplet pa) {
   currentMovie--;
   if(currentMovie < 0) currentMovie = movieFiles.size()-1;
   feedVideo(pa, movieFiles.get(currentMovie));
+  playMovie();
 }
 
 void randomTransition(PApplet pa) {
@@ -549,10 +555,10 @@ void initCP5() {
   .setSize(32, 8)
   .addItem("Dither", 1)
   ;
-  stretchModeCheckbox = cp5.addCheckBox("stretchModeCheckbox")
+  scaleModeCheckbox = cp5.addCheckBox("scaleModeCheckbox")
   .setPosition(w6+10, h24+h6+h12+h6+10)
   .setSize(32, 8)
-  .addItem("Stretch", 1)
+  .addItem("Scale", 1)
   ;
   
   cp5.addSlider("movieVolume")
@@ -569,6 +575,7 @@ void initCP5() {
   ditherCheckbox.setArrayValue((dither?y:n));
   isPlayingCheckbox.setArrayValue((isPlaying?y:n));
   forceStateCheckbox.setArrayValue((forceState?y:n));
+  scaleModeCheckbox.setArrayValue((scaleMode?y:n));
   
   
 }
@@ -592,9 +599,9 @@ void ditherCheckbox(float[] a) {
   else dither = false;
   println("dither: " + dither);
 }
-void stretchModeCheckbox(float[] a) {
+void scaleModeCheckbox(float[] a) {
   if(state == INTRO) return;
-  if (a[0] == 1f) stretchMode = true;
-  else stretchMode = false;
-  println("stretchMode: " + stretchMode);
+  if (a[0] == 1f) scaleMode = true;
+  else scaleMode = false;
+  println("scaleMode: " + scaleMode);
 }

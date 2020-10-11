@@ -47,7 +47,7 @@ color black;
 color white;
 color gray = color(9);
 float movieVolume = 0;
-boolean stretchMode = true; // true = fit to width, false = no fitting. source must be 1:1 (that is 196x14 pixels)
+boolean scaleMode = true; // true = fit to width, false = no fitting. source must be 1:1 (that is 196x14 pixels)
 
 StringList movieFiles = new StringList();
 StringList transitionFiles = new StringList();
@@ -60,7 +60,7 @@ PApplet pa;
 CheckBox onlineCheckbox;
 CheckBox isPlayingCheckbox;
 CheckBox ditherCheckbox;
-CheckBox stretchModeCheckbox;
+CheckBox scaleModeCheckbox;
 CheckBox forceStateCheckbox;
 Textlabel stateLabel;
 Textlabel fileLabel;

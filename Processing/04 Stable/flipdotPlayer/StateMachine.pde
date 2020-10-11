@@ -13,7 +13,7 @@ static final int NETWORK = 11;
 static final int SEND = 12;
 static final int GIFS = 13;
 static final int DRAWING = 14; // draw directly to the flipdots
-static final int PERLINGRID = 15; // draw directly to the flipdots
+static final int PERLINGRID = 15;
 
 int state = INTRO;
 
@@ -65,7 +65,7 @@ void stateMachine(int state) {
    switch(state) {
      
     case INTRO:
-      setState(CHECK);
+      setState(PERLINGRID);
     break;
     
     case VIDEO:
@@ -220,7 +220,6 @@ void stateMachine(int state) {
       //setState(TRANSITION);
       
       // markov chain hier?
-      
       int r = (int)random(2);
       if(r == 0) setState(VIDEO);
       else if(r == 1) setState(WORDS);

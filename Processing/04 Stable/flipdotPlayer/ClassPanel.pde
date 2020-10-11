@@ -13,6 +13,7 @@ class Panel {
   boolean changeDown = false;
   int upBits = 0;
   int downBits = 0;
+  boolean showIndicators = false;
   
   public Panel(int id, int _x, int _y) {
     panelID = id;
@@ -45,31 +46,33 @@ class Panel {
     push();
     translate(pos.x, pos.y);
     
-    push();
-    noStroke();
-    
-    if(!changeUp) fill(white);
-    else fill(black);
-    if(panelLayout == 0) {
-      rect(-(flipdotSize/2), 70, 28*(flipdotSize+1)-2, 1*(flipdotSize+1));
-    } else if(panelLayout == 1) {
-      //rect(140, -2, 27, 7*(flipdotSize+1)-2);
-      ellipse(150, 13, 5, 5);
+    if(showIndicators) {
+      push();
+      noStroke();
+      
+      if(!changeUp) fill(white);
+      else fill(black);
+      if(panelLayout == 0) {
+        rect(-(flipdotSize/2), 70, 28*(flipdotSize+1)-2, 1*(flipdotSize+1));
+      } else if(panelLayout == 1) {
+        //rect(140, -2, 27, 7*(flipdotSize+1)-2);
+        ellipse(150, 13, 5, 5);
+      }
+      pop();
+      
+      push();
+      noStroke();
+      if(!changeDown) fill(white);
+      else fill(black);
+      if(panelLayout == 0) {
+        rect(-(flipdotSize/2), 72+(1*(flipdotSize+1)), 28*(flipdotSize+1)-2, 1*(flipdotSize+1));
+      } else if(panelLayout == 1) {
+        //rect(140, 7*(flipdotSize+1)-2, 27, 7*(flipdotSize+1)-2);
+        ellipse(150, 7*(flipdotSize+1.0f)+5, 5, 5);
+      } 
+      
+      pop();
     }
-    pop();
-    
-    push();
-    noStroke();
-    if(!changeDown) fill(white);
-    else fill(black);
-    if(panelLayout == 0) {
-      rect(-(flipdotSize/2), 72+(1*(flipdotSize+1)), 28*(flipdotSize+1)-2, 1*(flipdotSize+1));
-    } else if(panelLayout == 1) {
-      //rect(140, 7*(flipdotSize+1)-2, 27, 7*(flipdotSize+1)-2);
-      ellipse(150, 7*(flipdotSize+1.0f)+5, 5, 5);
-    } 
-    
-    pop();
     
     for(int x = 0; x<28; x++) {
       for(int y = 0; y<14; y++) {
