@@ -65,7 +65,7 @@ void stateMachine(int state) {
    switch(state) {
      
     case INTRO:
-      setState(PERLINGRID);
+      setState(CHECK);
     break;
     
     case VIDEO:

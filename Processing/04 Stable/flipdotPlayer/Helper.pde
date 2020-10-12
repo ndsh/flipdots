@@ -351,13 +351,17 @@ void feedVideo(PApplet pa, String s) {
   movieFinished = false;
   if(myMovie != null) myMovie.stop();
   //myMovie = new Movie(pa, s);
-  //myMovie = new Movie(pa, s);
-  myMovie = new Movie(pa, s) {
+  myMovie = new Movie(pa, s);
+  movieTimestamp = millis();
+  myMovie.stop();
+  // this doesn't work under linux with the movie beta library :(
+  /*myMovie = new Movie(pa, s) {
     @ Override public void eosEvent() {
       super.eosEvent();
       myEoS();
     }
   };
+  */
   
   //myMovie.loop();
   moviePlaying = false;
@@ -375,7 +379,16 @@ void playMovie() {
   }
 }
 boolean movieFinished() {
-  return movieFinished;
+  boolean result = false;
+  if(myMovie.time() >= myMovie.duration()) {
+    println("11");
+    result = true;
+  } else if(millis() - movieTimestamp > (long)myMovie.duration()*1000) {
+    println("22");
+    result = true;
+  }
+  return result;
+  //return movieFinished;
 }
 
 void myEoS() {

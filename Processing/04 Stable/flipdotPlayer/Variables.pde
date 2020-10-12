@@ -94,6 +94,7 @@ long stateRuntime = 15000;
 boolean stateHasFinished = false; // z.B. für animationen
 boolean movieFinished = false;
 boolean stateHasOutput = false;
+long movieTimestamp = 0;
 
 boolean refreshUI = false;
 float[] y = {1f};
