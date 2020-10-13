@@ -87,7 +87,7 @@ Textlabel panelActivityLabel;
 int panelLayout = 1; // horizontal
 
 long idleTimestamp = 0;
-long idleInterval = 2000;
+long idleInterval = 420000;
 
 long stateTimestamp = 0;
 long stateRuntime = 15000;
