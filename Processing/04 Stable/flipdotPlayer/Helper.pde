@@ -353,7 +353,7 @@ void feedVideo(PApplet pa, String s) {
   //myMovie = new Movie(pa, s);
   myMovie = new Movie(pa, s);
   movieTimestamp = millis();
-  myMovie.stop();
+  //myMovie.stop();
   // this doesn't work under linux with the movie beta library :(
   /*myMovie = new Movie(pa, s) {
     @ Override public void eosEvent() {
