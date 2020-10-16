@@ -36,8 +36,8 @@ void stateMachine(int state) {
       idleTimestamp = millis();
       
       // markov chain hier?
-      //int r = (int)random(2);
-      int r = 3;
+      int r = (int)random(2);
+      //int r = 0;
       if(r == 0) setState(VIDEO);
       else if(r == 1) setState(WORDS);
       else if(r == 2) setState(TRANSITION);
