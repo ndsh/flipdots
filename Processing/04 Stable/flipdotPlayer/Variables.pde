@@ -18,6 +18,9 @@ int bytesSent = 0; // zahl am ende durch 7 teilen, weil nicht bits
 int bytesTotal = 0;
 color pixel = color(0);
 
+JSONArray stateSettings;
+JSONObject currentState; 
+
 PImage newFrame;
 PImage staticImage;
 PImage shrink;
@@ -31,6 +34,7 @@ boolean online = true;
 boolean dither = false;
 boolean isPlaying = true;
 boolean forceState = false;
+boolean scaleMode = false; // true = fit to width, false = no fitting. source must be 1:1 (that is 196x14 pixels)
 
 
 FlipdotDisplay flipdots;
@@ -47,7 +51,7 @@ color black;
 color white;
 color gray = color(9);
 float movieVolume = 0;
-boolean scaleMode = true; // true = fit to width, false = no fitting. source must be 1:1 (that is 196x14 pixels)
+
 
 StringList movieFiles = new StringList();
 StringList transitionFiles = new StringList();
@@ -87,13 +91,12 @@ Textlabel panelActivityLabel;
 int panelLayout = 1; // horizontal
 
 long idleTimestamp = 0;
-long idleInterval = 420000;
+long idleInterval = 4000;
 
 long stateTimestamp = 0;
 long stateRuntime = 15000;
 boolean stateHasFinished = false; // z.B. für animationen
 boolean movieFinished = false;
-boolean stateHasOutput = false;
 long movieTimestamp = 0;
 
 boolean refreshUI = false;

@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Intro",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Check",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Video",
+    "runtime": 0,
+    "finishes": true,
+    "dither": true,
+    "scale": true
+  },
+  {
+    "name": "Images",
+    "runtime": 5000,
+    "finishes": false,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Calendar",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Time",
+    "runtime": 2000,
+    "finishes": false,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Intervention",
+    "runtime": 5000,
+    "finishes": false,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Transition",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Words",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Idle",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "OSC",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Network",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Send",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "GIFs",
+    "runtime": 5000,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Drawing",
+    "runtime": 0,
+    "finishes": true,
+    "dither": false,
+    "scale": false
+  },
+  {
+    "name": "Perlingrid",
+    "runtime": 15000,
+    "finishes": false,
+    "dither": false,
+    "scale": false
+  },
+]

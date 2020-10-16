@@ -2,38 +2,59 @@ void keyPressed() {
   if (key == CODED) {
     if (keyCode == LEFT) {
       prevMovie(this);
+      playMovie();
     } else if (keyCode == RIGHT) {
       nextMovie(this);
+      playMovie();
     } 
   } else if (key == 'o') {
-    online = !online;
-    println("online= " + online);
-    float r[] = {online?1f:0f};
-    onlineCheckbox.setArrayValue(r);
+    onlineBang(!online);
   } else if (key == 'd') {
-    dither = !dither;
-    println("dither= " + dither);
-    float r[] = {dither?1f:0f};
-    ditherCheckbox.setArrayValue(r);
+    ditherBang(!dither);
   } else if (key == 's') {
-    scaleMode = !scaleMode;
-    println("scaleMode= " + scaleMode);
-    float r[] = {scaleMode?1f:0f};
-    scaleModeCheckbox.setArrayValue(r);
+    scaleBang(!scaleMode);
   } else if (key == 'f') {
-    forceState = !forceState;
-    println("forceState= " + forceState);
-    float r[] = {forceState?1f:0f};
-    forceStateCheckbox.setArrayValue(r);
+    forceBang(!forceState);
   } else if(key == ' ') {
-    isPlaying = !isPlaying;
-    println("isPlaying= "+ isPlaying);
-    if(isPlaying) myMovie.play();
-    else myMovie.pause();
-    float r[] = {isPlaying?1f:0f};
-    isPlayingCheckbox.setArrayValue(r);
-    
+    playBang(!isPlaying);
   }
+}
+
+void onlineBang(boolean b) {
+  online = b;
+  println("online= " + b);
+  float r[] = {b?1f:0f};
+  onlineCheckbox.setArrayValue(r);
+}
+
+void scaleBang(boolean b) {
+  scaleMode = b;
+  println("scaleMode= " + b);
+  float r[] = {b?1f:0f};
+  scaleModeCheckbox.setArrayValue(r);
+}
+
+void ditherBang(boolean b) {
+  dither = b;
+  println("dither= " + b);
+  float r[] = {b?1f:0f};
+  ditherCheckbox.setArrayValue(r);
+}
+
+void forceBang(boolean b) {
+  forceState = b;
+  println("forceState= " + b);
+  float r[] = {b?1f:0f};
+  forceStateCheckbox.setArrayValue(r);
+}
+
+void playBang(boolean b) {
+  isPlaying = b;
+  println("isPlaying= "+ b);
+  if(isPlaying) myMovie.play();
+  else myMovie.pause();
+  float r[] = {b?1f:0f};
+  isPlayingCheckbox.setArrayValue(r);
 }
 
 PImage shrinkToFormat(PImage p) {
@@ -47,7 +68,8 @@ PImage shrinkToFormat(PImage p) {
   if(panelLayout == 0) pg_t.image(p, 0, map(mouseY, 0, height, 0, -calcHeight), pg.width, 147);
   else if(panelLayout == 1) {
     if(scaleMode) pg_t.image(p, map(mouseX, 0, width, 0, -calcWidth), 0, calcWidth, pg.height);
-    else pg_t.image(p, 0, 0);
+    else pg_t.image(p, 0, 0, 28, 98);
+    
   }
   pg_t.endDraw();
   return pg_t;
@@ -147,6 +169,8 @@ void runInits(PApplet pa) {
 
 void initObjects(PApplet pa) {
   cp5 = new ControlP5(pa);
+  stateSettings = loadJSONArray("stateSettings.json");
+  currentState = stateSettings.getJSONObject(state);
   //frameRate(15);
   if(panelLayout == 0) pg = createGraphics(196, 14); // 2744 pixel
   else if(panelLayout  == 1) pg = createGraphics(28, 98); // 2744 pixels
@@ -261,7 +285,7 @@ void drawUserInterface() {
     rect(w6*4, 0, w3, h24); // console
     rect(w6*4, h24, w3, h3+h8); // console content
     rect(w6*4, h24+h3+h8, w3, h24); // network
-    rect(w6*4, h24+h3+h8, w3, h4+h12); // network
+    rect(w6*4, h24+h3+h8, w3, h4+h12); // network content
     
     // #### row 1
     rect(w6*1, h3+h3+h6, w3*2+w6, h24); // panel activity
@@ -293,10 +317,17 @@ void drawProgessbar(Textlabel percentLabel, Textlabel leftLabel, float current, 
 }
 
 void listStates() {
+  // currentState.getInt("runtime");
   String out = "";
-  for(int i = 0; i<stateNames.length; i++) {
+  /*for(int i = 0; i<stateNames.length; i++) {
     if(i == state) out += "[x] " + stateNames[i].toUpperCase() + "\n";
     else out += "[   ] " + stateNames[i].toUpperCase() + "\n";
+  }*/
+  for(int i = 0; i<stateSettings.size(); i++) {
+    //currentState.getInt("name");
+    JSONObject current = stateSettings.getJSONObject(i);
+    if(i == state) out += "[x] " + current.getString("name").toUpperCase() + "\n";
+    else out += "[   ] " + current.getString("name").toUpperCase() + "\n";
   }
   stateLabel.setText(out);
 }
@@ -350,9 +381,8 @@ void feedVideo(PApplet pa, String s) {
   println("Flipdots movie= " + getBasename(s));
   movieFinished = false;
   if(myMovie != null) myMovie.stop();
-  //myMovie = new Movie(pa, s);
   myMovie = new Movie(pa, s);
-  movieTimestamp = millis();
+  
   //myMovie.stop();
   // this doesn't work under linux with the movie beta library :(
   /*myMovie = new Movie(pa, s) {
@@ -376,19 +406,20 @@ void playMovie() {
     myMovie.play();
     myMovie.volume(movieVolume);
     moviePlaying = true;
+    movieTimestamp = millis();
   }
 }
 boolean movieFinished() {
   boolean result = false;
+  //println(myMovie.time() +" " + myMovie.duration());
   if(myMovie.time() >= myMovie.duration()) {
-    println("11");
+    //println("11");
     result = true;
-  } else if(millis() - movieTimestamp > (long)myMovie.duration()*1000) {
-    println("22");
+  } else if(millis() - movieTimestamp > ((long)myMovie.duration())*1000) {
+    //println("22");
     result = true;
   }
   return result;
-  //return movieFinished;
 }
 
 void myEoS() {
@@ -414,14 +445,12 @@ void nextMovie(PApplet pa) {
   currentMovie++;
   currentMovie %= movieFiles.size();
   feedVideo(pa, movieFiles.get(currentMovie));
-  playMovie();
 }
 
 void prevMovie(PApplet pa) {
   currentMovie--;
   if(currentMovie < 0) currentMovie = movieFiles.size()-1;
   feedVideo(pa, movieFiles.get(currentMovie));
-  playMovie();
 }
 
 void randomTransition(PApplet pa) {
@@ -579,6 +608,8 @@ void initCP5() {
   .setRange(0f,1f)
   .setLabel("Volume")
   ;
+  
+  
   
   cp5.setColorForeground(gray);
   cp5.setColorBackground(black);
