@@ -17,11 +17,6 @@ static final int PERLINGRID = 15;
 
 int state = INTRO;
 
-/*String getStateName(int state) {
-  return currentState.getString("name");
-  //return stateNames[state];
-}*/
-
 void stateMachine(int state) {
   
    switch(state) {
@@ -34,10 +29,11 @@ void stateMachine(int state) {
       drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-idleTimestamp)/1000f, idleInterval/1000f, w6-60, 10f, h3+h6+h12);
       if(millis() - idleTimestamp < idleInterval) return;
       idleTimestamp = millis();
+      //stateTimestamp = millis();
       
       // markov chain hier?
       int r = (int)random(2);
-      //int r = 0;
+      //r = 3;
       if(r == 0) setState(VIDEO);
       else if(r == 1) setState(WORDS);
       else if(r == 2) setState(TRANSITION);
@@ -47,63 +43,50 @@ void stateMachine(int state) {
     case VIDEO:
       if(!isPlaying) return;
       if(!moviePlaying) playMovie();       
-      //if(myMovie.available()) {
-      //background(black);
-      //myMovie.read();
       
       source = myMovie.get();
       newFrame = myMovie;
       if(newFrame.height == 0) return;
-      shrink = shrinkToFormat(newFrame);
+      comped = shrinkToFormat(newFrame);
       
       visualOutput();
       ditherOutput();
-      feedBuffer(shrink);
-      flipdots.feed(shrink);
+      feedBuffer(comped);
+      flipdots.feed(comped);
       
       sourceFlipdots();
       
       flipdots.update();
       flipdots.display();
       
-    //  refreshUI = true;
-      //}
       if(online) flipdots.send();
       drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
       if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
         
       stateHasFinished = movieFinished();
-      if(stateHasFinished) nextMovie(this);
+      if(stateHasFinished) randomMovie(this);
       stateCheckTime();
     break;
     
     case TRANSITION:
       if(!isPlaying) return;
-      if(!moviePlaying) {
-        randomTransition(this);
-        playMovie();
-      }
-      //if(myMovie.available()) {
-      //background(black);
-      //myMovie.read();
+      if(!moviePlaying) playMovie();
       
       source = myMovie.get();
       newFrame = myMovie;
       if(newFrame.height == 0) return;
-      shrink = shrinkToFormat(newFrame);
+      comped = shrinkToFormat(newFrame);
       
       visualOutput();
       ditherOutput();
-      feedBuffer(shrink);
-      flipdots.feed(shrink);
+      feedBuffer(comped);
+      flipdots.feed(comped);
       
       sourceFlipdots();
       
       flipdots.update();
       flipdots.display();
       
-    //  refreshUI = true;
-      //}
       if(online) flipdots.send();
       drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
       if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
@@ -116,43 +99,33 @@ void stateMachine(int state) {
     case WORDS:
       
       if(!isPlaying) return;
-      if(!moviePlaying) {
-        nextMovie(this);
-        playMovie();
+      
+      if(!isStateReady) {
+        randomTransition(this);
+        randomFlipdotWord();
+        isStateReady = true;
       }
-      //if(myMovie.available()) {
-      //background(black);
-      //myMovie.read();
+      if(!moviePlaying) playMovie();
+      
       
       // content
-      String displayText = "L\nT\nC\n";
       source = myMovie.get();
       newFrame = myMovie;
       if(newFrame.height == 0) return;
-      shrink = shrinkToFormat(newFrame);
+      comped = shrinkToFormat(newFrame);
       
-      
-      textOverlay.beginDraw();
-      textOverlay.image(shrink, 0, 0);
-      textOverlay.fill(black);
-      textOverlay.text(displayText, textOverlay.width/2-1, textOverlay.height/2);
-      
-      textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2-1);
-      
-      textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2+1);
-      textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2+2);
-      textOverlay.text(displayText, textOverlay.width/2+1, textOverlay.height/2);
-      textOverlay.text(displayText, textOverlay.width/2+2, textOverlay.height/2);
-      textOverlay.fill(white);
-      textOverlay.text(displayText, textOverlay.width/2, textOverlay.height/2);
-      textOverlay.endDraw();
-      shrink = textOverlay.copy();
+      temp.beginDraw();
+      temp.clear();
+      temp.image(comped, 0, 0);
+      temp.image(textOverlay, 0, 0);
+      temp.endDraw();
+      comped = temp;
       // content end
       
       visualOutput();
       ditherOutput();
-      feedBuffer(shrink);
-      flipdots.feed(shrink);
+      feedBuffer(comped);
+      flipdots.feed(comped);
       
       sourceFlipdots();
       
@@ -162,10 +135,9 @@ void stateMachine(int state) {
       
       drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
       if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
-    //  refreshUI = true;
-    //  }
+
       stateHasFinished = movieFinished();
-      if(stateHasFinished) nextMovie(this);
+      if(stateHasFinished) randomTransition(this);
       stateCheckTime();
     break;
     
@@ -196,12 +168,12 @@ void stateMachine(int state) {
       newFrame = source;
       
       if(newFrame.height == 0) return;
-      shrink = shrinkToFormat(newFrame);
+      comped = shrinkToFormat(newFrame);
       
       visualOutput();
       ditherOutput();
-      feedBuffer(shrink);
-      flipdots.feed(shrink);
+      feedBuffer(comped);
+      flipdots.feed(comped);
       
       sourceFlipdots();
       
@@ -211,10 +183,10 @@ void stateMachine(int state) {
     //  refreshUI = true;
       //}
       if(online) flipdots.send();
-      drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
+      //drawProgessbar(movieTimePercentageLabel, movieTimeRestLabel, myMovie.time(), myMovie.duration(), w6-60, 10f, h3*2);
       if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
         
-      stateHasFinished = movieFinished();
+      stateHasFinished = false;
       
       stateCheckTime();
     break;
@@ -222,24 +194,19 @@ void stateMachine(int state) {
 }
 
 void setState(int s) {
-  //println("setState");
   state = s;
   currentState = stateSettings.getJSONObject(state);
-  //stateLabel.setText("State: " + getStateName(s));
   listStates();
   setStateRuntime();
   setScale();
   setDither();
   stateHasFinished = false;
-  
+  isStateReady = false;
+  stateTimestamp = millis();
 }
 
 void stateCheckTime() {
-  //boolean b = stateFinishes[state];
-  //println("stateCheckTime");
   boolean b = currentState.getBoolean("finishes");
-  //println("state= " + state);
-  //println(b);
   if(!b) {
     if(millis() - stateTimestamp < stateRuntime) {
       stateTimestamp = millis();
@@ -247,32 +214,30 @@ void stateCheckTime() {
       return;
     }
   } else {
-    //println("else");
     if(stateHasFinished) {
       idleTimestamp = millis();
       setState(CHECK);
-    } //else setState(state);
+    }
   }
-  
 }
 
 void setStateRuntime() {
-  //stateRuntime = stateRuntimes[state];
   stateRuntime = currentState.getInt("runtime");
 }
 
 void setScale() {
-  //stateRuntime = stateRuntimes[state];
   scaleBang(currentState.getBoolean("scale"));
-  
 }
 
 void setDither() {
-  //stateRuntime = stateRuntimes[state];
   ditherBang(currentState.getBoolean("dither"));
 }
 
 boolean stateTerminates() {
-  //return stateFinishes[state];
   return currentState.getBoolean("finishes");
 }
+
+/*String getStateName(int state) {
+  return currentState.getString("name");
+  //return stateNames[state];
+}*/

@@ -15,6 +15,9 @@ void keyPressed() {
     scaleBang(!scaleMode);
   } else if (key == 'f') {
     forceBang(!forceState);
+  } else if (key == 'c') {
+    setState(CHECK);
+    return;
   } else if(key == ' ') {
     playBang(!isPlaying);
   }
@@ -181,7 +184,7 @@ void initObjects(PApplet pa) {
   
   importer = new Importer("footage");
   for(int i = 0; i<importer.folders.size(); i++) {
-    if(importer.folders.get(i).equals("sequences")) {
+    if(importer.folders.get(i).equals("sequences3")) {
       importer.loadFiles(importer.folders.get(i));
       for (int j = 0; j <importer.getFiles().size(); j++) {   
         movieFiles.append(importer.getFiles().get(j));
@@ -191,7 +194,7 @@ void initObjects(PApplet pa) {
   
   importer = new Importer("footage");
   for(int i = 0; i<importer.folders.size(); i++) {
-    if(importer.folders.get(i).equals("transitions")) {
+    if(importer.folders.get(i).equals("transitions2")) {
       importer.loadFiles(importer.folders.get(i));
       for (int j = 0; j <importer.getFiles().size(); j++) {   
         transitionFiles.append(importer.getFiles().get(j));
@@ -200,13 +203,17 @@ void initObjects(PApplet pa) {
   }
   
   if(movieFiles.size() > 0) feedVideo(pa, movieFiles.get(currentMovie));
-  font = loadFont("04b-25-12.vlw");
-  textFont(font, 12);
+  //font = loadFont("04b-25-12.vlw");
+  pixelFontSize = 16;
+  font = createFont("fonts/DigitalDisco_16px.ttf", pixelFontSize);
+  textFont(font, pixelFontSize);
   textOverlay = createGraphics(28, 98);
   textOverlay.beginDraw();
-  textOverlay.textFont(font, 12);
+  textOverlay.textFont(font, pixelFontSize);
   textOverlay.textAlign(CENTER, CENTER);
   textOverlay.endDraw();
+  
+  temp = createGraphics(28, 98);
   
   sendDataViz = createGraphics((int)(w3*2+w6), (int)h12);
   sendDataViz.beginDraw();
@@ -214,6 +221,8 @@ void initObjects(PApplet pa) {
   sendDataViz.endDraw();
   
   grid = new PerlinGrid(28, 98);
+  
+  flipdotWords = loadStrings("flipdotWords.txt");
 }
 
 void initVariables() {
@@ -350,8 +359,8 @@ void ditherOutput() {
       image(d.floyd_steinberg(), 0, h6+h12);
     pop();
     
-    d.feed(shrink);
-    shrink = d.floyd_steinberg();
+    d.feed(comped);
+    comped = d.floyd_steinberg();
   } else {
     push();
     if(panelLayout == 0) translate(8, 200);
@@ -456,6 +465,34 @@ void prevMovie(PApplet pa) {
 void randomTransition(PApplet pa) {
   int r = (int)random(transitionFiles.size());
   feedVideo(pa, transitionFiles.get(r));
+}
+
+void randomMovie(PApplet pa) {
+  int r = (int)random(movieFiles.size());
+  feedVideo(pa, movieFiles.get(r));
+}
+
+void randomFlipdotWord() {
+  displayText = "";
+  int r = (int)random(flipdotWords.length-1);
+  displayText = flipdotWords[r];
+  int totalTextHeight = displayText.length()*pixelFontSize-(displayText.length()*4);
+  
+  textOverlay.beginDraw();
+  textOverlay.clear();
+  textOverlay.fill(black);
+  for(int x = -1; x<3; x++) {
+    for(int y = -1; y<3; y++) {
+      for(int i = 0; i<displayText.length(); i++) {
+        textOverlay.text(displayText.charAt(i), textOverlay.width/2+x, textOverlay.height/2+map(i, 0, displayText.length()-1, int(totalTextHeight/2)*-1,  int(totalTextHeight/2))+y);
+      }
+    }
+  }
+  textOverlay.fill(white);
+  for(int i = 0; i<displayText.length(); i++) {
+    textOverlay.text(displayText.charAt(i), textOverlay.width/2, textOverlay.height/2+map(i, 0, displayText.length()-1, int(totalTextHeight/2)*-1,  int(totalTextHeight/2)));
+  }
+  textOverlay.endDraw();
 }
 
 // #######################################

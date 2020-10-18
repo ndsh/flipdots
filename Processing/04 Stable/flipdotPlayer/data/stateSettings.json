@@ -17,8 +17,8 @@
     "name": "Video",
     "runtime": 0,
     "finishes": true,
-    "dither": true,
-    "scale": true
+    "dither": false,
+    "scale": false
   },
   {
     "name": "Images",
@@ -52,14 +52,14 @@
     "name": "Transition",
     "runtime": 0,
     "finishes": true,
-    "dither": false,
+    "dither": true,
     "scale": false
   },
   {
     "name": "Words",
     "runtime": 0,
     "finishes": true,
-    "dither": false,
+    "dither": true,
     "scale": false
   },
   {

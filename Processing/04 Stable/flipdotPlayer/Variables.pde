@@ -23,8 +23,9 @@ JSONObject currentState;
 
 PImage newFrame;
 PImage staticImage;
-PImage shrink;
+PImage comped;
 PImage source;
+PGraphics temp;
 PGraphics pg;
 PGraphics textOverlay;
 PGraphics sendDataViz;
@@ -91,7 +92,7 @@ Textlabel panelActivityLabel;
 int panelLayout = 1; // horizontal
 
 long idleTimestamp = 0;
-long idleInterval = 4000;
+long idleInterval = 420000;
 
 long stateTimestamp = 0;
 long stateRuntime = 15000;
@@ -102,6 +103,11 @@ long movieTimestamp = 0;
 boolean refreshUI = false;
 float[] y = {1f};
 float[] n = {0f};
+
+String[] flipdotWords;
+String displayText = "";
+boolean isStateReady = false;
+int pixelFontSize = 0;
 /*
   0
  ▀ ▀ ▀ ▀ ▀ ▀ ▀
