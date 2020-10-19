@@ -100,7 +100,7 @@ Next we want to talk to the our panels. On the backside we can find a green term
 We grab our Arduino and a MAX RS485 and set it up as a controller, thus making our Flipdot panel a peripheral!
 This minimal setup is certainly enough, since the Flipdot panel doesn't talk back to the controller:
 
-![](assets/circuit.png)
+![](assets/circuit.jpg)
 
 In order to send a data frame (that is a complete package with address information, content etc.) we need to learn how to construct it first:
 
