@@ -38,6 +38,8 @@ The boards/panels are called "AlfaZeta XY5 Boards" and come in different variati
 
 The following table is for the most standard module, the 14x28 panel:
 
+| | |
+|-----------------------------------|------------------------------|
 | Supply voltage                    | 24V DC                       |
 | Control Interface                 | RS-485 (data source          |
 | Speed                             | 15 FPS                       |
