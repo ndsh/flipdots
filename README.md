@@ -189,4 +189,4 @@ I am using Processing and have build a rather "general" Flipdot player, that sen
 
 The Flipdot Player is currently in experimental use at the "Living the City" Exhibition in Berlin, running from *25.9.–20.12.2020 at Tempelhof Airport Platz der Luftbrücke* (Free admission!)
 Go and watch it in action there.
-![](assets/SRB_2009300891-916_send.jpg | width=300)
+![](assets/SRB_2009300891-916_send.jpg)
