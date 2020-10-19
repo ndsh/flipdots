@@ -7,7 +7,6 @@
 // force output implementieren
 // alle cp5 buttons durchstylen
 // histogram
-// buttons müssen richtig "gebangt" werden
 // input window für states (z.B. malfläche oder buttons etc)
 
 void setup() {

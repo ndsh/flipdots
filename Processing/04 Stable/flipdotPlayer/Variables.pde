@@ -110,6 +110,10 @@ String[] flipdotWords;
 String displayText = "";
 boolean isStateReady = false;
 int pixelFontSize = 0;
+float timeRotation = 0;
+boolean timeColors = false;
+int threadedState = -1;
+
 /*
   0
  ▀ ▀ ▀ ▀ ▀ ▀ ▀

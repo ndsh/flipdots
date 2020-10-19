@@ -500,6 +500,13 @@ void randomFlipdotWord() {
   textOverlay.endDraw();
 }
 
+void timeThread() {
+  // set threadedState to TIME when something interesting is happening
+  if(minute() % 15 == 0) {
+    threadedState = TIME;
+  }
+}
+
 // #######################################
 // ##########    CP5   ###################
 // #######################################

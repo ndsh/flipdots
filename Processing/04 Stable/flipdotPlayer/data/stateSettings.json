@@ -36,7 +36,7 @@
   },
   {
     "name": "Time",
-    "runtime": 2000,
+    "runtime": 60000,
     "finishes": false,
     "dither": false,
     "scale": false
