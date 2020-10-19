@@ -106,9 +106,9 @@
   },
   {
     "name": "Perlingrid",
-    "runtime": 15000,
+    "runtime": 30000,
     "finishes": false,
-    "dither": false,
+    "dither": true,
     "scale": false
   },
 ]

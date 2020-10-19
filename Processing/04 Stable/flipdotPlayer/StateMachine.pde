@@ -17,7 +17,7 @@ static final int PERLINGRID = 15;
 
 int state = INTRO;
 
-int[] availableStates = {VIDEO, WORDS, TRANSITION};
+int[] availableStates = {VIDEO, WORDS, TRANSITION, PERLINGRID};
 
 void stateMachine(int state) {
   
@@ -36,8 +36,8 @@ void stateMachine(int state) {
       
       // markov chain hier?
       int r = (int)random(availableStates.length);
-      //r = 3;
       setState(availableStates[r]);
+      //setState(PERLINGRID);
     break;
     
     case VIDEO:
@@ -105,9 +105,7 @@ void stateMachine(int state) {
     break;
     
     case WORDS:
-      
       if(!isPlaying) return;
-      
       if(!isStateReady) {
         randomTransition(this);
         randomFlipdotWord();
@@ -115,7 +113,6 @@ void stateMachine(int state) {
         randomTransition(this);
       }
       if(!moviePlaying) playMovie();
-      
       
       // content
       source = myMovie.get();
@@ -151,16 +148,20 @@ void stateMachine(int state) {
     break;
     
     case IMAGES:
+      source = staticImage.copy();
+      
+      visualOutput();
+      ditherOutput();
       feedBuffer(staticImage);
       flipdots.feed(staticImage);
-      
-      push();
-      image(pg, 5, height-160, 28*11, 14*11);
-      pop();
         
       flipdots.update();
       flipdots.display();
       if(online) flipdots.send();
+      
+      if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
+      
+      stateCheckTime();
     break;
     
     case SEND:
@@ -169,7 +170,10 @@ void stateMachine(int state) {
     
     case PERLINGRID:
       if(!isPlaying) return;
-      
+      if(!isStateReady) {
+        isStateReady = true;
+      }
+
       grid.update(); 
       grid.display();
       PImage t = grid.getDisplay();
@@ -177,7 +181,7 @@ void stateMachine(int state) {
       newFrame = source;
       
       if(newFrame.height == 0) return;
-      comped = shrinkToFormat(newFrame);
+      comped = shrinkToFormat(source);
       
       visualOutput();
       ditherOutput();
@@ -217,7 +221,7 @@ void setState(int s) {
 void stateCheckTime() {
   boolean b = currentState.getBoolean("finishes");
   if(!b) {
-    if(millis() - stateTimestamp < stateRuntime) {
+    if(millis() - stateTimestamp > stateRuntime) {
       stateTimestamp = millis();
       setState(CHECK);
       return;

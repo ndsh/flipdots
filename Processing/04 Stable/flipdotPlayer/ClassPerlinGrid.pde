@@ -4,7 +4,7 @@ class PerlinGrid {
   Noise noise;
   
   //String letters = "MN@#$o;:,. ";
-  String letters = " BHZ" ;
+  String letters = "ABCDEFGHJKILMNOPQRSTUVWXYZ " ;
 
   String fontSets[][] = {
     {"BitFUUL_10px.ttf", "10"},
@@ -35,7 +35,7 @@ class PerlinGrid {
     pg.textAlign(CENTER, CENTER);
     
     noise = new Noise(w, h);
-    pg.beginDraw();
+    //pg.beginDraw();
   }
   
   void update() {
@@ -70,7 +70,7 @@ class PerlinGrid {
     // from the processing examples: PerlinNoise3D
     PGraphics pg;
     // noise
-    float increment = 0.02;
+    float increment = 0.015;
     // The noise function's 3rd argument, a global variable that increments once per cycle
     float zoff = 0.0;  
     // We will increment zoff differently than xoff and yoff
@@ -95,13 +95,13 @@ class PerlinGrid {
           yoff += increment; // Increment yoff
           
           // Calculate noise and scale by 255
-          float bright = noise(xoff,yoff,zoff)*512;
+          float bright = noise(xoff,yoff,zoff)*200;
     
           // Try using this line instead
           //float bright = random(0,255);
           
           // Set each pixel onscreen to a grayscale value
-          pg.pixels[x+y*pg.width] = color(bright,bright,bright);
+          pg.pixels[y*pg.width+x] = color(bright,bright,bright);
         }
       }
       pg.updatePixels();

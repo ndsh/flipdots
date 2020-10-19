@@ -18,7 +18,7 @@ class PerlinGrid {
     {"craft_16px.ttf", "16"}
   };
   
-  int currentFont = 3;
+  int currentFont = 2;
   int fontSize = 0;
   int fontScale = 1;
   
@@ -35,7 +35,7 @@ class PerlinGrid {
     pg.textAlign(CENTER, CENTER);
     
     noise = new Noise(w, h);
-    pg.beginDraw();
+    //pg.beginDraw();
   }
   
   void update() {

@@ -12,8 +12,4 @@ void draw() {
   grid.update(); 
   grid.display();
   image(grid.getDisplay(), 0, 0, width, height);
-  
-  
-  
-  
 }

@@ -25,35 +25,35 @@ void keyPressed() {
 
 void onlineBang(boolean b) {
   online = b;
-  println("online= " + b);
+  //println("online= " + b);
   float r[] = {b?1f:0f};
   onlineCheckbox.setArrayValue(r);
 }
 
 void scaleBang(boolean b) {
   scaleMode = b;
-  println("scaleMode= " + b);
+  //println("scaleMode= " + b);
   float r[] = {b?1f:0f};
   scaleModeCheckbox.setArrayValue(r);
 }
 
 void ditherBang(boolean b) {
   dither = b;
-  println("dither= " + b);
+  //println("dither= " + b);
   float r[] = {b?1f:0f};
   ditherCheckbox.setArrayValue(r);
 }
 
 void forceBang(boolean b) {
   forceState = b;
-  println("forceState= " + b);
+  //println("forceState= " + b);
   float r[] = {b?1f:0f};
   forceStateCheckbox.setArrayValue(r);
 }
 
 void playBang(boolean b) {
   isPlaying = b;
-  println("isPlaying= "+ b);
+  //println("isPlaying= "+ b);
   if(isPlaying) myMovie.play();
   else myMovie.pause();
   float r[] = {b?1f:0f};
@@ -346,7 +346,9 @@ void visualOutput() {
     source.resize((int)w6, (int)h6);
     if(panelLayout == 0) translate(8, 200);
     else if(panelLayout == 1) translate(w6, h24);
-    image(source, 0, 0);
+    
+    if(scaleMode) image(source, 0, 0);
+    else image(source, w6/2-(28/2), h24/2, 28, 98);
   pop();
 }
 
@@ -356,11 +358,14 @@ void ditherOutput() {
       if(panelLayout == 0) translate(8, 200);
       else if(panelLayout == 1) translate(w6, h24);
        d.feed(source);
-      image(d.floyd_steinberg(), 0, h6+h12);
+      
+      if(scaleMode) image(d.floyd_steinberg(), 0, h6+h12);
+      else image(d.floyd_steinberg(), w6/2-(28/2), h6+h12, 28, 98); //image(source, w6/2-(28/2), 0, 28, 98);
     pop();
     
     d.feed(comped);
-    comped = d.floyd_steinberg();
+    //comped = d.floyd_steinberg();
+    comped = d.dither();
   } else {
     push();
     if(panelLayout == 0) translate(8, 200);
