@@ -111,4 +111,11 @@
     "dither": true,
     "scale": false
   },
+  {
+    "name": "Webcam",
+    "runtime": 30000,
+    "finishes": false,
+    "dither": false,
+    "scale": false
+  },
 ]

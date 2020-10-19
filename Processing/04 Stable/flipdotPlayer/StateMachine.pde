@@ -14,6 +14,7 @@ static final int WORDS = 8; // plays random text from file
   static final int GIFS = 13;
   static final int DRAWING = 14; // draw directly to the flipdots
 static final int PERLINGRID = 15;
+static final int WEBCAM = 16;
 
 int state = INTRO;
 
