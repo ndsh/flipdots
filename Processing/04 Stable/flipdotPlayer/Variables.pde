@@ -7,9 +7,9 @@ ControlP5 cp5;
 Importer importer;
 Dither d;
 PerlinGrid grid;
-String ip = "2.0.0.3"; // flipdoteeny
+//String ip = "2.0.0.3"; // flipdoteeny
 //String ip = "2.0.0.23"; // local, ndsh macbook
-//String ip = "2.0.0.24"; // local, iMac
+String ip = "2.0.0.24"; // local, iMac
 boolean switcher = false;
 float flipdotSize = 4.95;
 
@@ -92,7 +92,9 @@ Textlabel panelActivityLabel;
 int panelLayout = 1; // horizontal
 
 long idleTimestamp = 0;
-long idleInterval = 420000;
+long idleInterval = 3000;
+long minIdle = 420000;
+long maxIdle = 600000;
 
 long stateTimestamp = 0;
 long stateRuntime = 15000;

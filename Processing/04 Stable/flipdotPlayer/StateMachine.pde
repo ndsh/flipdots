@@ -223,15 +223,22 @@ void stateCheckTime() {
   if(!b) {
     if(millis() - stateTimestamp > stateRuntime) {
       stateTimestamp = millis();
+      randomizeIdleTime();
       setState(CHECK);
       return;
     }
   } else {
     if(stateHasFinished) {
       idleTimestamp = millis();
+      randomizeIdleTime();
       setState(CHECK);
     }
   }
+}
+
+void randomizeIdleTime() {
+  idleInterval = (int)random(minIdle, maxIdle);
+  println("new idleInterval= " + idleInterval);
 }
 
 void setStateRuntime() {
