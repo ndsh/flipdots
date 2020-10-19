@@ -17,6 +17,8 @@ static final int PERLINGRID = 15;
 
 int state = INTRO;
 
+int[] availableStates = {VIDEO, WORDS, TRANSITION};
+
 void stateMachine(int state) {
   
    switch(state) {
@@ -31,17 +33,19 @@ void stateMachine(int state) {
       idleTimestamp = millis();
       //stateTimestamp = millis();
       
+      
       // markov chain hier?
-      int r = (int)random(2);
+      int r = (int)random(availableStates.length);
       //r = 3;
-      if(r == 0) setState(VIDEO);
-      else if(r == 1) setState(WORDS);
-      else if(r == 2) setState(TRANSITION);
-      else if(r == 3) setState(PERLINGRID);
+      setState(availableStates[r]);
     break;
     
     case VIDEO:
       if(!isPlaying) return;
+      if(!isStateReady) {
+        randomMovie(this);
+        isStateReady = true;
+      }
       if(!moviePlaying) playMovie();       
       
       source = myMovie.get();
@@ -64,12 +68,16 @@ void stateMachine(int state) {
       if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
         
       stateHasFinished = movieFinished();
-      if(stateHasFinished) randomMovie(this);
+      //if(stateHasFinished) randomMovie(this);
       stateCheckTime();
     break;
     
     case TRANSITION:
       if(!isPlaying) return;
+      if(!isStateReady) {
+        randomTransition(this);
+        isStateReady = true;
+      }
       if(!moviePlaying) playMovie();
       
       source = myMovie.get();
@@ -92,7 +100,7 @@ void stateMachine(int state) {
       if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
         
       stateHasFinished = movieFinished();
-      if(stateHasFinished) randomTransition(this);
+      
       stateCheckTime();
     break;
     
@@ -104,6 +112,7 @@ void stateMachine(int state) {
         randomTransition(this);
         randomFlipdotWord();
         isStateReady = true;
+        randomTransition(this);
       }
       if(!moviePlaying) playMovie();
       
@@ -137,7 +146,7 @@ void stateMachine(int state) {
       if(!stateTerminates()) drawProgessbar(stateTimePercentageLabel, stateTimeRestLabel, (millis()-stateTimestamp)/1000f, stateRuntime/1000f, w6-60, 10f, h3+h6+h12);
 
       stateHasFinished = movieFinished();
-      if(stateHasFinished) randomTransition(this);
+      
       stateCheckTime();
     break;
     
