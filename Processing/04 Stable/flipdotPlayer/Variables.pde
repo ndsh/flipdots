@@ -7,9 +7,9 @@ ControlP5 cp5;
 Importer importer;
 Dither d;
 PerlinGrid grid;
-//String ip = "2.0.0.3"; // flipdoteeny
+String ip = "2.0.0.3"; // flipdoteeny
 //String ip = "2.0.0.23"; // local, ndsh macbook
-String ip = "2.0.0.24"; // local, iMac
+//String ip = "2.0.0.24"; // local, iMac
 boolean switcher = false;
 float flipdotSize = 4.95;
 
