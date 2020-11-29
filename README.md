@@ -1,7 +1,12 @@
 [![](https://img.shields.io/badge/using-Processing-brightgreen.svg?style=flat-square&color=000000)](http://processing.org/)
 [![](https://img.shields.io/badge/using-Arduino-brightgreen.svg?style=flat-square&color=000000)](http://arduino.cc/)
 
-[![BuyMeACoffee](https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-1.svg)](https://www.buymeacoffee.com/ndsh)
+| Information | Donate |
+|:------------||:-------|
+| Everything you ever wanted to know about Flipdots in one compact repository! | [![BuyMeACoffee](https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-1.svg)](https://www.buymeacoffee.com/ndsh) |
+
+
+
 
 ![](assets/flip-dot-board-xy5-1.png)
 
