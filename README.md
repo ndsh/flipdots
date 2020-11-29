@@ -2,7 +2,7 @@
 [![](https://img.shields.io/badge/using-Arduino-brightgreen.svg?style=flat-square&color=000000)](http://arduino.cc/)
 
 | Information | Donate |
-|:------------||:-------|
+|:------------|:-------|
 | Everything you ever wanted to know about Flipdots in one compact repository! | [![BuyMeACoffee](https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-1.svg)](https://www.buymeacoffee.com/ndsh) |
 
 
